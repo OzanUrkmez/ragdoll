@@ -24,44 +24,54 @@ public class WeaponChooser : MonoBehaviour
     [SerializeField]
     private int WeaponNumber = 0;
 
+    public float ScrollSense = 0.01f;
+
     // Update is called once per frame aefef
     void Update()
     {
         
         if (Input.GetKeyDown("1"))
         {
-            ChooseFist.SetActive(true);
-            ChooseKnife.SetActive(false);
-            ChooseGun.SetActive(false);
-            ChooseBat.SetActive(false);
-        }
-        if (Input.GetKeyDown("2"))
-        {
+            CurrentWeapon = Weapons[0];
+            WeaponNumber = 1;
             ChooseFist.SetActive(false);
             ChooseKnife.SetActive(true);
             ChooseGun.SetActive(false);
             ChooseBat.SetActive(false);
         }
+        if (Input.GetKeyDown("2"))
+        {
+            CurrentWeapon = Weapons[1];
+            ChooseFist.SetActive(true);
+            ChooseKnife.SetActive(false);
+            ChooseGun.SetActive(false);
+            ChooseBat.SetActive(false);
+            WeaponNumber = 2;
+        }
         if (Input.GetKeyDown("3"))
         {
+            CurrentWeapon = Weapons[2];
             ChooseFist.SetActive(false);
             ChooseKnife.SetActive(false);
             ChooseGun.SetActive(true);
             ChooseBat.SetActive(false);
+            WeaponNumber = 3;
         }
         if (Input.GetKeyDown("4"))
         {
+            CurrentWeapon = Weapons[3];
             ChooseFist.SetActive(false);
             ChooseKnife.SetActive(false);
             ChooseGun.SetActive(false);
             ChooseBat.SetActive(true);
+            WeaponNumber = 4;
         }
 
         if (Input.GetAxisRaw("Mouse ScrollWheel") == 0)
         {
             return;
         }
-        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > ScrollSense)
         {
             if (WeaponNumber < 4)
             {
@@ -69,7 +79,7 @@ public class WeaponChooser : MonoBehaviour
                 CurrentWeapon = Weapons[WeaponNumber - 1];
             }
         }
-        else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
+        else if (Input.GetAxisRaw("Mouse ScrollWheel") < -ScrollSense)
         {
             if (WeaponNumber > 1)
             {

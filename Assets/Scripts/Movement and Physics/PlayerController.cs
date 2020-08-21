@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     float xRotation = 0;
 
     [SerializeField]
+    float animationDecreaseConstant = 2;
+    [SerializeField]
     float animationIncreaseConstant = 1;
     [SerializeField]
     float animationCutOffConstant = 0.5f;
@@ -59,7 +61,12 @@ public class PlayerController : MonoBehaviour
         Vector2 moveDelta = new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
 
         //change animation depending on player input
-        playerAnimator.SetFloat("Speed", Mathf.Clamp(playerAnimator.GetFloat("Speed") + (moveDelta.magnitude - animationCutOffConstant) * animationIncreaseConstant * Time.fixedDeltaTime,0,1));
+
+        float animChangeCoeff = (moveDelta.magnitude - animationCutOffConstant);
+
+        playerAnimator.SetFloat("Speed", Mathf.Clamp(playerAnimator.GetFloat("Speed") + ((animChangeCoeff > 0)? animChangeCoeff * animationIncreaseConstant * Time.fixedDeltaTime:
+            animChangeCoeff * animationDecreaseConstant * Time.fixedDeltaTime)
+            , 0,1));
 
         //adjust depending on speed, keyboard input, FPS etc.
         moveDelta *= Time.deltaTime;
