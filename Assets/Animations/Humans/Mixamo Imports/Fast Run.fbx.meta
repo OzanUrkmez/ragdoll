@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 161bf451298450f418fe698788267e58
+guid: e438aa0545fcec440bd808804d36c140
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Naruto
+    second: Fast Run
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Naruto
+      name: Fast Run
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 16
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     float animationIncreaseConstant = 1;
+    [SerializeField]
+    float animationCutOffConstant = 0.5f;
 
 	void Start () {
         //hide cursor and lock it
@@ -55,6 +57,9 @@ public class PlayerController : MonoBehaviour
 
         //get keyboard WASD movement. Vertical is WS and Horizontal is AD keys.
         Vector2 moveDelta = new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
+
+        //change animation depending on player input
+        playerAnimator.SetFloat("Speed", Mathf.Clamp(playerAnimator.GetFloat("Speed") + (moveDelta.magnitude - animationCutOffConstant) * animationIncreaseConstant * Time.fixedDeltaTime,0,1));
 
         //adjust depending on speed, keyboard input, FPS etc.
         moveDelta *= Time.deltaTime;
