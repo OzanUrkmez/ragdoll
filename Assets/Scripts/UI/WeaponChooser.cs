@@ -24,7 +24,7 @@ public class WeaponChooser : MonoBehaviour
     [SerializeField]
     private int WeaponNumber = 0;
 
-    // Update is called once per frame 
+    // Update is called once per frame aefef
     void Update()
     {
         
