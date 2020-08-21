@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Eventing.Reader;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class WeaponChooser : MonoBehaviour
 {
