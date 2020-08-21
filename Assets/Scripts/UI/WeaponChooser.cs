@@ -3,19 +3,26 @@ using UnityEngine;
 
 public class WeaponChooser : MonoBehaviour
 {
-    public GameObject ChooseKnife;
+    [SerializeField]
+    private GameObject ChooseKnife;
 
-    public GameObject ChooseFist;
+    [SerializeField]
+    private GameObject ChooseFist;
 
-    public GameObject ChooseGun;
+    [SerializeField]
+    private GameObject ChooseGun;
 
-    public GameObject ChooseBat;
+    [SerializeField]
+    private GameObject ChooseBat;
 
-    public GameObject[] Weapons;
+    [SerializeField]
+    private GameObject[] Weapons;
 
-    public GameObject CurrentWeapon;
+    [SerializeField]
+    private GameObject CurrentWeapon;
 
-    public int WeaponNumber = 0;
+    [SerializeField]
+    private int WeaponNumber = 0;
 
     // Update is called once per frame 
     void Update()
