@@ -17,7 +17,7 @@ public class WeaponChooser : MonoBehaviour
 
     public int WeaponNumber = 0;
 
-    // Update is called once per frame adfasdfjdfjlksdaf
+    // Update is called once per frame 
     void Update()
     {
         
