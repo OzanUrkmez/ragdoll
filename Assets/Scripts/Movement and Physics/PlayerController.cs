@@ -18,7 +18,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private CharacterController characterController;
 
+    [SerializeField]
+    private Animator playerAnimator;
+
     float xRotation = 0;
+
+    [SerializeField]
+    float animationIncreaseConstant = 1;
 
 	void Start () {
         //hide cursor and lock it
