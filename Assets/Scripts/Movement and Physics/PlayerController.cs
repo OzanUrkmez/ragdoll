@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    //TODO We do this in Update for now. If doing professionally, it is best practice to put controls in a separate controls
+    //TODO We do this in Update for now. If doing professionally, it is best practice to put controls in a separate controls.
     //interface/class so that keybinds can easily be modified and I/O is easily tracked. 
     //Unity also has a new system for doing this.
 	void Update () {
