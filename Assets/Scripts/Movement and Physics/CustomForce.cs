@@ -14,76 +14,20 @@ public class CustomForce
     //Does not concern itself with mass. is pure acceleration.
     public bool IsPure { get; private set; }
 
-    private Vector3 _forceVector = Vector3.zero;
-    public Vector3 ForceVector
-    {
-        get
-        {
-            if (maximumSpeedAlongForceDirection > 0 && )
-                return Vector3.zero;
-            return _forceVector;
-        }
-        private set
-        {
-            _forceVector = value;
-        }
-    }
-
+    //negative infinity implies constant force until removed by outside code.
     public float AppliedFor { get; set; }
 
-    public float ForceInstanceModifiedForMass { get; private set; }
-
-    //inactive if < 0
-    private float maximumSpeedAlongForceDirection = float.NegativeInfinity;
+    private ICustomForceImplementation customForceImplementation;
 
     private ForceObject parentForceObject;
 
-    ///<summary> creates a traditional force. </summary>
-    /// <param name="isPure"></param>
-    /// <param name="forceVector"></param>
-    /// <param name="appliedFor">set to negative infinity to be applied until stated otherwise.</param>
-    public CustomForce(bool isPure, Vector3 forceVector, float appliedFor)
+
+    public CustomForce(ForceObject appliedTo, ICustomForceImplementation forceApplierImplementation, bool isPure, float appliedFor)
     {
-        ForceInstanceModifiedForMass = 1;
         IsPure = isPure;
-        ForceVector = forceVector;
         AppliedFor = appliedFor;
-        maximumSpeedAlongForceDirection = float.NegativeInfinity;
-    }
-
-    /// <summary>
-    /// creates a custom force that is only applied if the speed of the object along the force direction is smaller than a set value.
-    /// </summary>
-    /// <param name="isPure"></param>
-    /// <param name="forceVector"></param>
-    /// <param name="appliedFor">set to negative infinity to be applied until stated otherwise.</param>
-    /// <param name="maximumForceAlongDir">must be higher than 0</param>
-    public CustomForce(bool isPure, Vector3 forceVector, float appliedFor, float maximumForceAlongDir)
-    {
-        ForceInstanceModifiedForMass = 1;
-        IsPure = isPure;
-        ForceVector = forceVector;
-        AppliedFor = appliedFor;
-        maximumSpeedAlongForceDirection = maximumForceAlongDir;
-    }
-
-    /// <summary>
-    /// copy constructor
-    /// </summary>
-    public CustomForce(CustomForce f)
-    {
-        IsPure = f.IsPure;
-        ForceVector = f.ForceVector;
-        AppliedFor = f.AppliedFor;
-        ForceInstanceModifiedForMass = f.ForceInstanceModifiedForMass;
-        maximumSpeedAlongForceDirection = f.maximumSpeedAlongForceDirection;
-    }
-
-    public void ModifyForceVectorByMass(float mass)
-    {
-        ForceVector *= ForceInstanceModifiedForMass;
-        ForceVector /= mass;
-        ForceInstanceModifiedForMass = mass;
+        customForceImplementation = forceApplierImplementation;
+        appliedTo.ApplyNewForce(this);
     }
 
     #region Parent Object Management
@@ -107,4 +51,54 @@ public class CustomForce
     }
 
     #endregion
+
+    public Vector3 GetCurrentAppliedForce()
+    {
+        return customForceImplementation.GetCurrentForceVector(this, parentForceObject);
+    }
+
 }
+
+
+//BEFORE INHERITANCE SYSTEM:
+
+/////<summary> creates a traditional force. </summary>
+///// <param name="isPure"></param>
+///// <param name="forceVector"></param>
+///// <param name="appliedFor">set to negative infinity to be applied until stated otherwise.</param>
+//public CustomForce(bool isPure, Vector3 forceVector, float appliedFor)
+//{
+//    ForceInstanceModifiedForMass = 1;
+//    IsPure = isPure;
+//    ForceVector = forceVector;
+//    AppliedFor = appliedFor;
+//    maximumSpeedAlongForceDirection = float.NegativeInfinity;
+//}
+
+///// <summary>
+///// creates a custom force that is only applied if the speed of the object along the force direction is smaller than a set value.
+///// </summary>
+///// <param name="isPure"></param>
+///// <param name="forceVector"></param>
+///// <param name="appliedFor">set to negative infinity to be applied until stated otherwise.</param>
+///// <param name="maximumForceAlongDir">must be higher than 0</param>
+//public CustomForce(bool isPure, Vector3 forceVector, float appliedFor, float maximumForceAlongDir)
+//{
+//    ForceInstanceModifiedForMass = 1;
+//    IsPure = isPure;
+//    ForceVector = forceVector;
+//    AppliedFor = appliedFor;
+//    maximumSpeedAlongForceDirection = maximumForceAlongDir;
+//}
+
+///// <summary>
+///// copy constructor
+///// </summary>
+//public CustomForce(CustomForce f)
+//{
+//    IsPure = f.IsPure;
+//    ForceVector = f.ForceVector;
+//    AppliedFor = f.AppliedFor;
+//    ForceInstanceModifiedForMass = f.ForceInstanceModifiedForMass;
+//    maximumSpeedAlongForceDirection = f.maximumSpeedAlongForceDirection;
+//}

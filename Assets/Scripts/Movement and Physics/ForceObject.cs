@@ -49,10 +49,9 @@ public class ForceObject : MonoBehaviour
             //not rigid body! we deal with gravity ourselves.
             characterController = GetComponent<CharacterController>();
 
-            CustomForce gravityForce = new CustomForce(true, GameProperties.Singleton.GravityConstant * gravityMultiplier, float.NegativeInfinity);
-            appliedConstantForces.Add(gravityForce);
+            CustomForce gravityForce = new CustomForce(this, new CustomTraditionalForce(GameProperties.Singleton.GravityConstant * gravityMultiplier), true, float.NegativeInfinity);
 
-            if(gravityForce.ForceVector != Vector3.zero) //TODO if it gets out of 0 then we shall have to start coroutines ourselves. just call  InitializeAppropriateGravityCoroutine(). also in that case if the constant becomes 0 then we shall have to stop gravity execution.
+            if(gravityForce.GetCurrentAppliedForce() != Vector3.zero) //TODO if it gets out of 0 then we shall have to start coroutines ourselves. just call  InitializeAppropriateGravityCoroutine(). also in that case if the constant becomes 0 then we shall have to stop gravity execution.
             {
                 InitializeAppropriateForceCoroutine();
             }
@@ -82,7 +81,7 @@ public class ForceObject : MonoBehaviour
     [SerializeField]
     private Vector3 netSpeedForFrame = Vector3.zero;
     [SerializeField]
-    private Vector3 netAcceleration = Vector3.zero;
+    private Vector3 netAccelerationForFrame = Vector3.zero;
 
     //private List<Vector3> appliedSpeed = new List<Vector3>(); //TODO implement pure speed.
     private List<CustomForce> appliedForces = new List<CustomForce>();
@@ -130,26 +129,26 @@ public class ForceObject : MonoBehaviour
     /// </summary> 
     private void CalculateProcesAcceleration(float frameTime)
     {
-        netAcceleration = Vector3.zero;
+        netAccelerationForFrame = Vector3.zero;
         foreach(var force in appliedForces)
         {
             force.AppliedFor -= frameTime;
             if (force.AppliedFor < frameTime)
             {
                 //only increase by amount left.
-                netAcceleration += force.ForceVector * ((force.AppliedFor + frameTime) / frameTime);
+                netAccelerationForFrame += force.GetCurrentAppliedForce() * ((force.AppliedFor + frameTime) / frameTime);
             }
             else
             {
-                netAcceleration += force.ForceVector;
+                netAccelerationForFrame += force.GetCurrentAppliedForce();
             }
         }
         foreach (var force in appliedConstantForces)
         {
-            netAcceleration += force.ForceVector;
+            netAccelerationForFrame += force.GetCurrentAppliedForce();
         }
 
-        netSpeedForFrame += netAcceleration * frameTime;
+        netSpeedForFrame += netAccelerationForFrame * frameTime;
         if(netSpeedForFrame.magnitude * dragResistanceMultiplier > objectDragValue)
         {
             netSpeedForFrame = netSpeedForFrame.normalized * objectDragValue;
@@ -162,11 +161,6 @@ public class ForceObject : MonoBehaviour
 
     public void ApplyNewForce(CustomForce f)
     {
-        //Implying unchanging mass. if mass does change then adjust impure accordingly!
-        if (!f.IsPure)
-        {
-            f.ModifyForceVectorByMass(mass);
-        }
         if (f.AppliedFor == float.NegativeInfinity)
         {
             appliedConstantForces.Add(f);
@@ -208,7 +202,20 @@ public class ForceObject : MonoBehaviour
 
     #region Getters
 
-    public 
+    public Vector3 GetRecentNetSpeed()
+    {
+        return netSpeedForFrame;
+    }
+
+    public Vector3 GetRecentNetAcceleration()
+    {
+        return netAccelerationForFrame;
+    }
+
+    public float GetMass()
+    {
+        return mass;
+    }
 
     #endregion
 
