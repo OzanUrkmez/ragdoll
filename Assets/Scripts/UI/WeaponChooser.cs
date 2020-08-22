@@ -26,6 +26,16 @@ public class WeaponChooser : MonoBehaviour
 
     public float ScrollSense = 0.01f;
 
+    void Start()
+    {
+        CurrentWeapon = Weapons[0];
+        WeaponNumber = 1;
+        ChooseFist.SetActive(false);
+        ChooseKnife.SetActive(true);
+        ChooseGun.SetActive(false);
+        ChooseBat.SetActive(false);
+    }
+
     // Update is called once per frame aefef
     void Update()
     {
