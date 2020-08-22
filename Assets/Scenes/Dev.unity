@@ -98,8 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: e20585ca9cea510478063bba950205c1,
-    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: e20585ca9cea510478063bba950205c1, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -695,13 +694,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 130
-  playerWalkBaseSpeed: 5
-  playerBaseRunSpeed: 8
-  playerBackwardsSpeed: -3
-  batSlowdown: 2
+  movementInputThreshold: 0.5
   characterObject: {fileID: 919132148796935982}
   characterController: {fileID: 919132148796935983}
   playerAnimator: {fileID: 1289479274}
+  humanoidMotorObject: {fileID: 919132148796935986}
   animationDecreaseConstant: 3
   animationIncreaseConstant: 1
   animationCutOffConstant: 0.5
@@ -1429,7 +1426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148796935982}
   m_LocalRotation: {x: -0.021528762, y: -0.07674805, z: -0.0130403, w: 0.9967328}
-  m_LocalPosition: {x: 0.19, y: 3.31, z: -2.52}
+  m_LocalPosition: {x: 0.19, y: 0.62, z: -2.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -1614,31 +1611,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 919132148796935983}
+  affectedForceObject: {fileID: 919132148796935984}
   motorMovementForceObject:
     forwardSpeeds:
+    - 0
     - 5
     - 8
     backwardSpeeds:
+    - 0
+    - 3
     - 5
-    - 8
     rightSpeeds:
+    - 0
+    - 3
     - 5
-    - 8
     leftSpeeds:
+    - 0
+    - 3
     - 5
-    - 8
     forwardAccelerations:
+    - 0
     - 20
     - 40
     backwardAccelerations:
-    - 20
-    - 40
+    - 0
+    - 15
+    - 30
     rightAccelerations:
-    - 20
-    - 40
+    - 0
+    - 15
+    - 30
     leftAccelerations:
-    - 20
-    - 40
+    - 0
+    - 15
+    - 30
     motorMovementTransform: {fileID: 543450652984907156}
   humanoidAnimator: {fileID: 1289479274}
 --- !u!4 &1052125073661383896

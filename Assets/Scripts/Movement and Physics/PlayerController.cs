@@ -7,15 +7,16 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float mouseSensitivity = 100f;
-    [SerializeField]
-    private float playerWalkBaseSpeed = 5f;
-    [SerializeField]
-    private float playerBaseRunSpeed = 8f;
-    [SerializeField]
-    private float playerBackwardsSpeed = -3f;
 
-    [SerializeField]
-    private float batSlowdown = 2f;
+    //[SerializeField]
+    //private float playerWalkBaseSpeed = 5f;
+    //[SerializeField]
+    //private float playerBaseRunSpeed = 8f;
+    //[SerializeField]
+    //private float playerBackwardsSpeed = -3f;
+
+    //[SerializeField]
+    //private float batSlowdown = 2f; //TODO IMPLEMENT THISS
 
 
     [SerializeField]
@@ -25,6 +26,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Animator playerAnimator;
+
+    [SerializeField]
+    private HumanoidMotorObject humanoidMotorObject;
 
     float xRotation = 0;
 
@@ -63,7 +67,7 @@ public class PlayerController : MonoBehaviour
         //KEYBOARD POSITION MOVEMENT
 
         //get keyboard WASD movement. Vertical is WS and Horizontal is AD keys.
-        Vector2 moveDelta = new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
+        Vector2 moveDelta = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         //change animation depending on player input
 
@@ -74,14 +78,19 @@ public class PlayerController : MonoBehaviour
             , 0,1));
 
         //adjust depending on speed, keyboard input, FPS etc.
-        moveDelta *= Time.deltaTime;
+        //moveDelta *= Time.deltaTime;
+
+        //if (Input.GetKey(KeyCode.LeftShift))
+        //    moveDelta *= playerBaseRunSpeed;
+        //else
+        //    moveDelta *= playerWalkBaseSpeed;
+
+        //characterController.Move(characterObject.transform.forward * moveDelta.x + characterObject.transform.right * moveDelta.y);
 
         if (Input.GetKey(KeyCode.LeftShift))
-            moveDelta *= playerBaseRunSpeed;
+            humanoidMotorObject.OctagonalRunUpdate(moveDelta);
         else
-            moveDelta *= playerWalkBaseSpeed;
-
-        characterController.Move(characterObject.transform.forward * moveDelta.x + characterObject.transform.right * moveDelta.y);
+            humanoidMotorObject.OctagonalWalkUpdate(moveDelta);
     }
 }
 
