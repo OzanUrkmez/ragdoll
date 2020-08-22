@@ -8,9 +8,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float mouseSensitivity = 100f;
     [SerializeField]
-    private float playerWalkBaseSpeed = 13f;
+    private float playerWalkBaseSpeed = 5f;
     [SerializeField]
-    private float playerBaseRunSpeed = 18f;
+    private float playerBaseRunSpeed = 8f;
+    [SerializeField]
+    private float playerBackwardsSpeed = -3f;
+
+    [SerializeField]
+    private float batSlowdown = 2f;
 
 
     [SerializeField]
