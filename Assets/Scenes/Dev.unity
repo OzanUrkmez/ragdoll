@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: e20585ca9cea510478063bba950205c1, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: e20585ca9cea510478063bba950205c1,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1545,6 +1546,7 @@ GameObject:
   - component: {fileID: 919132148796935983}
   - component: {fileID: 919132148796935984}
   - component: {fileID: 919132148796935985}
+  - component: {fileID: 919132148796935986}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1599,7 +1601,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104648be0474a3242bcfe70119e6a327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterController: {fileID: 919132148796935983}
+--- !u!114 &919132148796935986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148796935982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e88c49c55fb674a91b3621a8b2caf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 919132148796935983}
+  motorMovementForceObject:
+    forwardSpeeds:
+    - 5
+    - 8
+    backwardSpeeds:
+    - 5
+    - 8
+    rightSpeeds:
+    - 5
+    - 8
+    leftSpeeds:
+    - 5
+    - 8
+    forwardAccelerations:
+    - 20
+    - 40
+    backwardAccelerations:
+    - 20
+    - 40
+    rightAccelerations:
+    - 20
+    - 40
+    leftAccelerations:
+    - 20
+    - 40
+    motorMovementTransform: {fileID: 543450652984907156}
+  humanoidAnimator: {fileID: 1289479274}
 --- !u!4 &1052125073661383896
 Transform:
   m_ObjectHideFlags: 0
