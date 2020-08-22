@@ -34,8 +34,9 @@ public class HumanoidMotorObject : MonoBehaviour
     /// </summary>
     public void OctagonalWalkUpdate(Vector2 v) //Can make instantanious animations with this. for now. or actually might look good from the getgo.
     {
+
         //up
-        if(Vector3.Project(v, new Vector2(0,1)).magnitude > 0)
+        if(v.y > 0)
         {
             motorMovementForceObject.UpdateCurrentForwardIndex(1);
         }
@@ -45,7 +46,7 @@ public class HumanoidMotorObject : MonoBehaviour
         }
 
         //right
-        if (Vector3.Project(v, new Vector2(1, 0)).magnitude > 0)
+        if (v.x > 0)
         {
             motorMovementForceObject.UpdateCurrentRightIndex(1);
         }
@@ -55,7 +56,7 @@ public class HumanoidMotorObject : MonoBehaviour
         }
 
         //down
-        if (Vector3.Project(v, new Vector2(0, -1)).magnitude > 0)
+        if (v.y < 0)
         {
             motorMovementForceObject.UpdateCurrentBackwardIndex(1);
         }
@@ -65,7 +66,7 @@ public class HumanoidMotorObject : MonoBehaviour
         }
 
         //left
-        if (Vector3.Project(v, new Vector2(-1, 0)).magnitude > 0)
+        if (v.x < 0)
         {
             motorMovementForceObject.UpdateCurrentLeftIndex(1);
         }
@@ -82,7 +83,7 @@ public class HumanoidMotorObject : MonoBehaviour
     public void OctagonalRunUpdate(Vector2 v) //Can make instantanious animations with this. for now. or actually might look good from the getgo.
     {
         //up
-        if (Vector3.Project(v, new Vector2(0, 1)).magnitude > 0)
+        if (v.y > 0)
         {
             motorMovementForceObject.UpdateCurrentForwardIndex(2);
         }
@@ -92,7 +93,7 @@ public class HumanoidMotorObject : MonoBehaviour
         }
 
         //right
-        if (Vector3.Project(v, new Vector2(1, 0)).magnitude > 0)
+        if (v.x > 0)
         {
             motorMovementForceObject.UpdateCurrentRightIndex(2);
         }
@@ -102,7 +103,7 @@ public class HumanoidMotorObject : MonoBehaviour
         }
 
         //down
-        if (Vector3.Project(v, new Vector2(0, -1)).magnitude > 0)
+        if (v.y < 0)
         {
             motorMovementForceObject.UpdateCurrentBackwardIndex(2);
         }
@@ -112,7 +113,7 @@ public class HumanoidMotorObject : MonoBehaviour
         }
 
         //left
-        if (Vector3.Project(v, new Vector2(-1, 0)).magnitude > 0)
+        if (v.x < 0)
         {
             motorMovementForceObject.UpdateCurrentLeftIndex(2);
         }
