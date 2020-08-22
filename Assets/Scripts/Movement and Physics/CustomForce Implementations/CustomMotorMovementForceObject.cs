@@ -31,5 +31,8 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
     }
 
     public void UpdateCurrentForwardIndex()
+    {
+
+    }
 
 }
