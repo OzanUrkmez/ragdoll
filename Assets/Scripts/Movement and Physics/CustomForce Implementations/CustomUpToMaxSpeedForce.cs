@@ -1,15 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-namespace Assets.Scripts.Movement_and_Physics.CustomForce_Implementations
-{
-    class CustomUpToMaxSpeedForce
-    {
+﻿using UnityEngine;
+using System;
 
-        [SerializeField]
-        private float maximumSpeedAlongForceDirection;
+[Serializable]
+public class CustomUpToMaxSpeedForce : ICustomForceImplementation
+{
+
+    [SerializeField]
+    public Vector3 constantForce;
+    [SerializeField]
+    private float upToSpeed;
+
+    public Vector3 GetCurrentForceVector(CustomForce parentForce, ForceObject objectAppliedTo)
+    {
+        return (Vector3.Project(constantForce, objectAppliedTo.GetRecentNetAcceleration()).magnitude > upToSpeed)? Vector3.zero : constantForce;
     }
+
+
+    public CustomUpToMaxSpeedForce(Vector3 _constantForce, float _upToSpeed)
+    {
+        constantForce = _constantForce;
+        upToSpeed = _upToSpeed;
+    }
+
 }

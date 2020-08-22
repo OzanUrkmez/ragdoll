@@ -21,7 +21,13 @@ public class CustomForce
 
     private ForceObject parentForceObject;
 
-
+    /// <summary>
+    /// Creates a custom force
+    /// </summary>
+    /// <param name="appliedTo"> the object the force is applied to. </param>
+    /// <param name="forceApplierImplementation"> an interface through which logic for a particular custom force logic can communicate the force for the current frame. See implementations. </param>
+    /// <param name="isPure"> if it is pure, then the force will not be affected by mass. </param>
+    /// <param name="appliedFor"> the time for which the force is applied. if set to float.NegativeInfinity, then the force will be applied until outside code stops it. </param>
     public CustomForce(ForceObject appliedTo, ICustomForceImplementation forceApplierImplementation, bool isPure, float appliedFor)
     {
         IsPure = isPure;
@@ -54,7 +60,7 @@ public class CustomForce
 
     public Vector3 GetCurrentAppliedForce()
     {
-        return customForceImplementation.GetCurrentForceVector(this, parentForceObject);
+        return customForceImplementation.GetCurrentForceVector(this, parentForceObject) * (IsPure? 1 : 1/parentForceObject.GetMass());
     }
 
 }
