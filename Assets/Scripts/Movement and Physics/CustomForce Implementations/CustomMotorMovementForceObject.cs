@@ -11,6 +11,7 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
     private float[] forwardSpeeds, backwardSpeeds, rightSpeeds, leftSpeeds;
 
     private int currentForwardIndex, currentBackwardIndex, currentRightIndex, currentLeftIndex;
+   
 
     [SerializeField]
     private Transform motorMovementTransform;
@@ -29,6 +30,9 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
             + (Vector3.Project(backwardForce, objectAppliedTo.GetRecentNetSpeed()).magnitude > backwardSpeeds[currentBackwardIndex] ? Vector3.zero : backwardForce);
     }
 
-    public 
+    public void UpdateCurrentForwardIndex()
+    {
+
+    }
 
 }

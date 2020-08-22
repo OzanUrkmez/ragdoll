@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameProperties : MonoBehaviour
 {
@@ -40,15 +41,17 @@ public class GameProperties : MonoBehaviour
     #region Properties
 
     [SerializeField]
-    private Vector3 _GravityConstant = new Vector3(0,-9.81f,0);
+    private Vector3 _gravityConstant = new Vector3(0,-9.81f,0);
     public Vector3 GravityConstant {
         get
         {
-            return _GravityConstant;
+            return _gravityConstant;
         }
-        set
+        private set
         {
-            _GravityConstant = value;
+            _gravityConstant = value;
+            if (OnGravityConstantChanged != null)
+                OnGravityConstantChanged(value);
         }
     }
 
@@ -62,6 +65,8 @@ public class GameProperties : MonoBehaviour
     #endregion
 
     #region Events
+
+    public Action<Vector3> OnGravityConstantChanged;
 
     #endregion
 
