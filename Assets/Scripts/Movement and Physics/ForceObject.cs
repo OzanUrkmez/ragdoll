@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 /// <summary>
@@ -11,16 +12,25 @@ public class ForceObject : MonoBehaviour
 
     [SerializeField]
     private float gravityMultiplier = 1f;
+    [SerializeField]
+    private float dragResistanceMultiplier = 1f;
+    [SerializeField]
+    private float mass = 1f;
 
     private bool isRigid = false;
     private Rigidbody activeRigidBody;
     private ConstantForce activeConstantGravityAdjustmentForce;
 
+    //if smaller than 0, then it is disregarded.
+    //TODO add dampening effect for drag. make it more applied over time.
+    private float objectDragValue = -1;
+
+    #region Initialization
 
     private void Start()
     {
         activeRigidBody = GetComponent<Rigidbody>();
-        if(activeRigidBody != null)
+        if(activeRigidBody != null && !activeRigidBody.isKinematic) //kinematic rigidbodies do not interact with physics system so we will use this setting to enable and disable rigid body behaviour.
         {
             //GRAVITY
 
@@ -39,17 +49,21 @@ public class ForceObject : MonoBehaviour
             //not rigid body! we deal with gravity ourselves.
             characterController = GetComponent<CharacterController>();
 
-            cachedGravityConstant = GameProperties.Singleton.GravityConstant * gravityMultiplier;
+            CustomForce gravityForce = new CustomForce(this, new CustomTraditionalForce(GameProperties.Singleton.GravityConstant * gravityMultiplier), true, float.NegativeInfinity);
 
-            if(cachedGravityConstant != Vector3.zero) //TODO if it gets out of 0 then we shall have to start coroutines ourselves. just call  InitializeAppropriateGravityCoroutine(). also in that case if the constant becomes 0 then we shall have to stop gravity execution.
+            if(gravityForce.GetCurrentAppliedForce() != Vector3.zero) //TODO if it gets out of 0 then we shall have to start coroutines ourselves. just call  InitializeAppropriateGravityCoroutine(). also in that case if the constant becomes 0 then we shall have to stop gravity execution.
             {
-                InitializeAppropriateGravityCoroutine();
+                InitializeAppropriateForceCoroutine();
             }
 
         }
+
+        //DRAG
+
+        objectDragValue = GameManager.Singleton.GetLevelDefaultDragValue();
+
     }
 
-    private CharacterController characterController;
 
 
     private void OnDestroy()
@@ -58,43 +72,149 @@ public class ForceObject : MonoBehaviour
         StopAllCoroutines();
     }
 
-    #region Gravity
+    #endregion
 
-    private void InitializeAppropriateGravityCoroutine()
+    #region Force Enumeration
+
+    private CharacterController characterController;
+
+    [SerializeField]
+    private Vector3 netSpeedForFrame = Vector3.zero;
+    [SerializeField]
+    private Vector3 netAccelerationForFrame = Vector3.zero;
+
+    //private List<Vector3> appliedSpeed = new List<Vector3>(); //TODO implement pure speed.
+    private List<CustomForce> appliedForces = new List<CustomForce>();
+    private List<CustomForce> appliedConstantForces = new List<CustomForce>();
+
+    private void InitializeAppropriateForceCoroutine()
     {
         if (isRigid)
             return;
 
         if (characterController == null)
         {
-            StartCoroutine(TransformGravityEnumeration());
+            StartCoroutine(TransformForceEnumeration());
         }
         else
         {
-            StartCoroutine(ControllerGravityEnumeration());
+            StartCoroutine(ControllerForceEnumeration());
         }
     }
 
-    private Vector3 cachedGravityConstant;
-
     //this is run for objects with character contorllers
-    private IEnumerator ControllerGravityEnumeration()
+    private IEnumerator ControllerForceEnumeration()
     {
         while(true) 
         {
             yield return new WaitForFixedUpdate(); //fixed update is used for physics calculations by convention. it makes things less buggy in low FPS and makes sure collisions etc. occur properly.
-            characterController.Move(cachedGravityConstant * Time.fixedDeltaTime);
+            CalculateProcesAcceleration(Time.fixedDeltaTime);
+            characterController.Move(netSpeedForFrame * Time.fixedDeltaTime);
         }
     }
 
     //this is run for objects with regular tranforms.
-    private IEnumerator TransformGravityEnumeration()
+    private IEnumerator TransformForceEnumeration()
     {
         while (true) 
         {
             yield return new WaitForFixedUpdate();
-            transform.Translate(cachedGravityConstant * Time.fixedDeltaTime);
+            CalculateProcesAcceleration(Time.fixedDeltaTime);
+            transform.Translate(netSpeedForFrame * Time.fixedDeltaTime);
         }
+    }
+
+    /// <summary>
+    /// Calculates acceleration and then applies it to speed variable for frame time. Also sets calculated global variables and subtracts times from forces.
+    /// </summary> 
+    private void CalculateProcesAcceleration(float frameTime)
+    {
+        netAccelerationForFrame = Vector3.zero;
+        foreach(var force in appliedForces)
+        {
+            force.AppliedFor -= frameTime;
+            if (force.AppliedFor < frameTime)
+            {
+                //only increase by amount left.
+                netAccelerationForFrame += force.GetCurrentAppliedForce() * ((force.AppliedFor + frameTime) / frameTime);
+            }
+            else
+            {
+                netAccelerationForFrame += force.GetCurrentAppliedForce();
+            }
+        }
+        foreach (var force in appliedConstantForces)
+        {
+            netAccelerationForFrame += force.GetCurrentAppliedForce();
+        }
+
+        netSpeedForFrame += netAccelerationForFrame * frameTime;
+        if(netSpeedForFrame.magnitude * dragResistanceMultiplier > objectDragValue)
+        {
+            netSpeedForFrame = netSpeedForFrame.normalized * objectDragValue;
+        }
+    }
+
+    #endregion
+
+    #region Force Application and Removal
+
+    public void ApplyNewForce(CustomForce f)
+    {
+        if (f.AppliedFor == float.NegativeInfinity)
+        {
+            appliedConstantForces.Add(f);
+        }
+        else
+        {
+            appliedForces.Add(f);
+        }
+        f.SetParentForceObject(this);
+    }
+
+    public void RemoveForce(CustomForce f)
+    {
+        if(f.AppliedFor == float.NegativeInfinity)
+        {
+            if (appliedConstantForces.Remove(f))
+            {
+                f.RemoveParentForecObject(this);
+            }
+            else
+            {
+                Debug.LogError("ForceObject.RemoveForce() was called with a reference to a force that it does not own.");
+            }
+        }
+        else
+        {
+            if(appliedForces.Remove(f))
+            {
+                f.RemoveParentForecObject(this);
+            }
+            else
+            {
+                Debug.LogError("ForceObject.RemoveForce() was called with a reference to a force that it does not own.");
+            }
+        }
+    }
+
+    #endregion
+
+    #region Getters
+
+    public Vector3 GetRecentNetSpeed()
+    {
+        return netSpeedForFrame;
+    }
+
+    public Vector3 GetRecentNetAcceleration()
+    {
+        return netAccelerationForFrame;
+    }
+
+    public float GetMass()
+    {
+        return mass;
     }
 
     #endregion
