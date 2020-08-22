@@ -30,7 +30,7 @@ public class ForceObject : MonoBehaviour
     private void Start()
     {
         activeRigidBody = GetComponent<Rigidbody>();
-        if(activeRigidBody != null || !activeRigidBody.isKinematic) //kinematic rigidbodies do not interact with physics system so we will use this setting to enable and disable rigid body behaviour.
+        if(activeRigidBody != null && !activeRigidBody.isKinematic) //kinematic rigidbodies do not interact with physics system so we will use this setting to enable and disable rigid body behaviour.
         {
             //GRAVITY
 
