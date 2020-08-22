@@ -98,8 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: e20585ca9cea510478063bba950205c1,
-    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: e20585ca9cea510478063bba950205c1, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -167,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d505113de8d556a48932ec8c73806d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _GravityConstant: {x: 0, y: -9.81, z: 0}
+  _gravityConstant: {x: 0, y: -9.81, z: 0}
 --- !u!1 &488236922
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +290,6 @@ GameObject:
   - component: {fileID: 489613363}
   - component: {fileID: 489613362}
   - component: {fileID: 489613361}
-  - component: {fileID: 489613360}
   m_Layer: 5
   m_Name: Knife
   m_TagString: Untagged
@@ -299,30 +297,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &489613360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 489613359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 472fc520a0522c34c8a0a083c79244ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChooseKnife: {fileID: 489613359}
-  ChooseFist: {fileID: 1298546734}
-  ChooseGun: {fileID: 1199802847}
-  ChooseBat: {fileID: 901522625}
-  Weapons:
-  - {fileID: 489613359}
-  - {fileID: 1298546734}
-  - {fileID: 1199802847}
-  - {fileID: 901522625}
-  CurrentWeapon: {fileID: 489613359}
-  WeaponNumber: 1
-  ScrollSense: 0.01
 --- !u!114 &489613361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,7 +533,6 @@ GameObject:
   - component: {fileID: 901522626}
   - component: {fileID: 901522629}
   - component: {fileID: 901522628}
-  - component: {fileID: 901522627}
   m_Layer: 5
   m_Name: Bat
   m_TagString: Untagged
@@ -586,30 +559,6 @@ RectTransform:
   m_AnchoredPosition: {x: 45.539, y: 45.988}
   m_SizeDelta: {x: 81.285645, y: 80.97484}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &901522627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 901522625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 472fc520a0522c34c8a0a083c79244ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChooseKnife: {fileID: 489613359}
-  ChooseFist: {fileID: 1298546734}
-  ChooseGun: {fileID: 1199802847}
-  ChooseBat: {fileID: 901522625}
-  Weapons:
-  - {fileID: 489613359}
-  - {fileID: 1298546734}
-  - {fileID: 1199802847}
-  - {fileID: 901522625}
-  CurrentWeapon: {fileID: 901522625}
-  WeaponNumber: 4
-  ScrollSense: 0.01
 --- !u!114 &901522628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,6 +893,7 @@ RectTransform:
   - {fileID: 1298546738}
   - {fileID: 1199802851}
   - {fileID: 901522626}
+  - {fileID: 1277136574}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1088,7 +1038,6 @@ GameObject:
   - component: {fileID: 1199802851}
   - component: {fileID: 1199802850}
   - component: {fileID: 1199802849}
-  - component: {fileID: 1199802848}
   m_Layer: 5
   m_Name: Gun
   m_TagString: Untagged
@@ -1096,30 +1045,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1199802848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199802847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 472fc520a0522c34c8a0a083c79244ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChooseKnife: {fileID: 489613359}
-  ChooseFist: {fileID: 1298546734}
-  ChooseGun: {fileID: 1199802847}
-  ChooseBat: {fileID: 901522625}
-  Weapons:
-  - {fileID: 489613359}
-  - {fileID: 1298546734}
-  - {fileID: 1199802847}
-  - {fileID: 901522625}
-  CurrentWeapon: {fileID: 1199802847}
-  WeaponNumber: 3
-  ScrollSense: 0.01
 --- !u!114 &1199802849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1243,6 +1168,66 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1277136573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1277136574}
+  - component: {fileID: 1277136575}
+  m_Layer: 5
+  m_Name: WeaponHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1277136574
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277136573}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1127253169}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1277136575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277136573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472fc520a0522c34c8a0a083c79244ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChooseKnife: {fileID: 489613359}
+  ChooseFist: {fileID: 1298546734}
+  ChooseGun: {fileID: 1199802847}
+  ChooseBat: {fileID: 901522625}
+  Weapons:
+  - {fileID: 489613359}
+  - {fileID: 1298546734}
+  - {fileID: 1199802847}
+  - {fileID: 901522625}
+  CurrentWeapon: {fileID: 489613359}
+  WeaponNumber: 0
+  ScrollSense: 0
 --- !u!95 &1289479274
 Animator:
   serializedVersion: 3
@@ -1273,7 +1258,6 @@ GameObject:
   - component: {fileID: 1298546738}
   - component: {fileID: 1298546737}
   - component: {fileID: 1298546736}
-  - component: {fileID: 1298546735}
   m_Layer: 5
   m_Name: Fist
   m_TagString: Untagged
@@ -1281,30 +1265,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1298546735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298546734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 472fc520a0522c34c8a0a083c79244ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChooseKnife: {fileID: 489613359}
-  ChooseFist: {fileID: 1298546734}
-  ChooseGun: {fileID: 1199802847}
-  ChooseBat: {fileID: 901522625}
-  Weapons:
-  - {fileID: 489613359}
-  - {fileID: 1298546734}
-  - {fileID: 1199802847}
-  - {fileID: 901522625}
-  CurrentWeapon: {fileID: 1298546734}
-  WeaponNumber: 2
-  ScrollSense: 0.01
 --- !u!114 &1298546736
 MonoBehaviour:
   m_ObjectHideFlags: 0
