@@ -1,5 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
 public class WeaponChooser : MonoBehaviour
 {
@@ -105,6 +105,10 @@ public class WeaponChooser : MonoBehaviour
             if (weapon == CurrentWeapon)
             {
                 weapon.SetActive(true);
+                if (weaponchosen != null)
+                {
+                    weaponchosen(weapon);
+                }
             }
             else
             {
@@ -112,4 +116,8 @@ public class WeaponChooser : MonoBehaviour
             }
         }
     }
+
+    public Action<GameObject> weaponchosen;
+
+
 }
