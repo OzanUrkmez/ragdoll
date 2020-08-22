@@ -90,7 +90,7 @@ public class ForceObject : MonoBehaviour
     private void InitializeAppropriateForceCoroutine()
     {
         if (isRigid)
-            return;
+            return; //TODO do not return my friend! we shall play even with rigid bodies! none shall escape the wrath of the custom physics system
 
         if (characterController == null)
         {
@@ -215,6 +215,20 @@ public class ForceObject : MonoBehaviour
     public float GetMass()
     {
         return mass;
+    }
+
+    #endregion
+
+    #region Direct Adjustment
+
+    public void DirectAdjustAddSpeed(Vector3 speed)
+    {
+        netSpeedForFrame += speed;
+    }
+
+    public void DirectSetSpeed(Vector3 speed)
+    {
+        netSpeedForFrame = speed;
     }
 
     #endregion
