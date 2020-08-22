@@ -2,9 +2,11 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class ColliderDetectorObject : MonoBehaviour
+public class DeathCheck : MonoBehaviour
 {
-    public CharacterController CharacterController;
+    public static int lives = 200;
+    public AudioSource audiodata;
+
     void Update()
     {
         
@@ -14,7 +16,16 @@ public class ColliderDetectorObject : MonoBehaviour
     {
         if (hit.collider.tag == "Death")
         {
-            Debug.Log("Ouch");
+            if (lives > 0)
+            {
+                lives -= 1;
+                Debug.Log(lives);
+            }
+            else
+            {
+                audiodata.Play(0);
+            }
+
         }
     }
 }
