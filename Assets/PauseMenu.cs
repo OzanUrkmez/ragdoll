@@ -30,6 +30,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     //Pauses the game by stopping time and setting GameIsPaused to true
@@ -38,5 +39,14 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    //Starts time again and brings player out of play mode
+    public void LoadMenu()
+    {
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.None;
+        GameIsPaused = false;
     }
 }
