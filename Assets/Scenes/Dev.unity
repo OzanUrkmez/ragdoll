@@ -1615,43 +1615,19 @@ MonoBehaviour:
   characterController: {fileID: 919132148796935983}
   affectedForceObject: {fileID: 919132148796935984}
   motorMovementForceObject:
-    forwardSpeeds:
-    - 0
-    - 5
-    - 8
-    backwardSpeeds:
-    - 0
-    - 3
-    - 5
-    rightSpeeds:
-    - 0
-    - 3
-    - 5
-    leftSpeeds:
-    - 0
-    - 3
-    - 5
-    forwardAccelerations:
-    - 0
-    - 20
-    - 40
-    backwardAccelerations:
-    - 0
-    - 15
-    - 30
-    rightAccelerations:
-    - 0
-    - 15
-    - 30
-    leftAccelerations:
-    - 0
-    - 15
-    - 30
-    forwardAdjustmentIndex: 1
-    backwardAdjustmentIndex: 1
-    rightAdjustmentIndex: 1
-    leftAdjustmentIndex: 1
-    motorMovementTransform: {fileID: 543450652984907156}
+    forwardSpeeds: []
+    backwardSpeeds: []
+    rightSpeeds: []
+    leftSpeeds: []
+    forwardAccelerations: []
+    backwardAccelerations: []
+    rightAccelerations: []
+    leftAccelerations: []
+    forwardAdjustmentIndex: 0
+    backwardAdjustmentIndex: 0
+    rightAdjustmentIndex: 0
+    leftAdjustmentIndex: 0
+    motorMovementTransform: {fileID: 0}
   humanoidAnimator: {fileID: 1289479274}
 --- !u!114 &919132148796935987
 MonoBehaviour:
@@ -1662,14 +1638,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 919132148796935982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0dc7134f5f1acb4d9abbe51ff722757, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c8700437d2806c46b068c4f8a8f7c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: {fileID: 0}
-  appliedTo: {fileID: 919132148796935984}
-  isPure: 1
-  infiniteTimeForce: 1
-  applyTime: 0
+  componentOnlyObjectRef:
+    appliedTo: {fileID: 919132148796935984}
+    isPure: 1
+    infiniteTimeForce: 1
+    applyTime: 0
+  dragForceCoefficient: 0.05
 --- !u!4 &1052125073661383896
 Transform:
   m_ObjectHideFlags: 0
