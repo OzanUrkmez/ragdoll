@@ -10,6 +10,18 @@ public class DeathCheck : MonoBehaviour
     public Transform checkpoint;
     public GameObject Player;
 
+    void Update()
+    {
+        if (Input.GetKeyDown("k"))
+        {
+            Player.transform.position = checkpoint.transform.position;
+            if (lives > 0)
+            {
+                lives -= 1;
+                Debug.Log(lives);
+            }
+        }
+    }
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.collider.tag == "Checkpoint")
@@ -24,12 +36,6 @@ public class DeathCheck : MonoBehaviour
                 lives -= 1;
                 Debug.Log(lives);
             }
-
-            if (lives == 0)
-            {
-                Debug.Log("Ouch");
-            }
-            
 
         }
     }

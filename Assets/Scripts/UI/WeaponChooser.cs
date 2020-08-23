@@ -117,7 +117,7 @@ public class WeaponChooser : MonoBehaviour
         }
     }
 
-    public Action<GameObject> weaponchosen;
+    public static Action<GameObject> weaponchosen;
 
 
 }
