@@ -7,7 +7,7 @@ public class DeathTeleport : MonoBehaviour
     public Transform checkpoint;
     public GameObject Player;
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collider other)
     {
         Player.transform.position = checkpoint.transform.position;
     }
