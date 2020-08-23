@@ -9,7 +9,7 @@ public class DeathCheck : MonoBehaviour
     public static int lives = 10;
     public Transform checkpoint;
     public GameObject Player;
-
+    public Transform firstcheckpoint;
     void Update()
     {
         if (Input.GetKeyDown("k"))
@@ -18,7 +18,12 @@ public class DeathCheck : MonoBehaviour
             if (lives > 0)
             {
                 lives -= 1;
-                Debug.Log(lives);
+            }
+
+            if (lives == 0)
+            {
+                checkpoint = firstcheckpoint;
+                Player.transform.position = checkpoint.transform.position;
             }
         }
     }
@@ -34,9 +39,12 @@ public class DeathCheck : MonoBehaviour
             if (lives > 0)
             {
                 lives -= 1;
-                Debug.Log(lives);
             }
-
+            if (lives == 0)
+            {
+                checkpoint = firstcheckpoint;
+                Player.transform.position = checkpoint.transform.position;
+            }
         }
     }
 }
