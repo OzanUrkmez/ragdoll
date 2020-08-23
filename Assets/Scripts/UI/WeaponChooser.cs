@@ -16,6 +16,18 @@ public class WeaponChooser : MonoBehaviour
     private GameObject ChooseBat;
 
     [SerializeField]
+    private GameObject Knife;
+
+    [SerializeField]
+    private GameObject Fist;
+
+    [SerializeField]
+    private GameObject Gun;
+
+    [SerializeField]
+    private GameObject Bat;
+
+    [SerializeField]
     private GameObject[] Weapons;
 
     [SerializeField]
@@ -34,6 +46,10 @@ public class WeaponChooser : MonoBehaviour
         ChooseKnife.SetActive(true);
         ChooseGun.SetActive(false);
         ChooseBat.SetActive(false);
+        Fist.SetActive(false);
+        Knife.SetActive(true);
+        Gun.SetActive(false);
+        Bat.SetActive(false);
     }
 
     // Update is called once per frame aefef
@@ -48,6 +64,10 @@ public class WeaponChooser : MonoBehaviour
             ChooseKnife.SetActive(true);
             ChooseGun.SetActive(false);
             ChooseBat.SetActive(false);
+            Fist.SetActive(false);
+            Knife.SetActive(true);
+            Gun.SetActive(false);
+            Bat.SetActive(false);
         }
         if (Input.GetKeyDown("2"))
         {
@@ -56,6 +76,10 @@ public class WeaponChooser : MonoBehaviour
             ChooseKnife.SetActive(false);
             ChooseGun.SetActive(false);
             ChooseBat.SetActive(false);
+            Fist.SetActive(true);
+            Knife.SetActive(false);
+            Gun.SetActive(false);
+            Bat.SetActive(false);
             WeaponNumber = 2;
         }
         if (Input.GetKeyDown("3"))
@@ -65,6 +89,10 @@ public class WeaponChooser : MonoBehaviour
             ChooseKnife.SetActive(false);
             ChooseGun.SetActive(true);
             ChooseBat.SetActive(false);
+            Fist.SetActive(false);
+            Knife.SetActive(false);
+            Gun.SetActive(true);
+            Bat.SetActive(false);
             WeaponNumber = 3;
         }
         if (Input.GetKeyDown("4"))
@@ -74,6 +102,10 @@ public class WeaponChooser : MonoBehaviour
             ChooseKnife.SetActive(false);
             ChooseGun.SetActive(false);
             ChooseBat.SetActive(true);
+            Fist.SetActive(false);
+            Knife.SetActive(false);
+            Gun.SetActive(false);
+            Bat.SetActive(true);
             WeaponNumber = 4;
         }
 

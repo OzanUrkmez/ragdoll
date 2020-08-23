@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583a91047a55a4f49b1e84a033c3ca56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 0
   range: 100
   fpsCam: {fileID: 963194227}
   muzzleFlash: {fileID: 689738291}
@@ -576,7 +576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689738288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.03, y: -0, z: -0}
+  m_LocalPosition: {x: 1.17, y: -0.021, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 235162627}
@@ -5670,7 +5670,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276c0db4e5450644eab1e2b21bc9364a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
 --- !u!65 &843347968
 BoxCollider:
   m_ObjectHideFlags: 0

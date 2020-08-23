@@ -2,17 +2,16 @@
 
 public class Target : MonoBehaviour
 {
-    public float health = 50f;
-
-    public void TakeDamage (float amount)
+    //checks if gun has hit the object
+    public void GetHit (bool hit)
     {
-        health -= amount;
-        if (health <= 0f)
+        if (hit)
         {
             Die();
         }
     }
 
+    //if gun has hit the object, excute this code
     void Die()
     {
         Destroy(gameObject);
