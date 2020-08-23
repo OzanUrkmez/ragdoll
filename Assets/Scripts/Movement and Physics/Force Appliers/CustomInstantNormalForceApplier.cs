@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CustomInstantNormalForceApplier : MonoBehaviour
 {
+    private Collider ownCollider;
 
     private void Start()
     {
+        ownCollider = GetComponent<Collider>();
     }
 
 
@@ -14,12 +16,17 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
     private float normalForceMultiplier = 1f;
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        var forceTarget = other.GetComponent<ForceObject>();
+        var forceTarget = collision.collider.GetComponent<ForceObject>();
         if (forceTarget == null)
             return;
-            
-    }
+        //TODO can improve upon this.
 
+        Vector3 adjustment = (-Vector3.Project(forceTarget.GetRecentNetSpeed(), collision.GetContact(0).normal)) * normalForceMultiplier;
+
+        Debug.Log(adjustment);
+
+        forceTarget.DirectAdjustAddSpeed(adjustment);
+    }
 }
