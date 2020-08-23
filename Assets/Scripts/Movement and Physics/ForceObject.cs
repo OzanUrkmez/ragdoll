@@ -13,17 +13,25 @@ public class ForceObject : MonoBehaviour
     [SerializeField]
     private float gravityMultiplier = 1f;
     [SerializeField]
-    private float dragResistanceMultiplier = 1f;
+    private float dragResistanceMultiplier = 1f; //TODO if can change this, then update adjusted true maximum speed etc. too
     [SerializeField]
     private float mass = 1f;
+
+    [SerializeField]
+    private float minimumSpeedToMove = 0.2f;
 
     private bool isRigid = false;
     private Rigidbody activeRigidBody;
     private ConstantForce activeConstantGravityAdjustmentForce;
 
+    private float adjustedTrueMaximumSpeed;
+
     //if smaller than 0, then it is disregarded.
     //TODO add dampening effect for drag. make it more applied over time.
-    private float objectDragValue = -1;
+    //TODO if can change this, then do event system! 
+    private float objectDragValue = -1; 
+
+    //TODO In future move drag etc. to modular outside modifiable behaviour effecting system. have this system be called by events etc. in here to adjust speeds etc etc. so yeah modular behaviour etc. system! we can then truly have customizable physics
 
     #region Initialization
 
@@ -61,6 +69,8 @@ public class ForceObject : MonoBehaviour
         //DRAG
 
         objectDragValue = GameManager.Singleton.GetLevelDefaultDragValue();
+        adjustedTrueMaximumSpeed = objectDragValue * dragResistanceMultiplier;
+
 
     }
 
@@ -109,7 +119,8 @@ public class ForceObject : MonoBehaviour
         {
             yield return new WaitForFixedUpdate(); //fixed update is used for physics calculations by convention. it makes things less buggy in low FPS and makes sure collisions etc. occur properly.
             CalculateProcesAcceleration(Time.fixedDeltaTime);
-            characterController.Move(netSpeedForFrame * Time.fixedDeltaTime);
+            if(netSpeedForFrame.magnitude > minimumSpeedToMove)
+                characterController.Move(netSpeedForFrame * Time.fixedDeltaTime);
         }
     }
 
@@ -120,7 +131,8 @@ public class ForceObject : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
             CalculateProcesAcceleration(Time.fixedDeltaTime);
-            transform.Translate(netSpeedForFrame * Time.fixedDeltaTime);
+            if (netSpeedForFrame.magnitude > minimumSpeedToMove)
+                transform.Translate(netSpeedForFrame * Time.fixedDeltaTime);
         }
     }
 
@@ -149,9 +161,9 @@ public class ForceObject : MonoBehaviour
         }
 
         netSpeedForFrame += netAccelerationForFrame * frameTime;
-        if(netSpeedForFrame.magnitude * dragResistanceMultiplier > objectDragValue)
+        if(netSpeedForFrame.magnitude > adjustedTrueMaximumSpeed)
         {
-            netSpeedForFrame = netSpeedForFrame.normalized * objectDragValue;
+            netSpeedForFrame = netSpeedForFrame.normalized * adjustedTrueMaximumSpeed;
         }
     }
 
@@ -215,6 +227,16 @@ public class ForceObject : MonoBehaviour
     public float GetMass()
     {
         return mass;
+    }
+
+    public float GetAdjustedTrueMaximumSpeed()
+    {
+        return adjustedTrueMaximumSpeed;
+    }
+
+    public float GetObjectDragValue()
+    {
+        return objectDragValue;
     }
 
     #endregion

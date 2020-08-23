@@ -1,12 +1,34 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UnityEngine;
+using System;
 
-namespace Assets.Scripts.Movement_and_Physics.CustomForce_Implementations
+[Serializable]
+public class CustomSwitchingForce : ICustomForceImplementation
 {
-    class CustomSwitchingForce
+
+    [SerializeField]
+    private ICustomForceImplementation[] forces;
+
+    [SerializeField]
+    private float[] switchTimes;
+
+    private int currentIndex = 0;
+
+    private float currentTime = 0;
+
+    public Vector3 GetCurrentForceVector(CustomForce parentForce, ForceObject objectAppliedTo)
     {
+
+        
+
+        currentTime += Time.fixedDeltaTime;
+        if(currentTime > switchTimes[currentIndex])
+        {
+            currentTime = 0;
+            currentIndex = (currentIndex + 1) % switchTimes.Length;
+        }
+
+        return forces[currentIndex].GetCurrentForceVector(parentForce, objectAppliedTo);
     }
 }

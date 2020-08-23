@@ -11,6 +11,8 @@ using System;
 public class CustomForce
 {
 
+    //TODO PROPER GARBAGE COLLECTION ETC. AROUND EVENT SYSTEM
+
     //Does not concern itself with mass. is pure acceleration.
     public bool IsPure { get; private set; }
 
