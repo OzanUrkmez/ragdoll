@@ -13,6 +13,6 @@ public class DeathCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TextChange.text ="Lives: " + DeathCheck.lives.ToString();
+        TextChange.text = "Lives: " + DeathCheck.lives.ToString();
     }
 }
