@@ -5,7 +5,7 @@ using UnityEngine;
 public class BasicForceApplier : MonoBehaviour
 {
 
-    [SerializeField, TypeConstraint(typeof(ICustomForceImplementation))]
+    [SerializeField]
     private Object force;
 
     [SerializeField]
