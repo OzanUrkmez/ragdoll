@@ -15,6 +15,8 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
     [SerializeField]
     private float normalForceMultiplier = 1f;
 
+    private List<ForceObject> normalAppliedOn = new List<ForceObject>();
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -28,5 +30,36 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
         Debug.Log(adjustment);
 
         forceTarget.DirectAdjustAddSpeed(adjustment);
+
+        forceTarget.onNewForceAdded += OnForceAdded;
+        forceTarget.onForceRemoved += OnForceRemoved;
+
+        normalAppliedOn.Add(forceTarget);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        var forceTarget = collision.collider.GetComponent<ForceObject>();
+        if (forceTarget == null)
+            return;
+
+        forceTarget.onNewForceAdded -= OnForceAdded;
+        forceTarget.onForceRemoved -= OnForceRemoved;
+        normalAppliedOn.Remove(forceTarget);
+    }
+
+    private void FixedUpdate()
+    {
+        //assuming force is run every fixed update.
+    }
+
+    private void OnForceAdded(CustomForce f)
+    {
+
+    }
+
+    private void OnForceRemoved(CustomForce f)
+    {
+
     }
 }
