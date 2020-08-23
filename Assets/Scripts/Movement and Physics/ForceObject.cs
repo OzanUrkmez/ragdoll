@@ -181,6 +181,9 @@ public class ForceObject : MonoBehaviour
             appliedForces.Add(f);
         }
         f.SetParentForceObject(this);
+
+        onNewForceAdded?.Invoke(f);
+
     }
 
     public void RemoveForce(CustomForce f)
@@ -207,6 +210,8 @@ public class ForceObject : MonoBehaviour
                 Debug.LogError("ForceObject.RemoveForce() was called with a reference to a force that it does not own.");
             }
         }
+
+        onForceRemoved?.Invoke(f);
     }
 
     #endregion
@@ -251,6 +256,14 @@ public class ForceObject : MonoBehaviour
     {
         netSpeedForFrame = speed;
     }
+
+    #endregion
+
+    #region EventSystem
+
+    public Action<CustomForce> onNewForceAdded;
+
+    public Action<CustomForce> onForceRemoved;
 
     #endregion
 

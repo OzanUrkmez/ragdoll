@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField]
+    private GameObject batObject;
+
+    [SerializeField]
     private GameObject characterObject;
     [SerializeField]
     private CharacterController characterController;
@@ -43,6 +46,8 @@ public class PlayerController : MonoBehaviour
         //hide cursor and lock it
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        WeaponChooser.onNewWeaponChosen += OnWeaponChanged;
     }
 
     //TODO We do this in Update for now. If doing professionally, it is best practice to put controls in a separate controls.
@@ -91,6 +96,19 @@ public class PlayerController : MonoBehaviour
             humanoidMotorObject.OctagonalRunUpdate(moveDelta);
         else
             humanoidMotorObject.OctagonalWalkUpdate(moveDelta);
+    }
+
+    private void OnWeaponChanged(WeaponType ChosenWeapon)
+    {
+        switch (ChosenWeapon)
+        {
+            case WeaponType.Bat:
+                batObject.SetActive(true);
+                break;
+            default:
+                batObject.SetActive(false); //TODO fix
+                break;
+        }
     }
 }
 
