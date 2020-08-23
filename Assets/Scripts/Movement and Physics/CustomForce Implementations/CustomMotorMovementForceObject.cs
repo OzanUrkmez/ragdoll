@@ -6,23 +6,29 @@ using System;
 [Serializable]
 public class CustomMotorMovementForceObject : ICustomForceImplementation
 {
-    
+
     [SerializeField]
-    private float[] forwardSpeeds, backwardSpeeds, rightSpeeds, leftSpeeds;
+    private float[] maximumSpeedsPerIndex;
 
     [SerializeField]
     private float[] forwardAccelerations, backwardAccelerations, rightAccelerations, leftAccelerations;
 
     [SerializeField]
-    private int forwardAdjustmentIndex, backwardAdjustmentIndex, rightAdjustmentIndex, leftAdjustmentIndex;
+    private float[] adjustmentAccelerations; //TODO can play with these to create interesting effects?
 
     private int currentForwardIndex, currentBackwardIndex, currentRightIndex, currentLeftIndex;
-   
 
     [SerializeField]
     private Transform motorMovementTransform;
 
     private Func<bool> isGroundedCheck;
+
+    private Vector3 groundDir = new Vector3(0, -1, 0); //TODO make this adjustable to walk on walls. maybe.
+
+    private int currentMaxIndex = 0;
+
+    [SerializeField]
+    private float NoMovementCutoff = 1;
 
     #region Initializaiton
 
@@ -48,18 +54,24 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
         Vector3 leftForce = -motorMovementTransform.right * rightAccelerations[currentLeftIndex];
         Vector3 backwardForce = -motorMovementTransform.forward * leftAccelerations[currentBackwardIndex];
 
-        //Can use adjustment force code at other places too!
+        //TODO add grounded check
 
-        float forwardSpeedMagnitude = Vector3.Project(forwardForce, objectAppliedTo.GetRecentNetSpeed()).magnitude;
-        float rightSpeedMagnitude = Vector3.Project(rightForce, objectAppliedTo.GetRecentNetSpeed()).magnitude;
-        float leftSpeedMagnitude = Vector3.Project(leftForce, objectAppliedTo.GetRecentNetSpeed()).magnitude;
-        float backwardSpeedMagnitude = Vector3.Project(backwardForce, objectAppliedTo.GetRecentNetSpeed()).magnitude;
+        Vector3 adjustedWalkPlaneSpeed = Vector3.ProjectOnPlane(objectAppliedTo.GetRecentNetSpeed(), groundDir);
+
+        Vector3 resultantForce = forwardForce + rightForce + leftForce + backwardForce;
+
+        if(adjustedWalkPlaneSpeed.magnitude < NoMovementCutoff && resultantForce.magnitude < NoMovementCutoff)
+        {
+            objectAppliedTo.DirectAdjustAddSpeed(-adjustedWalkPlaneSpeed);
+            return Vector3.zero;
+        }
+
+        if (adjustedWalkPlaneSpeed.magnitude > maximumSpeedsPerIndex[currentMaxIndex])
+        {
+            resultantForce += -adjustedWalkPlaneSpeed.normalized * adjustmentAccelerations[currentMaxIndex];
+        }
 
         //TODO doing it with just if might be faster becasue there is no addition with vector3.zero. Do diagnostic if releasing this code separately.
-        Vector3 resultantForce = (forwardSpeedMagnitude > forwardSpeeds[currentForwardIndex] ? Vector3.zero : forwardForce)
-            + (rightSpeedMagnitude > rightSpeeds[currentRightIndex] ? Vector3.zero : rightForce)
-            + (leftSpeedMagnitude > leftSpeeds[currentLeftIndex] ? Vector3.zero : leftForce)
-            + (backwardSpeedMagnitude > backwardSpeeds[currentBackwardIndex] ? Vector3.zero : backwardForce);
 
         return resultantForce;
     }
@@ -67,21 +79,30 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
     public void UpdateCurrentForwardIndex(int index)
     {
         currentForwardIndex = index;
+        RecalculateMaxIndex();
     }
 
     public void UpdateCurrentBackwardIndex(int index)
     {
         currentBackwardIndex = index;
+        RecalculateMaxIndex();
     }
 
     public void UpdateCurrentRightIndex(int index)
     {
         currentRightIndex = index;
+        RecalculateMaxIndex();
     }
 
     public void UpdateCurrentLeftIndex(int index)
     {
         currentLeftIndex = index;
+        RecalculateMaxIndex();
+    }
+
+    private void RecalculateMaxIndex()
+    {
+        currentMaxIndex = Mathf.Max(currentForwardIndex, currentRightIndex, currentBackwardIndex, currentLeftIndex);
     }
 
 }

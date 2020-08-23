@@ -1424,15 +1424,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148796935982}
-  m_LocalRotation: {x: -0.021528762, y: -0.07674805, z: -0.0130403, w: 0.9967328}
-  m_LocalPosition: {x: 0.19, y: 0.62, z: -2.52}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.19, y: 0.527, z: -2.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
   - {fileID: 543450652600706959}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -2.575, y: -8.777, z: -1.302}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &556700659466868009
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,7 +1584,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
-  minimumSpeedToMove: 0.1
+  minimumSpeedToMove: 2
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
 --- !u!114 &919132148796935985
@@ -1615,19 +1615,31 @@ MonoBehaviour:
   characterController: {fileID: 919132148796935983}
   affectedForceObject: {fileID: 919132148796935984}
   motorMovementForceObject:
-    forwardSpeeds: []
-    backwardSpeeds: []
-    rightSpeeds: []
-    leftSpeeds: []
-    forwardAccelerations: []
-    backwardAccelerations: []
-    rightAccelerations: []
-    leftAccelerations: []
-    forwardAdjustmentIndex: 0
-    backwardAdjustmentIndex: 0
-    rightAdjustmentIndex: 0
-    leftAdjustmentIndex: 0
-    motorMovementTransform: {fileID: 0}
+    maximumSpeedsPerIndex:
+    - 0
+    - 5
+    - 8
+    forwardAccelerations:
+    - 0
+    - 25
+    - 40
+    backwardAccelerations:
+    - 0
+    - 15
+    - 30
+    rightAccelerations:
+    - 0
+    - 15
+    - 30
+    leftAccelerations:
+    - 0
+    - 15
+    - 30
+    adjustmentAccelerations:
+    - 50
+    - 80
+    - 120
+    motorMovementTransform: {fileID: 543450652984907156}
   humanoidAnimator: {fileID: 1289479274}
 --- !u!114 &919132148796935987
 MonoBehaviour:
@@ -1646,7 +1658,7 @@ MonoBehaviour:
     isPure: 1
     infiniteTimeForce: 1
     applyTime: 0
-  dragForceCoefficient: 0.05
+  dragForceCoefficient: 0.02
 --- !u!4 &1052125073661383896
 Transform:
   m_ObjectHideFlags: 0

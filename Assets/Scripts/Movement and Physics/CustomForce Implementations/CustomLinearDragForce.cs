@@ -25,8 +25,8 @@ public class CustomLinearDragForce : MonoBehaviour, ICustomForceImplementation
 
     public Vector3 GetCurrentForceVector(CustomForce parentForce, ForceObject objectAppliedTo)
     {
-        return -objectAppliedTo.GetRecentNetSpeed().normalized * 
-            Mathf.Lerp(0, objectAppliedTo.GetObjectDragValue(), objectAppliedTo.GetRecentNetSpeed().magnitude / objectAppliedTo.GetAdjustedTrueMaximumSpeed());
+        return (-objectAppliedTo.GetRecentNetSpeed().normalized * 
+            Mathf.Lerp(0, objectAppliedTo.GetObjectDragValue(), objectAppliedTo.GetRecentNetSpeed().magnitude / objectAppliedTo.GetAdjustedTrueMaximumSpeed())) * dragForceCoefficient;
     }
 
 }

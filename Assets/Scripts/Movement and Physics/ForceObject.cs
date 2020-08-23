@@ -59,10 +59,9 @@ public class ForceObject : MonoBehaviour
 
             CustomForce gravityForce = new CustomForce(this, new CustomTraditionalForce(GameProperties.Singleton.GravityConstant * gravityMultiplier), true, float.NegativeInfinity);
 
-            if(gravityForce.GetCurrentAppliedForce() != Vector3.zero) //TODO if it gets out of 0 then we shall have to start coroutines ourselves. just call  InitializeAppropriateGravityCoroutine(). also in that case if the constant becomes 0 then we shall have to stop gravity execution.
-            {
-                InitializeAppropriateForceCoroutine();
-            }
+          
+            InitializeAppropriateForceCoroutine();
+            
 
         }
 

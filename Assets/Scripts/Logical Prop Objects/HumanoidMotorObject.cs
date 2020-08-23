@@ -17,7 +17,6 @@ public class HumanoidMotorObject : MonoBehaviour
     [SerializeField]
     Animator humanoidAnimator; //TODO deal with this last. pls deal with it tho.
 
-
     private CustomForce humanoidForce;
 
     private void Start()
