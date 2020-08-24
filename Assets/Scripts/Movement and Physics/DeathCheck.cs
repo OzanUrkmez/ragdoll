@@ -27,7 +27,8 @@ public class DeathCheck : MonoBehaviour
             }
         }
     }
-    void OnControllerColliderHit(ControllerColliderHit hit)
+
+    private void OnCollisionEnter(Collision hit)
     {
         if (hit.collider.tag == "Checkpoint")
         {
