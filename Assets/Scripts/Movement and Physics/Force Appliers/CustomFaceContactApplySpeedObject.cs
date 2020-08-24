@@ -43,13 +43,13 @@ public class CustomFaceContactApplySpeedObject : MonoBehaviour //TODO we use thi
         if (Vector3.Angle(sourceMassObject.GetRecentNetSpeed(), normal) > 90)
             return;
 
-        Vector3 projection = Vector3.Project(sourceMassObject.GetRecentNetSpeed(), normal);
+        Vector3 projection = Vector3.Project(sourceMassObject.GetRecentNetSpeed() + sourceMassObject.GetRecentNetAcceleration(), normal); //TODO this bad. better if after physics
 
         Vector3 speedApplication = projection * massMultiplier / (isPure ? 1 : forceObject.GetMass()) * speedTransferranceMultipler;
 
         forceObject.DirectAdjustAddSpeed(speedApplication - lastSpeedApplied[forceObject]);
 
-        lastSpeedApplied[forceObject] = speedApplication;
+        lastSpeedApplied[forceObject] = speedApplication; //APPLY AFTER SYSTEM
     }
 
     private void OnCollisionExit(Collision collision)

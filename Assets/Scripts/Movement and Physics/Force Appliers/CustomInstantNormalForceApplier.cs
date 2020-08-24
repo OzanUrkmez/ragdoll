@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class CustomInstantNormalForceApplier : MonoBehaviour
 {
-    private Collider ownCollider;
-
-    private void Start()
-    {
-        ownCollider = GetComponent<Collider>();
-    }
 
 
     [SerializeField]
