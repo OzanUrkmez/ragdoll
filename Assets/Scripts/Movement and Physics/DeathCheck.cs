@@ -15,17 +15,17 @@ public class DeathCheck : MonoBehaviour
     {
         if (Input.GetKeyDown("k"))
         {
-            Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
-            Player.transform.position = checkpoint.transform.position;
+
             if (lives > 0)
             {
+                Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
+                Player.transform.position = checkpoint.transform.position;
                 lives -= 1;
             }
 
             if (lives == 0)
             {
-                checkpoint = firstcheckpoint;
-                Player.transform.position = checkpoint.transform.position;
+                SceneManager.LoadScene("")
             }
         }
     }
