@@ -121,6 +121,7 @@ public class ForceObject : MonoBehaviour
         {
             yield return new WaitForFixedUpdate(); //fixed update is used for physics calculations by convention. it makes things less buggy in low FPS and makes sure collisions etc. occur properly.
             CalculateProcesAcceleration(Time.fixedDeltaTime);
+            onBeforeSpeedApplied?.Invoke(this);
             if (netSpeedForFrame.magnitude > minimumSpeedToMove)
                 characterController.Move(netSpeedForFrame * Time.fixedDeltaTime);
         }
@@ -325,6 +326,8 @@ public class ForceObject : MonoBehaviour
     #endregion
 
     #region EventSystem
+
+    public Action<ForceObject> onBeforeSpeedApplied;
 
     public Action<ForceObject, CustomForce> onNewForceAdded;
 

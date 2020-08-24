@@ -18,11 +18,15 @@ public class CustomSwitchingForce : MonoBehaviour, ICustomForceImplementation
     [SerializeField]
     private bool isPure;
 
-    [SerializeField]
-    private ICustomForceImplementation[] forces;
+    [Serializable]
+    struct SwitchingForce
+    {
+        public Vector3 forceVector;
+        public float time;
+    }
 
     [SerializeField]
-    private float[] switchTimes;
+    private SwitchingForce[] switchingForces;
 
     [SerializeField]
     private bool repeatForever = true;
@@ -40,7 +44,7 @@ public class CustomSwitchingForce : MonoBehaviour, ICustomForceImplementation
     public Vector3 GetCurrentForceVector(CustomForce parentForce, ForceObject objectAppliedTo)
     {
         currentTime += Time.fixedDeltaTime;
-        if(currentTime > switchTimes[currentIndex])
+        if(currentTime > switchingForces[currentIndex].time)
         {
             if (!repeatForever)
             {
@@ -51,9 +55,9 @@ public class CustomSwitchingForce : MonoBehaviour, ICustomForceImplementation
                 }
             }
             currentTime = 0;
-            currentIndex = (currentIndex + 1) % switchTimes.Length;
+            currentIndex = (currentIndex + 1) % switchingForces.Length;
         }
 
-        return forces[currentIndex].GetCurrentForceVector(parentForce, objectAppliedTo);
+        return switchingForces[currentIndex].forceVector;
     }
 }

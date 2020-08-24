@@ -14,6 +14,12 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
     private float[] forwardAccelerations, backwardAccelerations, rightAccelerations, leftAccelerations;
 
     [SerializeField]
+    private float maximumNonGroundedSpeedAdjustment;
+
+    private Vector3 priorAdjustment;
+
+
+    [SerializeField]
     private float[] adjustmentAccelerations; //TODO can play with these to create interesting effects?
 
     private int currentForwardIndex, currentBackwardIndex, currentRightIndex, currentLeftIndex;
@@ -49,17 +55,32 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
     #endregion
 
 
+    private bool pureSpeedDirty = false;
+
     public Vector3 GetCurrentForceVector(CustomForce parentForce, ForceObject objectAppliedTo)
     {
         if (!canExertMotorForceCheck())
+        {
+            //NOT GROUNDED
+
+            //do pure speed efforts
+
+            //Vector3 currentSpeed 
+
             return Vector3.zero;
+        }
+
+        //GROUNDED
+
+        if (pureSpeedDirty)
+        {
+            UndirtyPureSpeed();
+        }
 
         Vector3 forwardForce = motorMovementTransform.forward * forwardAccelerations[currentForwardIndex];
         Vector3 rightForce = motorMovementTransform.right * backwardAccelerations[currentRightIndex];
         Vector3 leftForce = -motorMovementTransform.right * rightAccelerations[currentLeftIndex];
         Vector3 backwardForce = -motorMovementTransform.forward * leftAccelerations[currentBackwardIndex];
-
-        //TODO add grounded check
 
         Vector3 adjustedWalkPlaneSpeed = Vector3.ProjectOnPlane(objectAppliedTo.GetRecentNetSpeed(), groundDir);
 
@@ -79,6 +100,12 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
         //TODO doing it with just if might be faster becasue there is no addition with vector3.zero. Do diagnostic if releasing this code separately.
 
         return resultantForce;
+    }
+
+    private void UndirtyPureSpeed()
+    {
+        pureSpeedDirty = false;
+        priorAdjustment = Vector3.zero;
     }
 
     #region Setters
