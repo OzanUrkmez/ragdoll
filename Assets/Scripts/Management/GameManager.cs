@@ -43,8 +43,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float levelDefaultDragValue = 25f;
 
+    [SerializeField]
+    private GameObject playerObject;
+
     public float GetLevelDefaultDragValue()
     {
         return levelDefaultDragValue;
+    }
+
+    public GameObject GetPlayerObject()
+    {
+        return playerObject;
     }
 }

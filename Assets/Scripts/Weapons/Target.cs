@@ -5,7 +5,7 @@ public class Target : MonoBehaviour
     public GameObject ragdoll;
     public Camera fpsCam;
     public float range = 100f;
-    public bool destroy = false;
+    private bool destroy = false; 
 
     //checks if gun has hit the object
     public void GetHit (bool hit)
@@ -19,7 +19,8 @@ public class Target : MonoBehaviour
     //if gun has hit the object, excute this code
     void Die()
     {
-        Instantiate(ragdoll, gameObject.transform.position, gameObject.transform.rotation);
+        GameObject g = Instantiate(ragdoll, gameObject.transform.position, gameObject.transform.rotation);
+        g.GetComponentInChildren<SkinnedMeshRenderer>().material = gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material; //TODO inefficient but good if we are not doing this more than 5 times per second
         Destroy(gameObject);
         destroy = true; 
     }
