@@ -15,7 +15,9 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
     [SerializeField]
     private float normalForceMultiplier = 1f;
 
-    private List<ForceObject> normalAppliedOn = new List<ForceObject>();
+    private Dictionary<ForceObject, CustomOppositeAlongNormalForce> normalAppliedOn = new Dictionary<ForceObject, CustomOppositeAlongNormalForce>();
+
+
 
 
     private void OnCollisionEnter(Collision collision)
@@ -27,14 +29,11 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
 
         Vector3 adjustment = (-Vector3.Project(forceTarget.GetRecentNetSpeed(), collision.GetContact(0).normal)) * normalForceMultiplier;
 
-        Debug.Log(adjustment);
-
         forceTarget.DirectAdjustAddSpeed(adjustment);
 
-        forceTarget.onNewForceAdded += OnForceAdded;
-        forceTarget.onForceRemoved += OnForceRemoved;
-
-        normalAppliedOn.Add(forceTarget);
+        var normforce = new CustomOppositeAlongNormalForce(collision.GetContact(0).normal, normalForceMultiplier); //TODO this right now only supports one face. is only good for big platforms etc. anything further may need a deeper mesh-interacting physics though
+        normforce.ApplyForce(forceTarget, true, float.NegativeInfinity);
+        normalAppliedOn.Add(forceTarget, normforce);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -43,23 +42,8 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
         if (forceTarget == null)
             return;
 
-        forceTarget.onNewForceAdded -= OnForceAdded;
-        forceTarget.onForceRemoved -= OnForceRemoved;
+        normalAppliedOn[forceTarget].CeaseForceApplication();
         normalAppliedOn.Remove(forceTarget);
     }
 
-    private void FixedUpdate()
-    {
-        //assuming force is run every fixed update.
-    }
-
-    private void OnForceAdded(CustomForce f)
-    {
-
-    }
-
-    private void OnForceRemoved(CustomForce f)
-    {
-
-    }
 }

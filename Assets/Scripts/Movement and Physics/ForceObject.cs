@@ -182,7 +182,7 @@ public class ForceObject : MonoBehaviour
         }
         f.SetParentForceObject(this);
 
-        onNewForceAdded?.Invoke(f);
+        onNewForceAdded?.Invoke(this, f);
 
     }
 
@@ -192,7 +192,7 @@ public class ForceObject : MonoBehaviour
         {
             if (appliedConstantForces.Remove(f))
             {
-                f.RemoveParentForecObject(this);
+                f.RemoveParentForceObject(this);
             }
             else
             {
@@ -203,7 +203,7 @@ public class ForceObject : MonoBehaviour
         {
             if(appliedForces.Remove(f))
             {
-                f.RemoveParentForecObject(this);
+                f.RemoveParentForceObject(this);
             }
             else
             {
@@ -211,7 +211,7 @@ public class ForceObject : MonoBehaviour
             }
         }
 
-        onForceRemoved?.Invoke(f);
+        onForceRemoved?.Invoke(this, f);
     }
 
     #endregion
@@ -261,9 +261,9 @@ public class ForceObject : MonoBehaviour
 
     #region EventSystem
 
-    public Action<CustomForce> onNewForceAdded;
+    public Action<ForceObject, CustomForce> onNewForceAdded;
 
-    public Action<CustomForce> onForceRemoved;
+    public Action<ForceObject, CustomForce> onForceRemoved;
 
     #endregion
 
