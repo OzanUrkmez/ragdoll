@@ -15,8 +15,7 @@ public class DeathCheck : MonoBehaviour
     {
         if (Input.GetKeyDown("k"))
         {
-            ragdoll.transform.position = Player.transform.position;
-            ragdoll.SetActive(true);
+            Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
             Player.transform.position = checkpoint.transform.position;
             if (lives > 0)
             {
@@ -39,8 +38,7 @@ public class DeathCheck : MonoBehaviour
         }
         if (hit.collider.tag == "Death")
         {
-            ragdoll.transform.position = Player.transform.position;
-            ragdoll.SetActive(true);
+            Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
             Player.transform.position = checkpoint.transform.position;
             if (lives > 0)
             {
