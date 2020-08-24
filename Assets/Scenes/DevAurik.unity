@@ -1349,7 +1349,7 @@ Transform:
   - {fileID: 1904733759}
   - {fileID: 1045162518}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1040354226
 GameObject:
@@ -1950,6 +1950,7 @@ MonoBehaviour:
     - 0
     - 15
     - 30
+    maximumNonGroundedSpeedAdjustment: 0
     adjustmentAccelerations:
     - 50
     - 80
@@ -1957,14 +1958,14 @@ MonoBehaviour:
     motorMovementTransform: {fileID: 1242208099}
     NoMovementCutoff: 1
   levitationTolerance: 0.1
-  acceptedInstantaniousForceInputs:
+  acceptedInstantaniousGroundedForceInputs:
     reorderableList:
       canAdd: 1
       canRemove: 1
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 1
+      isExpanded: 0
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -1979,14 +1980,36 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues: 20000000
-    _keys: 20000000
-    _values:
-    - v: {x: 0, y: 15, z: 0}
-      isPure: 1
-      infiniteTimeForce: 0
-      applyTime: 1
+    isExpanded: 0
+    _keyValues: 
+    _keys: 
+    _values: []
+  acceptedInstantaniousLevitatingForceInputs:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 0
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 0
+    _keyValues: 
+    _keys: 
+    _values: []
   humanoidAnimator: {fileID: 1734800060}
 --- !u!114 &1242208097
 MonoBehaviour:
@@ -2003,6 +2026,7 @@ MonoBehaviour:
   checkpoint: {fileID: 1904733759}
   Player: {fileID: 1242208092}
   firstcheckpoint: {fileID: 1904733759}
+  ragdoll: {fileID: 1456431587}
 --- !u!114 &1242208098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2035,7 +2059,7 @@ Transform:
   - {fileID: 236253835}
   - {fileID: 1734800061}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1248846756
 GameObject:
@@ -2612,6 +2636,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417577612}
   m_Mesh: {fileID: 716655249603938094, guid: 0cffe330e3a8e9145be56ec3fc38be2d, type: 3}
+--- !u!1 &1456431587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4420393181870941647, guid: 7324a5cfca92b6d4f8ba7d384439a77e, type: 3}
+  m_PrefabInstance: {fileID: 315660903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1496778483
 GameObject:
   m_ObjectHideFlags: 0
