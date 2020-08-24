@@ -38,7 +38,7 @@ public class CustomOppositeAlongNormalForce : ICustomForceImplementation
     public void ApplyForce(ForceObject parentObject, bool isPure, float applyFor)
     {
         currentParent = parentObject;
-        currentForceInstance = new CustomForce(parentObject, this, isPure, applyFor);
+        currentForceInstance = new CustomForce(parentObject, this, isPure, applyFor, true);
     }
 
     public bool CeaseForceApplication()
