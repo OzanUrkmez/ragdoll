@@ -10,10 +10,13 @@ public class DeathCheck : MonoBehaviour
     public Transform checkpoint;
     public GameObject Player;
     public Transform firstcheckpoint;
+    public GameObject ragdoll;
     void Update()
     {
         if (Input.GetKeyDown("k"))
         {
+            ragdoll.transform.position = Player.transform.position;
+            ragdoll.SetActive(true);
             Player.transform.position = checkpoint.transform.position;
             if (lives > 0)
             {
@@ -36,6 +39,8 @@ public class DeathCheck : MonoBehaviour
         }
         if (hit.collider.tag == "Death")
         {
+            ragdoll.transform.position = Player.transform.position;
+            ragdoll.SetActive(true);
             Player.transform.position = checkpoint.transform.position;
             if (lives > 0)
             {
