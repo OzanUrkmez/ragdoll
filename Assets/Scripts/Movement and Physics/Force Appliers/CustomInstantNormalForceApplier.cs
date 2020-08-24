@@ -20,18 +20,20 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
 
     #region Unity Collision Detectors
 
+
     private void OnCollisionEnter(Collision collision)
     {
-        var forceTarget = collision.collider.GetComponent<ForceObject>();
+        var forceTarget = collision.collider.transform.GetComponent<ForceObject>();
         if (forceTarget == null)
             return;
 
         GeneralCollisionEnter(forceTarget, collision.GetContact(0).normal);
+
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        var forceTarget = collision.collider.GetComponent<ForceObject>();
+        var forceTarget = collision.collider.transform.GetComponent<ForceObject>();
         if (forceTarget == null)
             return;
         GeneralCollisionExit(forceTarget);

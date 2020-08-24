@@ -359,7 +359,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &488236928
 MonoBehaviour:
@@ -368,11 +368,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488236922}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718d594ff5f876541aecdc7974bd5ebf, type: 3}
+  m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalForceMultiplier: 1
 --- !u!1 &489613359
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,6 +884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 130
+  batObject: {fileID: 7755882712988700444}
   characterObject: {fileID: 919132148796935982}
   characterController: {fileID: 0}
   playerAnimator: {fileID: 1289479274}
@@ -1399,7 +1401,6 @@ MonoBehaviour:
   - {fileID: 1298546734}
   - {fileID: 1199802847}
   - {fileID: 901522625}
-  CurrentWeapon: {fileID: 489613359}
   WeaponNumber: 0
   ScrollSense: 0
 --- !u!95 &1289479274
@@ -1792,7 +1793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148796935982}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.19, y: 0.527, z: -2.52}
+  m_LocalPosition: {x: 0.19, y: 0.569, z: -2.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -1906,11 +1907,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450652984907156}
-  - component: {fileID: 919132148796935983}
   - component: {fileID: 919132148796935984}
   - component: {fileID: 919132148796935985}
   - component: {fileID: 919132148796935986}
   - component: {fileID: 919132148796935987}
+  - component: {fileID: 919132148796935983}
+  - component: {fileID: 919132148796935988}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1918,24 +1920,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!143 &919132148796935983
-CharacterController:
+--- !u!54 &919132148796935983
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148796935982}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.95
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.95, z: 0}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &919132148796935984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1948,7 +1948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95b4ee948698fe4882844d5ccee0478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityMultiplier: 1
+  gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
   minimumSpeedToMove: 2
@@ -1968,6 +1968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpoint: {fileID: 710696376}
   Player: {fileID: 919132148796935982}
+  firstcheckpoint: {fileID: 0}
 --- !u!114 &919132148796935986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1980,7 +1981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e88c49c55fb674a91b3621a8b2caf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 919132148796935983}
+  characterController: {fileID: 0}
   affectedForceObject: {fileID: 919132148796935984}
   motorMovementForceObject:
     maximumSpeedsPerIndex:
@@ -2017,7 +2018,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148796935982}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c8700437d2806c46b068c4f8a8f7c74, type: 3}
   m_Name: 
@@ -2028,6 +2029,20 @@ MonoBehaviour:
     infiniteTimeForce: 1
     applyTime: 0
   dragForceCoefficient: 0.02
+--- !u!136 &919132148796935988
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148796935982}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &1052125073661383896
 Transform:
   m_ObjectHideFlags: 0

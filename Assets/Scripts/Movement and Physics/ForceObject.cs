@@ -37,21 +37,21 @@ public class ForceObject : MonoBehaviour
 
     private void Start()
     {
-        activeRigidBody = GetComponent<Rigidbody>();
-        if (activeRigidBody != null && !activeRigidBody.isKinematic) //kinematic rigidbodies do not interact with physics system so we will use this setting to enable and disable rigid body behaviour.
-        {
-            //GRAVITY
+        //activeRigidBody = GetComponent<Rigidbody>();
+        //if (activeRigidBody != null && !activeRigidBody.isKinematic) //kinematic rigidbodies do not interact with physics system so we will use this setting to enable and disable rigid body behaviour.
+        //{
+        //    //GRAVITY
 
-            //make sure to not do gravity ourselves but modify rigidbody gravity accordingly with a second force.
-            isRigid = true;
-            if (activeRigidBody.useGravity)
-            {
-                activeConstantGravityAdjustmentForce = gameObject.AddComponent<ConstantForce>();
-                activeConstantGravityAdjustmentForce.force = (gravityMultiplier - 1) * GameProperties.Singleton.GravityConstant;
-            }
-        }
-        else
-        {
+        //    //make sure to not do gravity ourselves but modify rigidbody gravity accordingly with a second force.
+        //    isRigid = true;
+        //    if (activeRigidBody.useGravity)
+        //    {
+        //        activeConstantGravityAdjustmentForce = gameObject.AddComponent<ConstantForce>();
+        //        activeConstantGravityAdjustmentForce.force = (gravityMultiplier - 1) * GameProperties.Singleton.GravityConstant;
+        //    }
+        //}
+        //else
+        //{
             //GRAVITY
 
             //not rigid body! we deal with gravity ourselves.
@@ -63,7 +63,7 @@ public class ForceObject : MonoBehaviour
             InitializeAppropriateForceCoroutine();
 
 
-        }
+        //}
 
         //DRAG
 
@@ -134,7 +134,7 @@ public class ForceObject : MonoBehaviour
             yield return new WaitForFixedUpdate();
             CalculateProcesAcceleration(Time.fixedDeltaTime);
             if (netSpeedForFrame.magnitude > minimumSpeedToMove)
-                transform.Translate(netSpeedForFrame * Time.fixedDeltaTime);
+                transform.Translate(netSpeedForFrame * Time.fixedDeltaTime, Space.World);
         }
     }
 
@@ -219,7 +219,7 @@ public class ForceObject : MonoBehaviour
     {
         if (f.AppliedFor == float.NegativeInfinity)
         {
-            if (appliedConstantForces.Remove(f))
+            if (appliedConstantForces.Remove(f) || appliedConstantForcesLast.Remove(f))
             {
                 f.RemoveParentForceObject(this);
             }
@@ -230,7 +230,7 @@ public class ForceObject : MonoBehaviour
         }
         else
         {
-            if (appliedForces.Remove(f))
+            if (appliedForces.Remove(f) || appliedForcesLast.Remove(f))
             {
                 f.RemoveParentForceObject(this);
             }
