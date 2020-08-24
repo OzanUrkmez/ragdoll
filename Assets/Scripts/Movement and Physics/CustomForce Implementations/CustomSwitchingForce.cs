@@ -43,7 +43,6 @@ public class CustomSwitchingForce : MonoBehaviour, ICustomForceImplementation
 
     public Vector3 GetCurrentForceVector(CustomForce parentForce, ForceObject objectAppliedTo)
     {
-        currentTime += Time.fixedDeltaTime;
         if(currentTime > switchingForces[currentIndex].time)
         {
             if (!repeatForever)
@@ -57,6 +56,7 @@ public class CustomSwitchingForce : MonoBehaviour, ICustomForceImplementation
             currentTime = 0;
             currentIndex = (currentIndex + 1) % switchingForces.Length;
         }
+        currentTime += Time.fixedDeltaTime;
 
         return switchingForces[currentIndex].forceVector;
     }
