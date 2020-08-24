@@ -24,8 +24,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject characterObject;
-    [SerializeField]
-    private CharacterController characterController;
 
     [SerializeField]
     private Animator playerAnimator;
@@ -42,12 +40,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float animationCutOffConstant = 0.5f;
 
+    private List<KeyCode> possibleInstantInputs = new List<KeyCode>();
+
 	void Start () {
         //hide cursor and lock it
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         WeaponChooser.onNewWeaponChosen += OnWeaponChanged;
+
+        possibleInstantInputs = humanoidMotorObject.GetAcceptedInstantKeyCodes();
     }
 
     //TODO We do this in Update for now. If doing professionally, it is best practice to put controls in a separate controls.
@@ -82,20 +84,20 @@ public class PlayerController : MonoBehaviour
             animChangeCoeff * animationDecreaseConstant * Time.fixedDeltaTime)
             , 0,1));
 
-        //adjust depending on speed, keyboard input, FPS etc.
-        //moveDelta *= Time.deltaTime;
-
-        //if (Input.GetKey(KeyCode.LeftShift))
-        //    moveDelta *= playerBaseRunSpeed;
-        //else
-        //    moveDelta *= playerWalkBaseSpeed;
-
-        //characterController.Move(characterObject.transform.forward * moveDelta.x + characterObject.transform.right * moveDelta.y);
-
         if (Input.GetKey(KeyCode.LeftShift))
             humanoidMotorObject.OctagonalRunUpdate(moveDelta);
         else
             humanoidMotorObject.OctagonalWalkUpdate(moveDelta);
+
+        //OTHER INPUT
+        foreach(var key in possibleInstantInputs)
+        {
+            if (Input.GetKeyDown(key))
+            {
+                humanoidMotorObject.ExecuteInstantaniousForce(key);
+            }
+        }
+        
     }
 
     private void OnWeaponChanged(WeaponType ChosenWeapon)

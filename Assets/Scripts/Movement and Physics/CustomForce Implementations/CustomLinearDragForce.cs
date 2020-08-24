@@ -8,7 +8,7 @@ public class CustomLinearDragForce : MonoBehaviour, ICustomForceImplementation
 {
 
     [SerializeField]
-    private IndividualComponentExclusiveDirectForceApplicationInformation componentOnlyObjectRef;
+    private ComponentExclusiveForceInformation componentOnlyObjectRef;
 
     private void Start()
     {

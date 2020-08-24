@@ -25,8 +25,10 @@ public class CustomOppositeAlongNormalForce : ICustomForceImplementation
 
     public Vector3 GetCurrentForceVector(CustomForce parentForce, ForceObject objectAppliedTo)
     {
-        Vector3 returned = (-Vector3.Project(objectAppliedTo.GetRecentNetAcceleration(), NormalVector) * NormalForceMultiplier);
-        return returned;
+        Vector3 projection = Vector3.Project(objectAppliedTo.GetRecentNetAcceleration(), NormalVector);
+        if (projection.magnitude < (projection - NormalVector).magnitude)
+            return Vector3.zero;
+        return (-projection *NormalForceMultiplier);
     }
 
     /// <summary>

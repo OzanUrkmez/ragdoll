@@ -138,11 +138,20 @@ public class ForceObject : MonoBehaviour
         }
     }
 
+    private List<CustomForce> appliedForcesToBeRemoved = new List<CustomForce>();
+    private List<CustomForce> appliedLastForcesToBeRemoved = new List<CustomForce>();
+    private List<CustomForce> queuedRemovals = new List<CustomForce>();
+
     /// <summary>
     /// Calculates acceleration and then applies it to speed variable for frame time. Also sets calculated global variables and subtracts times from forces.
     /// </summary> 
     private void CalculateProcesAcceleration(float frameTime)
     {
+
+        //TODO does using foreach lead to lower performance?
+
+        appliedForcesToBeRemoved.Clear();
+        appliedLastForcesToBeRemoved.Clear();
         netAccelerationForFrame = Vector3.zero;
         foreach (var force in appliedForces)
         {
@@ -151,6 +160,7 @@ public class ForceObject : MonoBehaviour
             {
                 //only increase by amount left.
                 netAccelerationForFrame += force.GetCurrentAppliedForce() * ((force.AppliedFor + frameTime) / frameTime);
+                appliedForcesToBeRemoved.Add(force);
             }
             else
             {
@@ -170,6 +180,7 @@ public class ForceObject : MonoBehaviour
             {
                 //only increase by amount left.
                 netAccelerationForFrame += force.GetCurrentAppliedForce() * ((force.AppliedFor + frameTime) / frameTime);
+                appliedLastForcesToBeRemoved.Add(force);
             }
             else
             {
@@ -186,6 +197,23 @@ public class ForceObject : MonoBehaviour
         if (netSpeedForFrame.magnitude > adjustedTrueMaximumSpeed)
         {
             netSpeedForFrame = netSpeedForFrame.normalized * adjustedTrueMaximumSpeed;
+        }
+
+        //remove expired forces
+        foreach(var force in appliedForcesToBeRemoved)
+        {
+            appliedForces.Remove(force);
+        }
+
+        foreach(var force in appliedLastForcesToBeRemoved)
+        {
+            appliedForcesLast.Remove(force);
+        }
+
+        //remove queued removals.
+        foreach(var force in queuedRemovals)
+        {
+            RemoveForce(force);
         }
     }
 
@@ -241,6 +269,14 @@ public class ForceObject : MonoBehaviour
         }
 
         onForceRemoved?.Invoke(this, f);
+    }
+
+    /// <summary>
+    /// remove force after current physics call is complete.
+    /// </summary>
+    public void QueueRemoveForce(CustomForce f)
+    {
+        queuedRemovals.Add(f);
     }
 
     #endregion
