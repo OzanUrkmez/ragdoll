@@ -21,9 +21,11 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
     [SerializeField]
     private Transform motorMovementTransform;
 
-    private Func<bool> isGroundedCheck;
+    private Func<bool> canExertMotorForceCheck;
 
-    private Vector3 groundDir = new Vector3(0, -1, 0); //TODO make this adjustable to walk on walls. maybe.
+    private Vector3 groundDir = new Vector3(0, -1, 0); //TODO make this adjustable to walk on walls. maybe. can just use down direction from player too, if going for such a thing.
+
+
 
     private int currentMaxIndex = 0;
 
@@ -41,7 +43,7 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
 
     public void InitializeNonSerializedFields(Func<bool> groundedCheck)
     {
-        isGroundedCheck = groundedCheck;
+        canExertMotorForceCheck = groundedCheck;
     }
 
     #endregion
@@ -49,6 +51,9 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
 
     public Vector3 GetCurrentForceVector(CustomForce parentForce, ForceObject objectAppliedTo)
     {
+        if (!canExertMotorForceCheck())
+            return Vector3.zero;
+
         Vector3 forwardForce = motorMovementTransform.forward * forwardAccelerations[currentForwardIndex];
         Vector3 rightForce = motorMovementTransform.right * backwardAccelerations[currentRightIndex];
         Vector3 leftForce = -motorMovementTransform.right * rightAccelerations[currentLeftIndex];
@@ -76,6 +81,8 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
         return resultantForce;
     }
 
+    #region Setters
+
     public void UpdateCurrentForwardIndex(int index)
     {
         currentForwardIndex = index;
@@ -100,9 +107,24 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
         RecalculateMaxIndex();
     }
 
+    #endregion
+
+    #region Housekeeping Logic
+
     private void RecalculateMaxIndex()
     {
         currentMaxIndex = Mathf.Max(currentForwardIndex, currentRightIndex, currentBackwardIndex, currentLeftIndex);
     }
+
+    #endregion
+
+    #region Getters
+
+    public Vector3 GetGroundDir()
+    {
+        return groundDir;
+    }
+
+    #endregion
 
 }

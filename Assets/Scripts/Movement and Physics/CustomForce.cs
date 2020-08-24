@@ -19,22 +19,25 @@ public class CustomForce
     //negative infinity implies constant force until removed by outside code.
     public float AppliedFor { get; set; }
 
+    public bool IsLastForce { get; private set; }
+
     private ICustomForceImplementation customForceImplementation;
 
     private ForceObject parentForceObject;
 
     /// <summary>
-    /// Creates a custom force
+    /// Creates a custom force and applies it to the parent.
     /// </summary>
     /// <param name="appliedTo"> the object the force is applied to. </param>
     /// <param name="forceApplierImplementation"> an interface through which logic for a particular custom force logic can communicate the force for the current frame. See implementations. </param>
     /// <param name="isPure"> if it is pure, then the force will not be affected by mass. </param>
     /// <param name="appliedFor"> the time for which the force is applied. if set to float.NegativeInfinity, then the force will be applied until outside code stops it. </param>
-    public CustomForce(ForceObject appliedTo, ICustomForceImplementation forceApplierImplementation, bool isPure, float appliedFor)
+    public CustomForce(ForceObject appliedTo, ICustomForceImplementation forceApplierImplementation, bool isPure, float appliedFor, bool isLastForce = false)
     {
         IsPure = isPure;
         AppliedFor = appliedFor;
         customForceImplementation = forceApplierImplementation;
+        IsLastForce = isLastForce;
         appliedTo.ApplyNewForce(this);
     }
 
@@ -50,7 +53,7 @@ public class CustomForce
         parentForceObject = obj;
     }
 
-    public void RemoveParentForecObject(ForceObject obj)
+    public void RemoveParentForceObject(ForceObject obj)
     {
         if (parentForceObject == obj)
             parentForceObject = null;

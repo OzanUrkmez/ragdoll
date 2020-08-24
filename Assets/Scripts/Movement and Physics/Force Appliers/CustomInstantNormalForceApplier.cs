@@ -15,51 +15,47 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
     [SerializeField]
     private float normalForceMultiplier = 1f;
 
-    private List<ForceObject> normalAppliedOn = new List<ForceObject>();
+    private Dictionary<ForceObject, CustomOppositeAlongNormalForce> normalAppliedOn = new Dictionary<ForceObject, CustomOppositeAlongNormalForce>();
+
+
+    #region Unity Collision Detectors
 
 
     private void OnCollisionEnter(Collision collision)
     {
-        var forceTarget = collision.collider.GetComponent<ForceObject>();
+        var forceTarget = collision.collider.transform.GetComponent<ForceObject>();
         if (forceTarget == null)
             return;
-        //TODO can improve upon this.
 
-        Vector3 adjustment = (-Vector3.Project(forceTarget.GetRecentNetSpeed(), collision.GetContact(0).normal)) * normalForceMultiplier;
+        GeneralCollisionEnter(forceTarget, collision.GetContact(0).normal);
 
-        Debug.Log(adjustment);
-
-        forceTarget.DirectAdjustAddSpeed(adjustment);
-
-        forceTarget.onNewForceAdded += OnForceAdded;
-        forceTarget.onForceRemoved += OnForceRemoved;
-
-        normalAppliedOn.Add(forceTarget);
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        var forceTarget = collision.collider.GetComponent<ForceObject>();
+        var forceTarget = collision.collider.transform.GetComponent<ForceObject>();
         if (forceTarget == null)
             return;
+        GeneralCollisionExit(forceTarget);
+    }
 
-        forceTarget.onNewForceAdded -= OnForceAdded;
-        forceTarget.onForceRemoved -= OnForceRemoved;
+    #endregion
+
+    private void GeneralCollisionEnter(ForceObject forceTarget, Vector3 contactFaceNormal)
+    {
+        Vector3 adjustment = (-Vector3.Project(forceTarget.GetRecentNetSpeed(), contactFaceNormal)) * normalForceMultiplier;
+
+        forceTarget.DirectAdjustAddSpeed(adjustment);
+
+        var normforce = new CustomOppositeAlongNormalForce(contactFaceNormal, normalForceMultiplier); //TODO this right now only supports one face. is only good for big platforms etc. anything further may need a deeper mesh-interacting physics though
+        normforce.ApplyForce(forceTarget, true, float.NegativeInfinity);
+        normalAppliedOn.Add(forceTarget, normforce);
+    }
+
+    private void GeneralCollisionExit(ForceObject forceTarget)
+    {
+        normalAppliedOn[forceTarget].CeaseForceApplication();
         normalAppliedOn.Remove(forceTarget);
     }
 
-    private void FixedUpdate()
-    {
-        //assuming force is run every fixed update.
-    }
-
-    private void OnForceAdded(CustomForce f)
-    {
-
-    }
-
-    private void OnForceRemoved(CustomForce f)
-    {
-
-    }
 }

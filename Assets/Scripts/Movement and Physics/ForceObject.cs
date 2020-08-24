@@ -29,7 +29,7 @@ public class ForceObject : MonoBehaviour
     //if smaller than 0, then it is disregarded.
     //TODO add dampening effect for drag. make it more applied over time.
     //TODO if can change this, then do event system! 
-    private float objectDragValue = -1; 
+    private float objectDragValue = -1;
 
     //TODO In future move drag etc. to modular outside modifiable behaviour effecting system. have this system be called by events etc. in here to adjust speeds etc etc. so yeah modular behaviour etc. system! we can then truly have customizable physics
 
@@ -37,21 +37,21 @@ public class ForceObject : MonoBehaviour
 
     private void Start()
     {
-        activeRigidBody = GetComponent<Rigidbody>();
-        if(activeRigidBody != null && !activeRigidBody.isKinematic) //kinematic rigidbodies do not interact with physics system so we will use this setting to enable and disable rigid body behaviour.
-        {
-            //GRAVITY
+        //activeRigidBody = GetComponent<Rigidbody>();
+        //if (activeRigidBody != null && !activeRigidBody.isKinematic) //kinematic rigidbodies do not interact with physics system so we will use this setting to enable and disable rigid body behaviour.
+        //{
+        //    //GRAVITY
 
-            //make sure to not do gravity ourselves but modify rigidbody gravity accordingly with a second force.
-            isRigid = true;
-            if (activeRigidBody.useGravity)
-            {
-                activeConstantGravityAdjustmentForce = gameObject.AddComponent<ConstantForce>();
-                activeConstantGravityAdjustmentForce.force = (gravityMultiplier - 1) * GameProperties.Singleton.GravityConstant;
-            }
-        }
-        else
-        {
+        //    //make sure to not do gravity ourselves but modify rigidbody gravity accordingly with a second force.
+        //    isRigid = true;
+        //    if (activeRigidBody.useGravity)
+        //    {
+        //        activeConstantGravityAdjustmentForce = gameObject.AddComponent<ConstantForce>();
+        //        activeConstantGravityAdjustmentForce.force = (gravityMultiplier - 1) * GameProperties.Singleton.GravityConstant;
+        //    }
+        //}
+        //else
+        //{
             //GRAVITY
 
             //not rigid body! we deal with gravity ourselves.
@@ -59,11 +59,11 @@ public class ForceObject : MonoBehaviour
 
             CustomForce gravityForce = new CustomForce(this, new CustomTraditionalForce(GameProperties.Singleton.GravityConstant * gravityMultiplier), true, float.NegativeInfinity);
 
-          
-            InitializeAppropriateForceCoroutine();
-            
 
-        }
+            InitializeAppropriateForceCoroutine();
+
+
+        //}
 
         //DRAG
 
@@ -96,6 +96,9 @@ public class ForceObject : MonoBehaviour
     private List<CustomForce> appliedForces = new List<CustomForce>();
     private List<CustomForce> appliedConstantForces = new List<CustomForce>();
 
+    private List<CustomForce> appliedForcesLast = new List<CustomForce>(); //TODO can in fact have more than one. must make sure that user knows that. Also maybe come up with better system about priority of being last etc among last forces.
+    private List<CustomForce> appliedConstantForcesLast = new List<CustomForce>();
+
     private void InitializeAppropriateForceCoroutine()
     {
         if (isRigid)
@@ -114,11 +117,11 @@ public class ForceObject : MonoBehaviour
     //this is run for objects with character contorllers
     private IEnumerator ControllerForceEnumeration()
     {
-        while(true) 
+        while (true)
         {
             yield return new WaitForFixedUpdate(); //fixed update is used for physics calculations by convention. it makes things less buggy in low FPS and makes sure collisions etc. occur properly.
             CalculateProcesAcceleration(Time.fixedDeltaTime);
-            if(netSpeedForFrame.magnitude > minimumSpeedToMove)
+            if (netSpeedForFrame.magnitude > minimumSpeedToMove)
                 characterController.Move(netSpeedForFrame * Time.fixedDeltaTime);
         }
     }
@@ -126,28 +129,38 @@ public class ForceObject : MonoBehaviour
     //this is run for objects with regular tranforms.
     private IEnumerator TransformForceEnumeration()
     {
-        while (true) 
+        while (true)
         {
             yield return new WaitForFixedUpdate();
             CalculateProcesAcceleration(Time.fixedDeltaTime);
             if (netSpeedForFrame.magnitude > minimumSpeedToMove)
-                transform.Translate(netSpeedForFrame * Time.fixedDeltaTime);
+                transform.Translate(netSpeedForFrame * Time.fixedDeltaTime, Space.World);
         }
     }
+
+    private List<CustomForce> appliedForcesToBeRemoved = new List<CustomForce>();
+    private List<CustomForce> appliedLastForcesToBeRemoved = new List<CustomForce>();
+    private List<CustomForce> queuedRemovals = new List<CustomForce>();
 
     /// <summary>
     /// Calculates acceleration and then applies it to speed variable for frame time. Also sets calculated global variables and subtracts times from forces.
     /// </summary> 
     private void CalculateProcesAcceleration(float frameTime)
     {
+
+        //TODO does using foreach lead to lower performance?
+
+        appliedForcesToBeRemoved.Clear();
+        appliedLastForcesToBeRemoved.Clear();
         netAccelerationForFrame = Vector3.zero;
-        foreach(var force in appliedForces)
+        foreach (var force in appliedForces)
         {
             force.AppliedFor -= frameTime;
             if (force.AppliedFor < frameTime)
             {
                 //only increase by amount left.
                 netAccelerationForFrame += force.GetCurrentAppliedForce() * ((force.AppliedFor + frameTime) / frameTime);
+                appliedForcesToBeRemoved.Add(force);
             }
             else
             {
@@ -159,10 +172,48 @@ public class ForceObject : MonoBehaviour
             netAccelerationForFrame += force.GetCurrentAppliedForce();
         }
 
+        //now for last forces. again some priority system might be better. Last forces can depend on current acceleration etc.
+        foreach (var force in appliedForcesLast)
+        {
+            force.AppliedFor -= frameTime;
+            if (force.AppliedFor < frameTime)
+            {
+                //only increase by amount left.
+                netAccelerationForFrame += force.GetCurrentAppliedForce() * ((force.AppliedFor + frameTime) / frameTime);
+                appliedLastForcesToBeRemoved.Add(force);
+            }
+            else
+            {
+                netAccelerationForFrame += force.GetCurrentAppliedForce();
+            }
+        }
+
+        foreach (var force in appliedConstantForcesLast)
+        {
+            netAccelerationForFrame += force.GetCurrentAppliedForce();
+        }
+
         netSpeedForFrame += netAccelerationForFrame * frameTime;
-        if(netSpeedForFrame.magnitude > adjustedTrueMaximumSpeed)
+        if (netSpeedForFrame.magnitude > adjustedTrueMaximumSpeed)
         {
             netSpeedForFrame = netSpeedForFrame.normalized * adjustedTrueMaximumSpeed;
+        }
+
+        //remove expired forces
+        foreach(var force in appliedForcesToBeRemoved)
+        {
+            appliedForces.Remove(force);
+        }
+
+        foreach(var force in appliedLastForcesToBeRemoved)
+        {
+            appliedForcesLast.Remove(force);
+        }
+
+        //remove queued removals.
+        foreach(var force in queuedRemovals)
+        {
+            RemoveForce(force);
         }
     }
 
@@ -174,25 +225,31 @@ public class ForceObject : MonoBehaviour
     {
         if (f.AppliedFor == float.NegativeInfinity)
         {
-            appliedConstantForces.Add(f);
+            if (f.IsLastForce)
+                appliedConstantForcesLast.Add(f);
+            else
+                appliedConstantForces.Add(f);
         }
         else
         {
-            appliedForces.Add(f);
+            if (f.IsLastForce)
+                appliedForcesLast.Add(f);
+            else
+                appliedForces.Add(f);
         }
         f.SetParentForceObject(this);
 
-        onNewForceAdded?.Invoke(f);
+        onNewForceAdded?.Invoke(this, f);
 
     }
 
     public void RemoveForce(CustomForce f)
     {
-        if(f.AppliedFor == float.NegativeInfinity)
+        if (f.AppliedFor == float.NegativeInfinity)
         {
-            if (appliedConstantForces.Remove(f))
+            if (appliedConstantForces.Remove(f) || appliedConstantForcesLast.Remove(f))
             {
-                f.RemoveParentForecObject(this);
+                f.RemoveParentForceObject(this);
             }
             else
             {
@@ -201,9 +258,9 @@ public class ForceObject : MonoBehaviour
         }
         else
         {
-            if(appliedForces.Remove(f))
+            if (appliedForces.Remove(f) || appliedForcesLast.Remove(f))
             {
-                f.RemoveParentForecObject(this);
+                f.RemoveParentForceObject(this);
             }
             else
             {
@@ -211,7 +268,15 @@ public class ForceObject : MonoBehaviour
             }
         }
 
-        onForceRemoved?.Invoke(f);
+        onForceRemoved?.Invoke(this, f);
+    }
+
+    /// <summary>
+    /// remove force after current physics call is complete.
+    /// </summary>
+    public void QueueRemoveForce(CustomForce f)
+    {
+        queuedRemovals.Add(f);
     }
 
     #endregion
@@ -261,9 +326,9 @@ public class ForceObject : MonoBehaviour
 
     #region EventSystem
 
-    public Action<CustomForce> onNewForceAdded;
+    public Action<ForceObject, CustomForce> onNewForceAdded;
 
-    public Action<CustomForce> onForceRemoved;
+    public Action<ForceObject, CustomForce> onForceRemoved;
 
     #endregion
 

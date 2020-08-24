@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using RotaryHeart.Lib.SerializableDictionary;
 
 public class HumanoidMotorObject : MonoBehaviour
 {
-
-    [SerializeField]
-    CharacterController characterController;
 
     [SerializeField]
     ForceObject affectedForceObject;
 
     [SerializeField]
     CustomMotorMovementForceObject motorMovementForceObject;
+
+    [SerializeField]
+    private float levitationTolerance = 0.1f;
+
+
+    [SerializeField]
+    private SerializableDictionaryBase<KeyCode, ComponentExclusiveAdjustableForceInformationWithKnownObject> acceptedInstantaniousForceInputs;
 
     [SerializeField]
     Animator humanoidAnimator; //TODO deal with this last. pls deal with it tho.
@@ -22,9 +28,12 @@ public class HumanoidMotorObject : MonoBehaviour
     private void Start()
     {
         //apply humanoid force :o
+        motorMovementForceObject.InitializeNonSerializedFields(CanExertMotorForce);
         humanoidForce = new CustomForce(affectedForceObject, motorMovementForceObject, true, float.NegativeInfinity);
     }
 
+
+    #region Walk and Run Updates
 
     //TODO this is kind of inefficient right now, as we do projections, but it is needed for abstraction to single vector. in future remove this if too bad for performance.
 
@@ -121,4 +130,32 @@ public class HumanoidMotorObject : MonoBehaviour
             motorMovementForceObject.UpdateCurrentLeftIndex(0);
         }
     }
+
+    #endregion
+
+    public void ExecuteInstantaniousForce(KeyCode forceKeyCode)
+    {
+        if (acceptedInstantaniousForceInputs.ContainsKey(forceKeyCode))
+        {
+            ComponentExclusiveAdjustableForceInformationWithKnownObject info = acceptedInstantaniousForceInputs[forceKeyCode];
+            CustomTraditionalForce force = new CustomTraditionalForce(info.v);
+            force.ApplyForce(affectedForceObject, info.isPure, info.infiniteTimeForce ? float.NegativeInfinity : info.applyTime);
+        }
+    }
+
+    private bool CanExertMotorForce()
+    {
+        return Vector3.Project(affectedForceObject.GetRecentNetAcceleration(), -motorMovementForceObject.GetGroundDir()).magnitude < levitationTolerance &&
+             Vector3.Project(affectedForceObject.GetRecentNetSpeed(), -motorMovementForceObject.GetGroundDir()).magnitude < levitationTolerance;
+    }
+
+    #region Getters
+
+    public List<KeyCode> GetAcceptedInstantKeyCodes()
+    {
+        return new List<KeyCode>(acceptedInstantaniousForceInputs.Keys);
+    }
+
+    #endregion
+
 }
