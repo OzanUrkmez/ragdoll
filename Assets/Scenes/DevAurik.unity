@@ -802,6 +802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 130
+  batObject: {fileID: 7755882712988700444}
   characterObject: {fileID: 919132148796935982}
   characterController: {fileID: 0}
   playerAnimator: {fileID: 1289479274}
@@ -1413,7 +1414,6 @@ MonoBehaviour:
   - {fileID: 1298546734}
   - {fileID: 1199802847}
   - {fileID: 901522625}
-  CurrentWeapon: {fileID: 489613359}
   WeaponNumber: 0
   ScrollSense: 0
 --- !u!95 &1289479274
