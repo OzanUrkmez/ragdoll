@@ -21,7 +21,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject batObject;
-
+    
+    [SerializeField]
+    private GameObject gunObject;
+    
     [SerializeField]
     private GameObject characterObject;
 
@@ -106,9 +109,15 @@ public class PlayerController : MonoBehaviour
         {
             case WeaponType.Bat:
                 batObject.SetActive(true);
+                gunObject.SetActive(false);
+                break;
+            case WeaponType.Gun:
+                gunObject.SetActive(true);
+                batObject.SetActive(false);
                 break;
             default:
                 batObject.SetActive(false); //TODO fix
+                gunObject.SetActive(false);
                 break;
         }
     }

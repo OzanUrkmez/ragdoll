@@ -84,7 +84,6 @@ public class WeaponChooser : MonoBehaviour
             if (WeaponNumber > 0)
             {
                 WeaponNumber = (WeaponNumber - 1);
-                Debug.Log(WeaponNumber);
             }
             
         }
