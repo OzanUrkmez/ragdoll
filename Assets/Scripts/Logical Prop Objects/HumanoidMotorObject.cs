@@ -18,7 +18,13 @@ public class HumanoidMotorObject : MonoBehaviour
 
 
     [SerializeField]
-    private SerializableDictionaryBase<KeyCode, ComponentExclusiveAdjustableForceInformationWithKnownObject> acceptedInstantaniousForceInputs;
+    private SerializableDictionaryBase<KeyCode, HumanoidComponentExclusiveAdjustableForceInformationWithKnownObject> acceptedInstantaniousGroundedForceInputs;
+
+    [SerializeField]
+    private SerializableDictionaryBase<KeyCode, HumanoidComponentExclusiveAdjustableForceInformationWithKnownObject> acceptedInstantaniousLevitatingForceInputs;
+
+    private List<KeyCode> cooldownAdjustableGroundedForceKeys = new List<KeyCode>();
+    private List<KeyCode> cooldownAdjustableLevitatingForceKeys = new List<KeyCode>();
 
     [SerializeField]
     Animator humanoidAnimator; //TODO deal with this last. pls deal with it tho.
@@ -30,6 +36,34 @@ public class HumanoidMotorObject : MonoBehaviour
         //apply humanoid force :o
         motorMovementForceObject.InitializeNonSerializedFields(CanExertMotorForce);
         humanoidForce = new CustomForce(affectedForceObject, motorMovementForceObject, true, float.NegativeInfinity);
+
+        foreach(var key in acceptedInstantaniousGroundedForceInputs.Keys)
+        {
+            if(acceptedInstantaniousGroundedForceInputs[key].applyCooldown > 0)
+            {
+                cooldownAdjustableGroundedForceKeys.Add(key);
+            }
+
+        }
+        foreach(var key in acceptedInstantaniousLevitatingForceInputs.Keys)
+        {
+            if (acceptedInstantaniousLevitatingForceInputs[key].applyCooldown > 0)
+            {
+                cooldownAdjustableLevitatingForceKeys.Add(key);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        foreach(var key in cooldownAdjustableGroundedForceKeys)
+        {
+            acceptedInstantaniousGroundedForceInputs[key].AdjustCurrentCooldown(- Time.deltaTime);
+        }
+        foreach (var key in cooldownAdjustableLevitatingForceKeys)
+        {
+            acceptedInstantaniousLevitatingForceInputs[key].AdjustCurrentCooldown(-Time.deltaTime);
+        }
     }
 
 
@@ -135,12 +169,38 @@ public class HumanoidMotorObject : MonoBehaviour
 
     public void ExecuteInstantaniousForce(KeyCode forceKeyCode)
     {
-        if (acceptedInstantaniousForceInputs.ContainsKey(forceKeyCode))
+        if (CanExertMotorForce())
         {
-            ComponentExclusiveAdjustableForceInformationWithKnownObject info = acceptedInstantaniousForceInputs[forceKeyCode];
-            CustomTraditionalForce force = new CustomTraditionalForce(info.v);
-            force.ApplyForce(affectedForceObject, info.isPure, info.infiniteTimeForce ? float.NegativeInfinity : info.applyTime);
+            if (acceptedInstantaniousGroundedForceInputs.ContainsKey(forceKeyCode))
+            {
+                HumanoidComponentExclusiveAdjustableForceInformationWithKnownObject info = acceptedInstantaniousGroundedForceInputs[forceKeyCode];
+
+                if (info.GetCurrentCooldown() <= 0)
+                {
+                    info.SetCurrentCooldown(info.applyCooldown);
+
+                    CustomTraditionalForce force = new CustomTraditionalForce(affectedForceObject.transform.localToWorldMatrix * info.v);
+                    force.ApplyForce(affectedForceObject, info.isPure, info.infiniteTimeForce ? float.NegativeInfinity : info.applyTime);
+                }
+
+            }
+        }else
+        {
+            if (acceptedInstantaniousLevitatingForceInputs.ContainsKey(forceKeyCode))
+            {
+                HumanoidComponentExclusiveAdjustableForceInformationWithKnownObject info = acceptedInstantaniousLevitatingForceInputs[forceKeyCode];
+
+                if (info.GetCurrentCooldown() <= 0)
+                {
+                    info.SetCurrentCooldown(info.applyCooldown);
+
+                    CustomTraditionalForce force = new CustomTraditionalForce(affectedForceObject.transform.localToWorldMatrix * info.v);
+                    force.ApplyForce(affectedForceObject, info.isPure, info.infiniteTimeForce ? float.NegativeInfinity : info.applyTime);
+                }
+
+            }
         }
+
     }
 
     private bool CanExertMotorForce()
@@ -153,9 +213,43 @@ public class HumanoidMotorObject : MonoBehaviour
 
     public List<KeyCode> GetAcceptedInstantKeyCodes()
     {
-        return new List<KeyCode>(acceptedInstantaniousForceInputs.Keys);
+        List<KeyCode> returned = new List<KeyCode>(acceptedInstantaniousGroundedForceInputs.Keys); //TODO a bit ineffiicent but oh well
+        returned.AddRange(acceptedInstantaniousLevitatingForceInputs.Keys);
+        return returned;
     }
 
     #endregion
+
+    [Serializable]
+    public class HumanoidComponentExclusiveAdjustableForceInformationWithKnownObject
+    {
+        public float applyCooldown;
+
+        private float currentCooldown;
+
+        public Vector3 v;
+
+        public bool isPure;
+
+        public bool infiniteTimeForce;
+
+        public float applyTime;
+
+        public void AdjustCurrentCooldown(float adjustment)
+        {
+            currentCooldown += adjustment;
+        }
+
+        public void SetCurrentCooldown(float coo)
+        {
+            currentCooldown = coo;
+        }
+
+        public float GetCurrentCooldown()
+        {
+            return currentCooldown;
+        }
+
+    }
 
 }

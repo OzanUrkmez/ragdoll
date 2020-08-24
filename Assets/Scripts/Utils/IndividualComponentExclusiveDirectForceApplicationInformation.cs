@@ -17,15 +17,3 @@ public struct ComponentExclusiveForceInformation
 
 }
 
-[Serializable]
-public struct ComponentExclusiveAdjustableForceInformationWithKnownObject
-{
-    public Vector3 v;
-
-    public bool isPure;
-
-    public bool infiniteTimeForce;
-
-    public float applyTime;
-
-}
