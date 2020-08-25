@@ -2062,6 +2062,7 @@ MonoBehaviour:
   mouseSensitivity: 130
   batObject: {fileID: 1243719790}
   gunObject: {fileID: 1043249285}
+  knifeObject: {fileID: 521806134}
   characterObject: {fileID: 638395591}
   playerAnimator: {fileID: 1012856304}
   humanoidMotorObject: {fileID: 638395595}
