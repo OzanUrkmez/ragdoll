@@ -999,6 +999,7 @@ GameObject:
   - component: {fileID: 236288376}
   - component: {fileID: 236288375}
   - component: {fileID: 236288374}
+  - component: {fileID: 236288373}
   m_Layer: 0
   m_Name: Temp Wall
   m_TagString: Untagged
@@ -1014,12 +1015,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236288371}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -15.16, y: 7.78, z: 0.00000023842}
-  m_LocalScale: {x: 28.661999, y: 0.5, z: 38.643642}
+  m_LocalPosition: {x: -15.16, y: 7.78, z: 0}
+  m_LocalScale: {x: 28.661999, y: 1, z: 38.643642}
   m_Children: []
   m_Father: {fileID: 1350601999}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &236288373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236288371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalForceMultiplier: 1
 --- !u!65 &236288374
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1133,7 +1147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 49024146822618738, guid: 9a6f20fa308cb944780befb9c17d550a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 49024146822618750, guid: 9a6f20fa308cb944780befb9c17d550a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2749,6 +2763,7 @@ GameObject:
   - component: {fileID: 721775837}
   - component: {fileID: 721775836}
   - component: {fileID: 721775835}
+  - component: {fileID: 721775839}
   m_Layer: 0
   m_Name: ButtonWall
   m_TagString: Untagged
@@ -2832,6 +2847,19 @@ Transform:
   m_Father: {fileID: 1350601999}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &721775839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721775834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalForceMultiplier: 1
 --- !u!1001 &753200990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15870,8 +15898,8 @@ GameObject:
   - component: {fileID: 1664867962}
   - component: {fileID: 1664867966}
   - component: {fileID: 1664867965}
-  - component: {fileID: 1664867964}
   - component: {fileID: 1664867963}
+  - component: {fileID: 1664867964}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -15906,8 +15934,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonwall: {fileID: 721775834}
---- !u!136 &1664867964
-CapsuleCollider:
+--- !u!65 &1664867964
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -15916,10 +15944,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 2
+  m_Size: {x: 0.75, y: 2, z: 0.75}
+  m_Center: {x: 0.00000005960465, y: -0.0000009536743, z: 0.000000029802322}
 --- !u!23 &1664867965
 MeshRenderer:
   m_ObjectHideFlags: 0
