@@ -28,7 +28,7 @@ public class DeathCheck : MonoBehaviour
             if (lives == 0)
             {
                 Player.transform.position = new Vector3(firstcheckpoint.transform.position.x, firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
-                SceneManager.LoadScene("DevAurik");
+                SceneManager.LoadScene("DevAggregate");
                 lives = 10;
             }
         }
@@ -52,7 +52,7 @@ public class DeathCheck : MonoBehaviour
             {
                 checkpoint = firstcheckpoint;
                 Player.transform.position = new Vector3(firstcheckpoint.transform.position.x, firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
-                SceneManager.LoadScene("DevAurik");
+                SceneManager.LoadScene("DevAggregate");
                 lives = 10;
 
             }
