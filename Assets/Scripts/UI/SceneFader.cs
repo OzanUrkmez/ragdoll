@@ -21,6 +21,8 @@ public class SceneFader : MonoBehaviour
         StartCoroutine(FadeOut(scene));
     }
 
+  
+
 
     //Animates slowly over time
     IEnumerator FadeIn ()
