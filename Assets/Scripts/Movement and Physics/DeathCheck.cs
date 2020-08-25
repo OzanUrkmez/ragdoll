@@ -12,7 +12,7 @@ public class DeathCheck : MonoBehaviour
     public GameObject Player;
     public Transform firstcheckpoint;
     public GameObject ragdoll;
-    public int heightrespawn;
+    public int heightrespawn = 1;
     void Update()
     {
         if (Input.GetKeyDown("k"))
