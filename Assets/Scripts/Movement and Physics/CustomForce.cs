@@ -26,7 +26,7 @@ public class CustomForce
     private ForceObject parentForceObject;
 
     /// <summary>
-    /// Creates a custom force and applies it to the parent.
+    /// Creates a custom force and applies it to the appliedTo force object.
     /// </summary>
     /// <param name="appliedTo"> the object the force is applied to. </param>
     /// <param name="forceApplierImplementation"> an interface through which logic for a particular custom force logic can communicate the force for the current frame. See implementations. </param>
