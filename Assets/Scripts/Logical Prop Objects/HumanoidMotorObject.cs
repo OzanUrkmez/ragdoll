@@ -81,10 +81,12 @@ public class HumanoidMotorObject : MonoBehaviour
         if(v.y > 0)
         {
             motorMovementForceObject.UpdateCurrentForwardIndex(1);
+            humanoidAnimator.SetFloat("forwardSpeed", 0.5f);
         }
         else
         {
             motorMovementForceObject.UpdateCurrentForwardIndex(0);
+            humanoidAnimator.SetFloat("forwardSpeed", 0);
         }
 
         //right
@@ -128,10 +130,12 @@ public class HumanoidMotorObject : MonoBehaviour
         if (v.y > 0)
         {
             motorMovementForceObject.UpdateCurrentForwardIndex(2);
+            humanoidAnimator.SetFloat("forwardSpeed", 1f);
         }
         else
         {
             motorMovementForceObject.UpdateCurrentForwardIndex(0);
+            humanoidAnimator.SetFloat("forwardSpeed", 0f);
         }
 
         //right
