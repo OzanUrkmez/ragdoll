@@ -617,6 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelDefaultDragValue: 35
+  playerObject: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,6 +2351,7 @@ GameObject:
   - component: {fileID: 1870695118}
   - component: {fileID: 1870695117}
   - component: {fileID: 1870695116}
+  - component: {fileID: 1870695119}
   m_Layer: 0
   m_Name: Ground (7)
   m_TagString: Untagged
@@ -2446,6 +2448,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalForceMultiplier: 1
+--- !u!54 &1870695119
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870695113}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!65 &1870695120
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2831,8 +2849,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!114 &919132148796935984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2867,6 +2885,8 @@ MonoBehaviour:
   Player: {fileID: 919132148796935982}
   firstcheckpoint: {fileID: 0}
   ragdoll: {fileID: 4420393181870941647, guid: 7324a5cfca92b6d4f8ba7d384439a77e, type: 3}
+  heightrespawn: 1
+  gameOverMenu: {fileID: 0}
 --- !u!114 &919132148796935986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2972,7 +2992,7 @@ MonoBehaviour:
     _keys: 44010000
     _values:
     - applyCooldown: 3
-      v: {x: 0, y: 0, z: 25}
+      v: {x: 0, y: 0, z: 45}
       isPure: 1
       infiniteTimeForce: 0
       applyTime: 0.1
@@ -2995,8 +3015,8 @@ MonoBehaviour:
     infiniteTimeForce: 1
     applyTime: 0
   dragForceCoefficient: 0.02
---- !u!136 &919132148796935988
-CapsuleCollider:
+--- !u!65 &919132148796935988
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3005,10 +3025,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.63
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.79, y: 1.84, z: 0.41}
+  m_Center: {x: 0, y: 0.92, z: 0.08}
 --- !u!4 &1052125073661383896
 Transform:
   m_ObjectHideFlags: 0

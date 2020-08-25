@@ -37,38 +37,18 @@ public class ForceObject : MonoBehaviour
 
     private void Start()
     {
-        //activeRigidBody = GetComponent<Rigidbody>();
-        //if (activeRigidBody != null && !activeRigidBody.isKinematic) //kinematic rigidbodies do not interact with physics system so we will use this setting to enable and disable rigid body behaviour.
-        //{
-        //    //GRAVITY
+        activeRigidBody = GetComponent<Rigidbody>();
+        if (activeRigidBody != null && !activeRigidBody.isKinematic)
+            isRigid = true;
 
-        //    //make sure to not do gravity ourselves but modify rigidbody gravity accordingly with a second force.
-        //    isRigid = true;
-        //    if (activeRigidBody.useGravity)
-        //    {
-        //        activeConstantGravityAdjustmentForce = gameObject.AddComponent<ConstantForce>();
-        //        activeConstantGravityAdjustmentForce.force = (gravityMultiplier - 1) * GameProperties.Singleton.GravityConstant;
-        //    }
-        //}
-        //else
-        //{
-            //GRAVITY
+        characterController = GetComponent<CharacterController>();
 
-            //not rigid body! we deal with gravity ourselves.
-            characterController = GetComponent<CharacterController>();
-
-            CustomForce gravityForce = new CustomForce(this, new CustomTraditionalForce(GameProperties.Singleton.GravityConstant * gravityMultiplier), true, float.NegativeInfinity);
-
-
-            InitializeAppropriateForceCoroutine();
-
-
-        //}
-
-        //DRAG
+        CustomForce gravityForce = new CustomForce(this, new CustomTraditionalForce(GameProperties.Singleton.GravityConstant * gravityMultiplier), true, float.NegativeInfinity);
 
         objectDragValue = GameManager.Singleton.GetLevelDefaultDragValue();
         adjustedTrueMaximumSpeed = objectDragValue * dragResistanceMultiplier;
+
+        InitializeAppropriateForceCoroutine();
 
 
     }
@@ -102,7 +82,10 @@ public class ForceObject : MonoBehaviour
     private void InitializeAppropriateForceCoroutine()
     {
         if (isRigid)
-            return; //TODO do not return my friend! we shall play even with rigid bodies! none shall escape the wrath of the custom physics system
+        {
+            StartCoroutine(RigidForceEnumeration());
+            return;
+        }
 
         if (characterController == null)
         {
@@ -111,6 +94,23 @@ public class ForceObject : MonoBehaviour
         else
         {
             StartCoroutine(ControllerForceEnumeration());
+        }
+    }
+
+    private IEnumerator RigidForceEnumeration()
+    {
+        while (true)
+        {
+            yield return new WaitForFixedUpdate(); //fixed update is used for physics calculations by convention. it makes things less buggy in low FPS and makes sure collisions etc. occur properly.
+            onBeforeSpeedApplied?.Invoke(this);
+
+            CalculateProcesAcceleration(Time.fixedDeltaTime);
+            if (netSpeedForFrame.magnitude > minimumSpeedToMove)
+                activeRigidBody.velocity = netSpeedForFrame;
+            else
+                activeRigidBody.velocity = Vector3.zero;
+
+            onAfterSpeedApplied?.Invoke(this);
         }
     }
 

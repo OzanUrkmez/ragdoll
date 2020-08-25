@@ -22,6 +22,7 @@ public class CustomFaceContactApplySpeedObject : MonoBehaviour //TODO we use thi
     private float massMultiplier = 1f;
 
     private Dictionary<ForceObject, Vector3> lastSpeedApplied = new Dictionary<ForceObject, Vector3>();
+    //private Dictionary<ForceObject, Vector3> lastNormal = new Dictionary<ForceObject, Vector3>(); //TODO this is suboptimal.
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -30,15 +31,12 @@ public class CustomFaceContactApplySpeedObject : MonoBehaviour //TODO we use thi
             return;
 
         lastSpeedApplied.Add(forceObject, Vector3.zero);
+
+        CalculateApplySpeed(forceObject, collision.GetContact(0).normal);
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void CalculateApplySpeed(ForceObject forceObject, Vector3 normal)
     {
-        ForceObject forceObject = collision.collider.transform.GetComponent<ForceObject>();
-        if (forceObject == null)
-            return;
-
-        Vector3 normal = collision.GetContact(0).normal;
 
         if (Vector3.Angle(sourceMassObject.GetRecentNetSpeed(), normal) > 90)
             return;
@@ -49,7 +47,17 @@ public class CustomFaceContactApplySpeedObject : MonoBehaviour //TODO we use thi
 
         forceObject.DirectAdjustAddSpeed(speedApplication - lastSpeedApplied[forceObject]);
 
-        lastSpeedApplied[forceObject] = speedApplication; //APPLY AFTER SYSTEM
+        lastSpeedApplied[forceObject] = speedApplication; //APPLY AFTER SYSTEM? If not work.
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        ForceObject forceObject = collision.collider.transform.GetComponent<ForceObject>();
+        if (forceObject == null)
+            return;
+
+        CalculateApplySpeed(forceObject, collision.GetContact(0).normal);
+
     }
 
     private void OnCollisionExit(Collision collision)
