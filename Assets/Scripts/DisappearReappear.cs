@@ -14,7 +14,7 @@ public class DisappearReappear : MonoBehaviour
     }
     void DisappearObject()
     {   
-        wall.SetActive(false);
+        wall.SetActive(false); //TODO bruh you gotta send notification to force object ;_;. on collision exit ;) 
     }
 
     void ReappearObject()
