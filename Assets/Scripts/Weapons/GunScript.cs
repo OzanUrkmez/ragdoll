@@ -8,6 +8,9 @@ public class GunScript : MonoBehaviour
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
+    // temp
+    public GameObject Player;
+    public GameObject bullet;
 
 
     // Update is called once per frame
@@ -30,6 +33,8 @@ public class GunScript : MonoBehaviour
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
+            // generates a bullet
+            Instantiate(bullet, Player.transform.position, Player.transform.rotation);
 
             Target target = hit.transform.GetComponent<Target>();
             if (target != null) //If target is hit, turn damage on and send bool to GetHit under Target
