@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
         //camera looks up and down, but player/parent is static. player only turns left and right.
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        characterObject.transform.Rotate(Vector3.up* md.x);
+        characterObject.transform.Rotate(characterObject.transform.up* md.x);
 
         //KEYBOARD POSITION MOVEMENT
 
