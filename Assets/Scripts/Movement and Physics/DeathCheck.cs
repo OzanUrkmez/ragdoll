@@ -12,7 +12,7 @@ public class DeathCheck : MonoBehaviour
     public GameObject Player;
     public Transform firstcheckpoint;
     public GameObject ragdoll;
-    public int heightrespawn;
+    public int heightrespawn = 1;
     void Update()
     {
         if (Input.GetKeyDown("k"))
@@ -27,7 +27,11 @@ public class DeathCheck : MonoBehaviour
 
             if (lives == 0)
             {
+<<<<<<< HEAD
                 Player.transform.position = new Vector3(firstcheckpoint.position.x, firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
+=======
+                Player.transform.position = new Vector3(firstcheckpoint.transform.position.x, firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
+>>>>>>> 09fcb8e950b41d7ce2eeeca2b5410ad15ccfefb3
                 SceneManager.LoadScene("DevAggregate");
                 lives = 10;
             }
@@ -51,7 +55,11 @@ public class DeathCheck : MonoBehaviour
             if (lives == 0)
             {
                 checkpoint = firstcheckpoint;
+<<<<<<< HEAD
                 Player.transform.position = new Vector3(firstcheckpoint.position.x, firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
+=======
+                Player.transform.position = new Vector3(firstcheckpoint.transform.position.x, firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
+>>>>>>> 09fcb8e950b41d7ce2eeeca2b5410ad15ccfefb3
                 SceneManager.LoadScene("DevAggregate");
                 lives = 10;
 
