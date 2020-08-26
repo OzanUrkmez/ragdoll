@@ -43,7 +43,7 @@ public class DeathCheck : MonoBehaviour
             if (lives > 0)
             {
                 Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
-                Invoke("Checkpointer1", 3);
+                Invoke("Checkpointer1", 0);
                 lives -= 1;
             }
 
@@ -85,7 +85,7 @@ public class DeathCheck : MonoBehaviour
             if (lives > 0)
             {
                 Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
-                Invoke("Checkpointer1", 3);
+                Invoke("Checkpointer1", 0);
                 lives -= 1;
             }
 
