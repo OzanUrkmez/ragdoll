@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using RotaryHeart.Lib.SerializableDictionary;
 
+[Serializable]
 public class HumanoidMotorObject : MonoBehaviour
 {
 
@@ -39,7 +40,7 @@ public class HumanoidMotorObject : MonoBehaviour
     {
 
         //apply humanoid force :o
-        motorMovementForceObject.InitializeNonSerializedFields(CanExertMotorForce);
+        motorMovementForceObject.InitializeNonSerializedFields(CanExertMotorForce, affectedForceObject, this);
         humanoidForce = new CustomForce(affectedForceObject, motorMovementForceObject, true, float.NegativeInfinity);
 
         humanoidCollider = affectedForceObject.GetComponent<Collider>();
@@ -239,7 +240,7 @@ public class HumanoidMotorObject : MonoBehaviour
         //     Vector3.Project(affectedForceObject.GetRecentNetSpeed(), -motorMovementForceObject.GetGroundDir()).magnitude < levitationTolerance;
 
         float sphereRad = levitationTolerance / 2;
-        bool returned = Physics.CheckSphere(humanoidCollider.bounds.center - Vector3.up * (humanoidCollider.bounds.extents.y + sphereRad + 0.01f), sphereRad);
+        bool returned = Physics.CheckSphere(humanoidCollider.bounds.center + motorMovementForceObject.GetGroundDir() * (humanoidCollider.bounds.extents.y + sphereRad + 0.01f), sphereRad);
 
         return returned;
     }
