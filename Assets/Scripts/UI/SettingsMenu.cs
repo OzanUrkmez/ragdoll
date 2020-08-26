@@ -5,10 +5,12 @@ using UnityEngine.Audio;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public AudioMixer audioMixer;
-
-    public void SetVolume (float volume)
+    public AudioManager audioManager;
+    public void SetVolume (float volumeMultiplier)
     {
-        audioMixer.SetFloat("volume", volume);
+        for(int i = 0; i < audioManager.sounds.Length; i++) {
+            Sound sound = audioManager.sounds[i];
+            sound.source.volume = sound.volume * volumeMultiplier;
+        }
     }
 }
