@@ -6,6 +6,7 @@ public class GunScript : MonoBehaviour
     public bool damage = false;
     public float range = 100f;
     public float power = 1000;
+    public float fireRate = 15f;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
@@ -14,14 +15,17 @@ public class GunScript : MonoBehaviour
     public GameObject bullet;
     CustomCarolForce fire;
 
+    private float nextFireTime = 0f;
 
     // Update is called once per frame
     void Update()
     {
         //Checks if player hits the fire button (right mouse click), if so execute Shoot()
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime)
         {
+            nextFireTime = Time.time + 5f / fireRate;
             Shoot();
+            FindObjectOfType<AudioManager>().Play("Gunshot"); //Plays death sound after death
         }
     }
 

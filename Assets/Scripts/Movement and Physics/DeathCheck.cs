@@ -75,7 +75,7 @@ public class DeathCheck : MonoBehaviour
 
             }
 
-
+            FindObjectOfType<AudioManager>().Play("PlayerDeath"); //Plays death sound after death
         }
     }
 }
