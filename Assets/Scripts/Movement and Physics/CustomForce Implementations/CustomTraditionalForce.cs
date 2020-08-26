@@ -8,8 +8,11 @@ public class CustomTraditionalForce : MonoBehaviour, ICustomForceImplementation
     [SerializeField]
     private ComponentExclusiveForceInformation editorSetApply;
 
+
     private void Start()
     {
+        if (parentObject != null)
+            return;
         Force = _force;
         parentForce = new CustomForce(editorSetApply.appliedTo, this, editorSetApply.isPure, editorSetApply.infiniteTimeForce ? float.NegativeInfinity : editorSetApply.applyTime);
         parentObject = editorSetApply.appliedTo;

@@ -37,4 +37,9 @@ public class Target : MonoBehaviour
             destroy = false;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
 }

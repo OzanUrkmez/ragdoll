@@ -12,12 +12,11 @@ GameObject:
   - component: {fileID: 4738629707825601132}
   - component: {fileID: 7360581451468648102}
   - component: {fileID: 281112574049818780}
-  - component: {fileID: 2597902441188370366}
   - component: {fileID: 8534053416410489061}
-  - component: {fileID: -7783553419416108179}
+  - component: {fileID: 313048560117078096}
   m_Layer: 0
   m_Name: bullet (1)
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9018165393775234931}
-  m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: -0.5}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0.7606186, z: 0}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.06}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 180, z: -90}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &4738629707825601132
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -95,26 +94,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2597902441188370366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9018165393775234931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f9848880c9ec47fb89fd59dad3c5812, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 48
-  bulletDuration: 2
 --- !u!136 &8534053416410489061
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -126,10 +111,10 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.0239689
-  m_Height: 1.5332698
+  m_Height: 1.78
   m_Direction: 2
-  m_Center: {x: 0.013087504, y: 0.013935752, z: 0.3246952}
---- !u!114 &-7783553419416108179
+  m_Center: {x: 0.013087504, y: 0.013935752, z: 0.14}
+--- !u!114 &313048560117078096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,8 +127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityMultiplier: 0.5
-  dragResistanceMultiplier: 1
-  mass: 10
-  minimumSpeedToMove: 0.2
+  dragResistanceMultiplier: 4
+  mass: 1
+  allowRigidBodyForces: 0
+  minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
