@@ -7,7 +7,10 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
 
 
     [SerializeField]
-    private float normalForceMultiplier = 1f;
+    private float normalForceStableMultiplier = 1f;
+
+    [SerializeField]
+    private float normalForceInstantBounceMultiplier = 1f;
 
     private Dictionary<ForceObject, CustomOppositeAlongNormalForce> normalAppliedOn = new Dictionary<ForceObject, CustomOppositeAlongNormalForce>();
 
@@ -60,11 +63,11 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
 
     private void GeneralCollisionEnter(ForceObject forceTarget, Vector3 contactFaceNormal)
     {
-        Vector3 adjustment = (-Vector3.Project(forceTarget.GetRecentNetSpeed(), contactFaceNormal)) * normalForceMultiplier;
+        Vector3 adjustment = (-Vector3.Project(forceTarget.GetRecentNetSpeed(), contactFaceNormal)) * normalForceInstantBounceMultiplier;
 
         forceTarget.DirectAdjustAddSpeed(adjustment);
 
-        var normforce = new CustomOppositeAlongNormalForce(contactFaceNormal, normalForceMultiplier); //TODO this right now only supports one face. is only good for big platforms etc. anything further may need a deeper mesh-interacting physics though
+        var normforce = new CustomOppositeAlongNormalForce(contactFaceNormal, normalForceStableMultiplier); //TODO this right now only supports one face. is only good for big platforms etc. anything further may need a deeper mesh-interacting physics though
         normforce.ApplyForce(forceTarget, true, float.NegativeInfinity);
         normalAppliedOn.Add(forceTarget, normforce);
     }
