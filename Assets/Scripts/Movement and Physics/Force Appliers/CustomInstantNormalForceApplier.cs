@@ -31,6 +31,7 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
         if (forceTarget == null)
             return;
         GeneralCollisionExit(forceTarget);
+        normalAppliedOn.Remove(forceTarget);
     }
 
     private void OnDisable()
@@ -39,6 +40,7 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
         {
             GeneralCollisionExit(force);
         }
+        normalAppliedOn.Clear();
     }
 
     #endregion
@@ -57,7 +59,6 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
     private void GeneralCollisionExit(ForceObject forceTarget)
     {
         normalAppliedOn[forceTarget].CeaseForceApplication();
-        normalAppliedOn.Remove(forceTarget);
     }
 
 }
