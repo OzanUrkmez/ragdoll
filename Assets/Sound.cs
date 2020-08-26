@@ -8,6 +8,8 @@ public class Sound
 
     public AudioClip clip;
 
+    public SoundType soundType;
+
     [Range(0f, 1f)]
     public float volume;
     [Range(.1f,3f)]
@@ -19,3 +21,6 @@ public class Sound
     public AudioSource source;
 
 }
+
+
+public enum SoundType { VFX, Music}
