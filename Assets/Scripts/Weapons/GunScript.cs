@@ -42,12 +42,15 @@ public class GunScript : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
             // generates a bullet
-            // GameObject bullet2;
-            // bullet2 = Instantiate(bullet, hit.point, fpsCam.transform.rotation);
-            // bullet2 = transform.TransformDirection(Vector3.forward * 10);
-            if (hit.rigidbody != null) {
-                hit.rigidbody.AddForceAtPosition(ray.direction * power, hit.point);
-            }
+            GameObject bulletObj;
+            bulletObj = Instantiate(bullet, hit.point, fpsCam.transform.rotation);
+            bulletObj.transform.position = fpsCam.transform.position + fpsCam.transform.forward;
+            bulletObj.transform.forward = fpsCam.transform.forward;
+
+            // the death hit
+            // if (hit.rigidbody != null) {
+            //     hit.rigidbody.AddForceAtPosition(ray.direction * power, hit.point);
+            // }
 
             Target target = hit.transform.GetComponent<Target>();
             if (target != null) //If target is hit, turn damage on and send bool to GetHit under Target
