@@ -33,6 +33,14 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
         GeneralCollisionExit(forceTarget);
     }
 
+    private void OnDisable()
+    {
+        foreach(var force in normalAppliedOn.Keys)
+        {
+            GeneralCollisionExit(force);
+        }
+    }
+
     #endregion
 
     private void GeneralCollisionEnter(ForceObject forceTarget, Vector3 contactFaceNormal)
