@@ -7,6 +7,8 @@ using RotaryHeart.Lib.SerializableDictionary;
 public class HumanoidMotorObject : MonoBehaviour
 {
 
+    private float animChecksSeconds;
+
     [SerializeField]
     ForceObject affectedForceObject;
 
@@ -35,6 +37,7 @@ public class HumanoidMotorObject : MonoBehaviour
 
     private void Start()
     {
+
         //apply humanoid force :o
         motorMovementForceObject.InitializeNonSerializedFields(CanExertMotorForce);
         humanoidForce = new CustomForce(affectedForceObject, motorMovementForceObject, true, float.NegativeInfinity);
@@ -55,6 +58,19 @@ public class HumanoidMotorObject : MonoBehaviour
             {
                 cooldownAdjustableLevitatingForceKeys.Add(key);
             }
+        }
+        //game properties
+        animChecksSeconds = GameProperties.Singleton.AnimationCheckBuffer;
+        StartCoroutine(AnimationCheckEnumeration(animChecksSeconds));
+    }
+
+    private IEnumerator AnimationCheckEnumeration(float wait)
+    {
+        while(humanoidAnimator != null)
+        {
+            humanoidAnimator.SetBool("isGrounded", CanExertMotorForce());
+
+            yield return new WaitForSecondsRealtime(wait);
         }
     }
 
@@ -186,7 +202,10 @@ public class HumanoidMotorObject : MonoBehaviour
                 if (info.GetCurrentCooldown() <= 0)
                 {
                     info.SetCurrentCooldown(info.applyCooldown);
-
+                    if(info.animationFlag != "")
+                    {
+                        humanoidAnimator.SetTrigger(info.animationFlag);
+                    }
                     CustomTraditionalForce force = new CustomTraditionalForce(affectedForceObject.transform.localToWorldMatrix * info.v);
                     force.ApplyForce(affectedForceObject, info.isPure, info.infiniteTimeForce ? float.NegativeInfinity : info.applyTime);
                 }
@@ -201,7 +220,10 @@ public class HumanoidMotorObject : MonoBehaviour
                 if (info.GetCurrentCooldown() <= 0)
                 {
                     info.SetCurrentCooldown(info.applyCooldown);
-
+                    if (info.animationFlag != "")
+                    {
+                        humanoidAnimator.SetTrigger(info.animationFlag);
+                    }
                     CustomTraditionalForce force = new CustomTraditionalForce(affectedForceObject.transform.localToWorldMatrix * info.v);
                     force.ApplyForce(affectedForceObject, info.isPure, info.infiniteTimeForce ? float.NegativeInfinity : info.applyTime);
                 }
@@ -217,7 +239,9 @@ public class HumanoidMotorObject : MonoBehaviour
         //     Vector3.Project(affectedForceObject.GetRecentNetSpeed(), -motorMovementForceObject.GetGroundDir()).magnitude < levitationTolerance;
 
         float sphereRad = levitationTolerance / 2;
-        return Physics.CheckSphere(humanoidCollider.bounds.center - Vector3.up * (humanoidCollider.bounds.extents.y + sphereRad + 0.01f), sphereRad);
+        bool returned = Physics.CheckSphere(humanoidCollider.bounds.center - Vector3.up * (humanoidCollider.bounds.extents.y + sphereRad + 0.01f), sphereRad);
+
+        return returned;
     }
 
     #region Getters
@@ -237,6 +261,8 @@ public class HumanoidMotorObject : MonoBehaviour
         public float applyCooldown;
 
         private float currentCooldown;
+
+        public string animationFlag;
 
         public Vector3 v;
 

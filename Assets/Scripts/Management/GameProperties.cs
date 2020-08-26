@@ -55,7 +55,20 @@ public class GameProperties : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private float _animationCheckBuffer;
 
+    public float AnimationCheckBuffer
+    {
+        get
+        {
+            return _animationCheckBuffer;
+        }
+        private set
+        {
+            _animationCheckBuffer = value;
+        }
+    }
     #endregion
 
     #region Setters of Properties
