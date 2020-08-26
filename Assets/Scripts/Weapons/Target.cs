@@ -40,6 +40,9 @@ public class Target : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        // detect if collision is by a bullet
+        if (collision.gameObject.tag == "Bullet") {
+            GetHit(true);
+        }
     }
 }
