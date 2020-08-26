@@ -5,12 +5,14 @@ public class GunScript : MonoBehaviour
 {
     public bool damage = false;
     public float range = 100f;
+    public float power = 1000;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
     // temp
     public GameObject Player;
     public GameObject bullet;
+    CustomCarolForce fire;
 
 
     // Update is called once per frame
@@ -30,11 +32,18 @@ public class GunScript : MonoBehaviour
         muzzleFlash.Play();
 
         RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, range))
         {
             Debug.Log(hit.transform.name);
             // generates a bullet
-            Instantiate(bullet, Player.transform.position, Player.transform.rotation);
+            // GameObject bullet2;
+            // bullet2 = Instantiate(bullet, hit.point, fpsCam.transform.rotation);
+            // bullet2 = transform.TransformDirection(Vector3.forward * 10);
+            if (hit.rigidbody != null) {
+                hit.rigidbody.AddForceAtPosition(ray.direction * power, hit.point);
+            }
 
             Target target = hit.transform.GetComponent<Target>();
             if (target != null) //If target is hit, turn damage on and send bool to GetHit under Target
