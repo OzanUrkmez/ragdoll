@@ -15,6 +15,7 @@ public class DeathCheck : MonoBehaviour
     public int heightrespawn = 1;
     public GameOverMenu gameOverMenu;
     public Vector3 stop;
+    private Collider pCollider;
 
     private ForceObject fo1;
 
@@ -22,7 +23,8 @@ public class DeathCheck : MonoBehaviour
 
     private void Start()
     {
-        if(Singleton != null)
+        pCollider = GetComponent<Collider>();
+        if (Singleton != null)
         {
             Destroy(gameObject);
             return;
@@ -41,20 +43,21 @@ public class DeathCheck : MonoBehaviour
             if (lives > 0)
             {
                 Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
-                fo1.DirectSetSpeed(stop);
-                Player.transform.position = new Vector3(checkpoint.position.x, checkpoint.position.y + heightrespawn, firstcheckpoint.position.z);
+                Invoke("Checkpointer1", 3);
                 lives -= 1;
             }
 
             if (lives == 0)
             {
-                Player.transform.position = new Vector3(firstcheckpoint.position.x, firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
+                Player.transform.position = new Vector3(firstcheckpoint.position.x,
+                    firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
                 fo1.DirectSetSpeed(stop);
-                Player.transform.position = new Vector3(firstcheckpoint.transform.position.x, firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
+                Player.transform.position = new Vector3(firstcheckpoint.transform.position.x,
+                    firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
                 gameOverMenu.GameOver();
                 lives = 10;
             }
-            
+
             FindObjectOfType<AudioManager>().Play("PlayerDeath"); //Plays death sound after death
         }
     }
@@ -75,21 +78,25 @@ public class DeathCheck : MonoBehaviour
         {
             checkpoint = hit.transform;
         }
+
         if (hit.tag == "Death")
         {
-            Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
-            fo1.DirectSetSpeed(stop);
-            Player.transform.position = new Vector3(checkpoint.position.x, checkpoint.position.y + heightrespawn, checkpoint.position.z);
+
             if (lives > 0)
             {
+                Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
+                Invoke("Checkpointer1", 3);
                 lives -= 1;
             }
+
             if (lives == 0)
             {
                 checkpoint = firstcheckpoint;
                 fo1.DirectSetSpeed(stop);
-                Player.transform.position = new Vector3(firstcheckpoint.position.x, firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
-                Player.transform.position = new Vector3(firstcheckpoint.transform.position.x, firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
+                Player.transform.position = new Vector3(firstcheckpoint.position.x,
+                    firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
+                Player.transform.position = new Vector3(firstcheckpoint.transform.position.x,
+                    firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
                 SceneManager.LoadScene("DevAggregate");
                 lives = 10;
 
@@ -98,4 +105,12 @@ public class DeathCheck : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("PlayerDeath"); //Plays death sound after death
         }
     }
+
+    public void Checkpointer1()
+    {
+        fo1.DirectSetSpeed(stop);
+        Player.transform.position = new Vector3(checkpoint.position.x, checkpoint.position.y + heightrespawn,
+            checkpoint.position.z);
+    }
+
 }

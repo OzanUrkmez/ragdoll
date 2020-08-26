@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.11185876, g: 0.14931992, b: 0.13826385, a: 1}
+  m_IndirectSpecularColor: {r: 0.13549107, g: 0.16620898, b: 0.15315911, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -670,6 +670,10 @@ PrefabInstance:
     - target: {fileID: 4261582690089668681, guid: ac224ebdfc6d07342abdaf0e23f2be08, type: 3}
       propertyPath: m_Name
       value: SceneLoader 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4261582690089668681, guid: ac224ebdfc6d07342abdaf0e23f2be08, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac224ebdfc6d07342abdaf0e23f2be08, type: 3}
@@ -1567,6 +1571,10 @@ PrefabInstance:
     - target: {fileID: 5114121766362173961, guid: 3bd38ed6ea3ea1f47b5b13b558f97849, type: 3}
       propertyPath: m_Name
       value: SceneFader 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114121766362173961, guid: 3bd38ed6ea3ea1f47b5b13b558f97849, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5114121766362173962, guid: 3bd38ed6ea3ea1f47b5b13b558f97849, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2785,6 +2793,10 @@ PrefabInstance:
     - target: {fileID: 9018086176774030212, guid: a9c445b1ae878d541a586a3f9430b2ef, type: 3}
       propertyPath: m_Name
       value: LevelSelector 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018086176774030212, guid: a9c445b1ae878d541a586a3f9430b2ef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9018086176774030213, guid: a9c445b1ae878d541a586a3f9430b2ef, type: 3}
       propertyPath: fader
@@ -4970,6 +4982,10 @@ PrefabInstance:
     - target: {fileID: 969764403391102510, guid: b1fd7060b6a0d554fbf2fb5f8d385da1, type: 3}
       propertyPath: m_Name
       value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 969764403391102510, guid: b1fd7060b6a0d554fbf2fb5f8d385da1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 969764403737837950, guid: b1fd7060b6a0d554fbf2fb5f8d385da1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

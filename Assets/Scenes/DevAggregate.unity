@@ -992,7 +992,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -13.056915, z: 7.83e-43, w: -0.0000033697343}
+  m_BoundingSphereOverride: {x: 0, y: 2.2774e-41, z: 0, w: 6.59375}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5037,6 +5037,7 @@ GameObject:
   - component: {fileID: 1012254600}
   - component: {fileID: 1012254599}
   - component: {fileID: 1012254598}
+  - component: {fileID: 1012254601}
   m_Layer: 0
   m_Name: DeathTest
   m_TagString: Death
@@ -5120,6 +5121,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012254596}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1012254601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012254596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!1 &1012856303
 GameObject:
   m_ObjectHideFlags: 0
