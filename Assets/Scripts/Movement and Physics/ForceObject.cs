@@ -18,6 +18,9 @@ public class ForceObject : MonoBehaviour
     private float mass = 1f;
 
     [SerializeField]
+    private bool allowRigidBodyForces;
+
+    [SerializeField]
     private float minimumSpeedToMove = 0.2f;
 
     private bool isRigid = false;
