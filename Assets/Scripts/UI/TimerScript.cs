@@ -41,6 +41,7 @@ public class TimerScript : MonoBehaviour
     {
         if (Timedisplay == 0)
         {
+            text.text = "5";
             CancelInvoke("TimeChanger");
         }
         else
