@@ -344,6 +344,8 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1592879750}
   Player: {fileID: 0}
   bullet: {fileID: 0}
+  bulletStartingForceMagnitude: 0
+  bulletForceApplicationTime: 0
 --- !u!1 &170610032
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +939,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -1310,6 +1313,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -1839,7 +1843,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 7.83e-43, y: 7.1e-44, z: 0, w: -30.062454}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2300,6 +2304,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -3008,6 +3013,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -4024,6 +4030,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -10007,6 +10014,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -10360,6 +10368,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5559681683405883616, guid: dc3626130ce2d3248b03e7a30e3c0238, type: 3}
+      propertyPath: checkpoint
+      value: 
+      objectReference: {fileID: 710696376}
+    - target: {fileID: 5559681683405883616, guid: dc3626130ce2d3248b03e7a30e3c0238, type: 3}
+      propertyPath: firstcheckpoint
+      value: 
+      objectReference: {fileID: 710696376}
     - target: {fileID: 5559681683405883647, guid: dc3626130ce2d3248b03e7a30e3c0238, type: 3}
       propertyPath: m_Name
       value: Player
@@ -10465,6 +10481,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -11080,6 +11097,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}

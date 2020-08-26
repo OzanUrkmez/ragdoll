@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -650,6 +650,8 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1436717616}
   Player: {fileID: 0}
   bullet: {fileID: 0}
+  bulletStartingForceMagnitude: 0
+  bulletForceApplicationTime: 0
 --- !u!1 &212702189
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +992,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.2197e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: -13.056915, z: 7.83e-43, w: -0.0000033697343}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2397,6 +2399,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -2750,6 +2753,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0.2
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -3241,6 +3245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104648be0474a3242bcfe70119e6a327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lives: 10
   checkpoint: {fileID: 1043810847}
   Player: {fileID: 638395591}
   firstcheckpoint: {fileID: 1043810847}
@@ -3263,6 +3268,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -5258,6 +5264,8 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1192903040}
   Player: {fileID: 1012856303}
   bullet: {fileID: 9018165393775234931, guid: 526768951c85741e1a205624c765a0fc, type: 3}
+  bulletStartingForceMagnitude: 150
+  bulletForceApplicationTime: 0.5
 --- !u!1 &1043810846
 GameObject:
   m_ObjectHideFlags: 0
@@ -11141,6 +11149,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0.2
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -18988,6 +18997,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
