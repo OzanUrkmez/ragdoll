@@ -11,6 +11,7 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
 
     private Dictionary<ForceObject, CustomOppositeAlongNormalForce> normalAppliedOn = new Dictionary<ForceObject, CustomOppositeAlongNormalForce>();
 
+    private Dictionary<ForceObject, List<Transform>> allCollidingComponents = new Dictionary<ForceObject, List<Transform>>();
 
     #region Unity Collision Detectors
 
@@ -21,8 +22,13 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
         if (forceTarget == null)
             return;
 
-        GeneralCollisionEnter(forceTarget, collision.GetContact(0).normal);
+        if (!allCollidingComponents.ContainsKey(forceTarget))
+        {
+            allCollidingComponents.Add(forceTarget, new List<Transform>());
+            GeneralCollisionEnter(forceTarget, collision.GetContact(0).normal);
+        }
 
+        allCollidingComponents[forceTarget].Add(collision.transform);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -30,17 +36,24 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
         var forceTarget = collision.collider.transform.GetComponent<ForceObject>();
         if (forceTarget == null)
             return;
-        GeneralCollisionExit(forceTarget);
-        normalAppliedOn.Remove(forceTarget);
+
+        allCollidingComponents[forceTarget].Remove(collision.transform);
+        if(allCollidingComponents[forceTarget].Count < 1)
+        {
+            allCollidingComponents.Remove(forceTarget);
+            GeneralCollisionExit(forceTarget);
+        }
     }
 
     private void OnDisable()
     {
-        foreach(var force in normalAppliedOn.Keys)
+        List<ForceObject> keys = new List<ForceObject>(normalAppliedOn.Keys);
+        foreach (var force in keys)
         {
             GeneralCollisionExit(force);
         }
-        normalAppliedOn.Clear();
+
+        allCollidingComponents.Clear();
     }
 
     #endregion
@@ -59,6 +72,7 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
     private void GeneralCollisionExit(ForceObject forceTarget)
     {
         normalAppliedOn[forceTarget].CeaseForceApplication();
+        normalAppliedOn.Remove(forceTarget);
     }
 
 }

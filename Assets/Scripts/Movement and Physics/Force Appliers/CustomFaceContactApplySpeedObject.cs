@@ -22,15 +22,23 @@ public class CustomFaceContactApplySpeedObject : MonoBehaviour //TODO we use thi
     private float massMultiplier = 1f;
 
     private Dictionary<ForceObject, Vector3> lastSpeedApplied = new Dictionary<ForceObject, Vector3>();
-    //private Dictionary<ForceObject, Vector3> lastNormal = new Dictionary<ForceObject, Vector3>(); //TODO this is suboptimal.
+    private Dictionary<ForceObject, List<Transform>> allCollidingComponents = new Dictionary<ForceObject, List<Transform>>();
+
 
     private void OnCollisionEnter(Collision collision)
     {
         ForceObject forceObject = collision.collider.transform.GetComponent<ForceObject>();
-        if (forceObject == null)
+        if (forceObject == null) 
             return;
 
-        lastSpeedApplied.Add(forceObject, Vector3.zero);
+
+        if (!allCollidingComponents.ContainsKey(forceObject))
+        {
+            lastSpeedApplied.Add(forceObject, Vector3.zero);
+            allCollidingComponents.Add(forceObject, new List<Transform>());
+        }
+
+        allCollidingComponents[forceObject].Add(collision.transform);
 
         CalculateApplySpeed(forceObject, collision.GetContact(0).normal);
     }
