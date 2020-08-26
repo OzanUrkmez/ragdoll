@@ -24,6 +24,11 @@ public class CustomFaceContactApplySpeedObject : MonoBehaviour //TODO we use thi
     private Dictionary<ForceObject, Vector3> lastSpeedApplied = new Dictionary<ForceObject, Vector3>();
     private Dictionary<ForceObject, List<Transform>> allCollidingComponents = new Dictionary<ForceObject, List<Transform>>();
 
+    private void OnDisable()
+    {
+        lastSpeedApplied.Clear();
+        allCollidingComponents.Clear();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -74,7 +79,15 @@ public class CustomFaceContactApplySpeedObject : MonoBehaviour //TODO we use thi
         if (forceObject == null)
             return;
 
-        lastSpeedApplied.Remove(forceObject);
+
+        allCollidingComponents[forceObject].Remove(collision.transform);
+        if (allCollidingComponents[forceObject].Count < 1)
+        {
+            allCollidingComponents.Remove(forceObject);
+            lastSpeedApplied.Remove(forceObject);
+        }
+
+
     }
 
 }
