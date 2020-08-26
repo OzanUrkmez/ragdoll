@@ -22,7 +22,7 @@ public class ForceObject : MonoBehaviour
 
     private bool isRigid = false;
     private Rigidbody activeRigidBody;
-    private ConstantForce activeConstantGravityAdjustmentForce;
+    private CustomTraditionalForce activeGravityForce;
 
     private float adjustedTrueMaximumSpeed;
 
@@ -43,7 +43,9 @@ public class ForceObject : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
 
-        CustomForce gravityForce = new CustomForce(this, new CustomTraditionalForce(GameProperties.Singleton.GravityConstant * gravityMultiplier), true, float.NegativeInfinity);
+        activeGravityForce = new CustomTraditionalForce(GameProperties.Singleton.BaseGravity * gravityMultiplier);
+
+        new CustomForce(this, activeGravityForce, true, float.NegativeInfinity);
 
         objectDragValue = GameManager.Singleton.GetLevelDefaultDragValue();
         adjustedTrueMaximumSpeed = objectDragValue * dragResistanceMultiplier;
@@ -328,6 +330,29 @@ public class ForceObject : MonoBehaviour
 
     #endregion
 
+    #region Gravity
+
+    public float GetGravityMultiplier()
+    {
+        return gravityMultiplier;
+    }
+
+    public Vector3 GetGravityForce()
+    {
+        return activeGravityForce.Force;
+    }
+
+    public void SetGravityBaseForce(Vector3 newForce)
+    {
+        newForce *= gravityMultiplier;
+
+        activeGravityForce.Force = newForce;
+
+        onGravityAdjusted?.Invoke(this, newForce);
+    }
+
+    #endregion
+
     #region EventSystem
 
     public Action<ForceObject> onBeforeSpeedApplied;
@@ -337,6 +362,8 @@ public class ForceObject : MonoBehaviour
     public Action<ForceObject, CustomForce> onNewForceAdded;
 
     public Action<ForceObject, CustomForce> onForceRemoved;
+
+    public Action<ForceObject, Vector3> onGravityAdjusted;
 
     #endregion
 
