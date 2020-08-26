@@ -475,7 +475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &89507464
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -695,7 +696,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &212702192
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -819,7 +821,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &217440276
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -987,7 +990,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 2.2197e-41, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1051,7 +1054,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &234250367
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1160,7 +1164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &236288374
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1817,7 +1822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &305520605
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2265,6 +2271,7 @@ MonoBehaviour:
     - 0
     - 5
     - 8
+    gravityReorientSpeed: 1
     forwardAccelerations:
     - 0
     - 25
@@ -2316,11 +2323,13 @@ MonoBehaviour:
     _keys: 2000000044010000
     _values:
     - applyCooldown: 1
+      animationFlag: 
       v: {x: 0, y: 120, z: 0}
       isPure: 1
       infiniteTimeForce: 0
       applyTime: 0.05
     - applyCooldown: 3
+      animationFlag: 
       v: {x: 0, y: 0, z: 200}
       isPure: 1
       infiniteTimeForce: 0
@@ -2352,6 +2361,7 @@ MonoBehaviour:
     _keys: 44010000
     _values:
     - applyCooldown: 3
+      animationFlag: 
       v: {x: 0, y: 0, z: 25}
       isPure: 1
       infiniteTimeForce: 0
@@ -3129,6 +3139,7 @@ MonoBehaviour:
     - 0
     - 5
     - 8
+    gravityReorientSpeed: 1
     forwardAccelerations:
     - 0
     - 25
@@ -3176,19 +3187,15 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 2000000044010000
-    _keys: 2000000044010000
+    _keyValues: 20000000
+    _keys: 20000000
     _values:
     - applyCooldown: 1
+      animationFlag: 
       v: {x: 0, y: 120, z: 0}
       isPure: 1
       infiniteTimeForce: 0
       applyTime: 0.05
-    - applyCooldown: 3
-      v: {x: 0, y: 0, z: 200}
-      isPure: 1
-      infiniteTimeForce: 0
-      applyTime: 0.1
   acceptedInstantaniousLevitatingForceInputs:
     reorderableList:
       canAdd: 1
@@ -3216,6 +3223,7 @@ MonoBehaviour:
     _keys: 44010000
     _values:
     - applyCooldown: 3
+      animationFlag: 
       v: {x: 0, y: 0, z: 25}
       isPure: 1
       infiniteTimeForce: 0
@@ -3845,7 +3853,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!1 &747166395
 GameObject:
   m_ObjectHideFlags: 0
@@ -4241,6 +4250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gravityConstant: {x: 0, y: -9.81, z: 0}
+  _animationCheckBuffer: 0
 --- !u!1 &827467332
 GameObject:
   m_ObjectHideFlags: 0
@@ -4380,7 +4390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &894305831
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4627,7 +4638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &937974654
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5292,7 +5304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &1043810849
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5638,7 +5651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &1083566648
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5882,7 +5896,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &1125011869
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16686,7 +16701,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 7503910697543260201}
-  musicManager: {fileID: 0}
 --- !u!1 &1529295398
 GameObject:
   m_ObjectHideFlags: 0
@@ -16969,7 +16983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &1607518627
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17330,6 +17345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206767aca89fea749ab5f0e15fbd82b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deActivateOnTouch: 1
   buttonwall: {fileID: 721775834}
 --- !u!65 &1664867964
 BoxCollider:
@@ -17405,7 +17421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!1 &1697721799
 GameObject:
   m_ObjectHideFlags: 0
@@ -17759,7 +17776,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!65 &1798522355
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19019,7 +19037,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalForceMultiplier: 1
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
 --- !u!114 &2129814727
 MonoBehaviour:
   m_ObjectHideFlags: 0

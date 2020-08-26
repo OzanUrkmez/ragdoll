@@ -1068,8 +1068,8 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 2000000044010000
-    _keys: 2000000044010000
+    _keyValues: 20000000
+    _keys: 20000000
     _values:
     - applyCooldown: 1
       animationFlag: isJump
@@ -1077,12 +1077,6 @@ MonoBehaviour:
       isPure: 1
       infiniteTimeForce: 0
       applyTime: 0.05
-    - applyCooldown: 3
-      animationFlag: isDash
-      v: {x: 0, y: 0, z: 200}
-      isPure: 1
-      infiniteTimeForce: 0
-      applyTime: 0.1
   acceptedInstantaniousLevitatingForceInputs:
     reorderableList:
       canAdd: 1
@@ -1111,7 +1105,7 @@ MonoBehaviour:
     _values:
     - applyCooldown: 3
       animationFlag: isDash
-      v: {x: 0, y: 0, z: 25}
+      v: {x: 0, y: 0, z: 35}
       isPure: 1
       infiniteTimeForce: 0
       applyTime: 0.1

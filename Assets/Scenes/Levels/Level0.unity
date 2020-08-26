@@ -5850,23 +5850,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8845986810899685275, guid: 61e12fc723061df42990bb655c72ac79, type: 3}
       propertyPath: switchingForces.Array.data[0].forceVector.x
-      value: -2
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8845986810899685275, guid: 61e12fc723061df42990bb655c72ac79, type: 3}
       propertyPath: switchingForces.Array.data[1].forceVector.x
-      value: 2
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8845986810899685275, guid: 61e12fc723061df42990bb655c72ac79, type: 3}
       propertyPath: switchingForces.Array.data[0].time
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8845986810899685275, guid: 61e12fc723061df42990bb655c72ac79, type: 3}
       propertyPath: switchingForces.Array.data[1].time
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8845986810899685275, guid: 61e12fc723061df42990bb655c72ac79, type: 3}
       propertyPath: switchingForces.Array.data[1].forceVector.z
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8845986810899685275, guid: 61e12fc723061df42990bb655c72ac79, type: 3}
       propertyPath: switchingForces.Array.data[2].forceVector.x
@@ -5890,9 +5890,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8845986810899685275, guid: 61e12fc723061df42990bb655c72ac79, type: 3}
       propertyPath: switchingForces.Array.data[0].forceVector.z
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8845986810899685275, guid: 61e12fc723061df42990bb655c72ac79, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 61e12fc723061df42990bb655c72ac79, type: 3}
 --- !u!1001 &6273093260238158491
 PrefabInstance:
