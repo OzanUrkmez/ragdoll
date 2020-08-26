@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour
 {
-    public Transform textTransform;
+    public TextMesh text;
     public GameObject platform;
     public int Time = 5;
     public int Timedisplay = 5;
@@ -12,15 +13,14 @@ public class TimerScript : MonoBehaviour
 
     void Update()
     {
-        textTransform.LookAt(Camera.main.transform);
-        textTransform.Rotate(0, 180, 0);
+        text.transform.LookAt(Camera.main.transform);
+        text.transform.Rotate(0, 180, 0);
     }
-    void OnCollisionEnter(Collision collision)
+    public void collided(Collision collision)
     {
-        if (collision.collider.tag == "Player")
-        {
-            Invoke("DisappearObject", Time);
-        }
+        Debug.Log("Collision");
+        Invoke("DisappearObject", Time);
+        InvokeRepeating("TimeChanger", 1, 1);
 
     }
 
@@ -35,6 +35,19 @@ public class TimerScript : MonoBehaviour
     {
         platform.SetActive(true);
         Timedisplay = Time;
+    }
+
+    void TimeChanger()
+    {
+        if (Timedisplay == 0)
+        {
+            CancelInvoke("TimeChanger");
+        }
+        else
+        {
+            Timedisplay -= 1;
+            text.text = Timedisplay.ToString();
+        }
     }
 }
 
