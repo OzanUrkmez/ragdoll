@@ -14,8 +14,14 @@ public class DeathCheck : MonoBehaviour
     public GameObject ragdoll;
     public int heightrespawn = 1;
     public GameOverMenu gameOverMenu;
-    ForceObject fo1 = new ForceObject();
     public Vector3 stop;
+
+    private ForceObject fo1;
+
+    private void Start()
+    {
+        fo1 = Player.GetComponent<ForceObject>();
+    }
 
     void Update()
     {
