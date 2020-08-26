@@ -31,11 +31,15 @@ public class HumanoidMotorObject : MonoBehaviour
 
     private CustomForce humanoidForce;
 
+    private Collider humanoidCollider;
+
     private void Start()
     {
         //apply humanoid force :o
         motorMovementForceObject.InitializeNonSerializedFields(CanExertMotorForce);
         humanoidForce = new CustomForce(affectedForceObject, motorMovementForceObject, true, float.NegativeInfinity);
+
+        humanoidCollider = affectedForceObject.GetComponent<Collider>();
 
         foreach(var key in acceptedInstantaniousGroundedForceInputs.Keys)
         {
@@ -209,8 +213,11 @@ public class HumanoidMotorObject : MonoBehaviour
 
     private bool CanExertMotorForce()
     {
-        return Vector3.Project(affectedForceObject.GetRecentNetAcceleration(), -motorMovementForceObject.GetGroundDir()).magnitude < levitationTolerance &&
-             Vector3.Project(affectedForceObject.GetRecentNetSpeed(), -motorMovementForceObject.GetGroundDir()).magnitude < levitationTolerance;
+        //return Vector3.Project(affectedForceObject.GetRecentNetAcceleration(), -motorMovementForceObject.GetGroundDir()).magnitude < levitationTolerance &&
+        //     Vector3.Project(affectedForceObject.GetRecentNetSpeed(), -motorMovementForceObject.GetGroundDir()).magnitude < levitationTolerance;
+
+        float sphereRad = levitationTolerance / 2;
+        return Physics.CheckSphere(humanoidCollider.bounds.center - Vector3.up * (humanoidCollider.bounds.extents.y + sphereRad + 0.01f), sphereRad);
     }
 
     #region Getters
