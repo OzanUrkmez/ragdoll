@@ -20433,6 +20433,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7503910698392193193, guid: 2d06caf6a18db1740a3e02f389632c0a, type: 3}
+      propertyPath: sounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7503910698392193193, guid: 2d06caf6a18db1740a3e02f389632c0a, type: 3}
+      propertyPath: sounds.Array.data[2].name
+      value: Gunshot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7503910698392193193, guid: 2d06caf6a18db1740a3e02f389632c0a, type: 3}
+      propertyPath: sounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7011d2a591bb9094bb20993ece062662, type: 3}
+    - target: {fileID: 7503910698392193193, guid: 2d06caf6a18db1740a3e02f389632c0a, type: 3}
+      propertyPath: sounds.Array.data[2].volume
+      value: 0.161
+      objectReference: {fileID: 0}
+    - target: {fileID: 7503910698392193193, guid: 2d06caf6a18db1740a3e02f389632c0a, type: 3}
+      propertyPath: sounds.Array.data[2].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7503910698392193193, guid: 2d06caf6a18db1740a3e02f389632c0a, type: 3}
+      propertyPath: sounds.Array.data[2].loop
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7503910698392193194, guid: 2d06caf6a18db1740a3e02f389632c0a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.1161017
