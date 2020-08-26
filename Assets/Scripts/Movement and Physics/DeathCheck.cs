@@ -38,6 +38,8 @@ public class DeathCheck : MonoBehaviour
                 gameOverMenu.GameOver();
                 lives = 10;
             }
+
+            FindObjectOfType<AudioManager>().Play("PlayerDeath"); //Plays death sound after death
         }
     }
 
@@ -66,6 +68,8 @@ public class DeathCheck : MonoBehaviour
                 lives = 10;
 
             }
+
+
         }
     }
 }
