@@ -5,7 +5,7 @@ public class GunScript : MonoBehaviour
 {
     public bool damage = false;
     public float range = 100f;
-    public int power = 100;
+    public float power = 1000;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
@@ -32,20 +32,22 @@ public class GunScript : MonoBehaviour
         muzzleFlash.Play();
 
         RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, range))
         {
             Debug.Log(hit.transform.name);
             // generates a bullet
             // GameObject bullet2;
             // bullet2 = Instantiate(bullet, hit.point, fpsCam.transform.rotation);
             // bullet2 = transform.TransformDirection(Vector3.forward * 10);
+            if (hit.rigidbody != null) {
+                hit.rigidbody.AddForceAtPosition(ray.direction * power, hit.point);
+            }
 
             Target target = hit.transform.GetComponent<Target>();
             if (target != null) //If target is hit, turn damage on and send bool to GetHit under Target
             {
-                if (hit.rigidbody != null) {
-                    hit.rigidbody.AddForceAtPosition(fpsCam.transform.forward * power, hit.point);
-                }
                 damage = true;
                 target.GetHit(damage);
             }
