@@ -644,6 +644,7 @@ MonoBehaviour:
   damage: 0
   range: 100
   power: 10
+  fireRate: 15
   fpsCam: {fileID: 0}
   muzzleFlash: {fileID: 1436717616}
   Player: {fileID: 0}
@@ -4689,6 +4690,7 @@ MonoBehaviour:
   damage: 0
   range: 100
   power: 1000
+  fireRate: 15
   fpsCam: {fileID: 428432589}
   muzzleFlash: {fileID: 1192903040}
   Player: {fileID: 1012856303}
@@ -20456,6 +20458,14 @@ PrefabInstance:
     - target: {fileID: 7503910698392193193, guid: 2d06caf6a18db1740a3e02f389632c0a, type: 3}
       propertyPath: sounds.Array.data[2].loop
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7503910698392193193, guid: 2d06caf6a18db1740a3e02f389632c0a, type: 3}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d00f8baad9d78ba47869c8fd0d68b1a4, type: 3}
+    - target: {fileID: 7503910698392193193, guid: 2d06caf6a18db1740a3e02f389632c0a, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.143
       objectReference: {fileID: 0}
     - target: {fileID: 7503910698392193194, guid: 2d06caf6a18db1740a3e02f389632c0a, type: 3}
       propertyPath: m_LocalPosition.x
