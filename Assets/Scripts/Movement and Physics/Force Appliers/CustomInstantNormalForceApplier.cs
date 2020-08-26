@@ -31,6 +31,16 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
         if (forceTarget == null)
             return;
         GeneralCollisionExit(forceTarget);
+        normalAppliedOn.Remove(forceTarget);
+    }
+
+    private void OnDisable()
+    {
+        foreach(var force in normalAppliedOn.Keys)
+        {
+            GeneralCollisionExit(force);
+        }
+        normalAppliedOn.Clear();
     }
 
     #endregion
@@ -49,7 +59,6 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
     private void GeneralCollisionExit(ForceObject forceTarget)
     {
         normalAppliedOn[forceTarget].CeaseForceApplication();
-        normalAppliedOn.Remove(forceTarget);
     }
 
 }
