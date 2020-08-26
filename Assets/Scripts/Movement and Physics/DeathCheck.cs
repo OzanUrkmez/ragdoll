@@ -51,15 +51,25 @@ public class DeathCheck : MonoBehaviour
 
     private void OnCollisionEnter(Collision hit)
     {
-        if (hit.collider.tag == "Checkpoint")
+        OnDeathCollision(hit.collider);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        OnDeathCollision(other);
+    }
+
+    private void OnDeathCollision(Collider hit)
+    {
+        if (hit.tag == "Checkpoint")
         {
-            checkpoint = hit.collider.transform;
+            checkpoint = hit.transform;
         }
-        if (hit.collider.tag == "Death")
+        if (hit.tag == "Death")
         {
             Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
             fo1.DirectSetSpeed(stop);
-            Player.transform.position = new Vector3(checkpoint.position.x, checkpoint.position.y+ heightrespawn, checkpoint.position.z);
+            Player.transform.position = new Vector3(checkpoint.position.x, checkpoint.position.y + heightrespawn, checkpoint.position.z);
             if (lives > 0)
             {
                 lives -= 1;
