@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3855821487551521452}
   - component: {fileID: 3855821487551521455}
   - component: {fileID: 3855821487551521454}
-  - component: {fileID: 8845986810899685275}
   - component: {fileID: 3855821487551521453}
+  - component: {fileID: 2200456155108678431}
   m_Layer: 0
   m_Name: Moving Light
   m_TagString: Untagged
@@ -98,23 +98,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8845986810899685275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3855821487551521448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22a95e99ee63aa748afbad6258d78b88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentAppliedObject: {fileID: 3855821487551521453}
-  isPure: 1
-  switchingForces: []
-  repeatForever: 1
-  repetitionTimes: 1
 --- !u!114 &3855821487551521453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,9 +113,29 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
+  allowRigidBodyForces: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
+--- !u!114 &2200456155108678431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3855821487551521448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e4444c55dc4e4439dc5b958c19f05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentOnlyObjectRef:
+    appliedTo: {fileID: 0}
+    isPure: 0
+    infiniteTimeForce: 0
+    applyTime: 0
+  towardsTransform: {fileID: 0}
+  magnitude: 0
 --- !u!1 &3855821488175514204
 GameObject:
   m_ObjectHideFlags: 0
