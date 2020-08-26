@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class DeathCheck : MonoBehaviour
 {
-    public static int lives = 10;
+    public int lives = 10;
     public Transform checkpoint;
     public GameObject Player;
     public Transform firstcheckpoint;
@@ -18,8 +18,18 @@ public class DeathCheck : MonoBehaviour
 
     private ForceObject fo1;
 
+    public static DeathCheck Singleton;
+
     private void Start()
     {
+        if(Singleton != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Singleton = this;
+
         fo1 = Player.GetComponent<ForceObject>();
     }
 
