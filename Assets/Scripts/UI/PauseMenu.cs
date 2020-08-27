@@ -6,11 +6,14 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject settingsMenu;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) //Looks for the 'ESC' key input
+        if (settingsMenu.activeSelf)
+                return;
+        if (Input.GetKeyDown(KeyCode.Tab)) //Looks for the 'ESC' key input
         {
             if (GameIsPaused) //If game is paused, resume the game again
             {
@@ -30,6 +33,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     //Pauses the game by stopping time and setting GameIsPaused to true
@@ -39,6 +43,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     //Starts time again and brings player out of play mode
@@ -46,6 +51,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         GameIsPaused = false;
     }
 }

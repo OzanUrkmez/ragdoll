@@ -7,6 +7,7 @@ public class GunScript : MonoBehaviour
     public float range = 100f;
     public float power = 1000;
     public float fireRate = 15f;
+    public GameObject gameOver;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
@@ -24,6 +25,8 @@ public class GunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameOver.activeSelf)
+            return;
         //Checks if player hits the fire button (right mouse click), if so execute Shoot()
         if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime)
         {
