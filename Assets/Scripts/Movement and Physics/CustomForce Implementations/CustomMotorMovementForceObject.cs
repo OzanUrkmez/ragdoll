@@ -11,6 +11,9 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
     private float[] maximumSpeedsPerIndex;
 
     [SerializeField]
+    private float gravityReorientSpeed = 1;
+
+    [SerializeField]
     private float[] forwardAccelerations, backwardAccelerations, rightAccelerations, leftAccelerations;
 
     [SerializeField]
@@ -31,7 +34,7 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
 
     private Vector3 groundDir = new Vector3(0, -1, 0); //TODO make this adjustable to walk on walls. maybe. can just use down direction from player too, if going for such a thing.
 
-
+    private MonoBehaviour enumeratorObject;
 
     private int currentMaxIndex = 0;
 
@@ -47,9 +50,41 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
         
     //}
 
-    public void InitializeNonSerializedFields(Func<bool> groundedCheck)
+    public void InitializeNonSerializedFields(Func<bool> groundedCheck, ForceObject orientationHandled = null, MonoBehaviour unityEnumeratorObject = null)
     {
         canExertMotorForceCheck = groundedCheck;
+        if (orientationHandled)
+        {
+            orientationHandled.onGravityAdjusted += OnMotorObjectGravityChanged;
+            enumeratorObject = unityEnumeratorObject;
+        }
+
+    }
+
+    #endregion
+
+    #region Motor Object Orientation
+
+    private void OnMotorObjectGravityChanged(ForceObject obj, Vector3 newGravity)
+    {
+        groundDir = newGravity.normalized;
+
+        Quaternion lookQuaternion = Quaternion.LookRotation(motorMovementTransform.forward, -newGravity);
+
+        enumeratorObject.StartCoroutine(ReOrientEnumeration(lookQuaternion));
+    } 
+
+    private IEnumerator ReOrientEnumeration(Quaternion lookQuaternion)
+    {
+        float t = 0;
+        while (t < 1)
+        {
+            t += gravityReorientSpeed * Time.fixedDeltaTime;
+            motorMovementTransform.rotation = Quaternion.Lerp(motorMovementTransform.rotation, lookQuaternion, t);
+            yield return new WaitForFixedUpdate();
+        }
+
+        motorMovementTransform.rotation = lookQuaternion;
     }
 
     #endregion

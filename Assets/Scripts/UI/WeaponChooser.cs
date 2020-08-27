@@ -29,10 +29,10 @@ public class WeaponChooser : MonoBehaviour
         onNewWeaponChosen = null; //TODO terrible practice
 
         WeaponNumber = 0;
-        ChooseFist.SetActive(false);
-        ChooseKnife.SetActive(true);
-        ChooseGun.SetActive(false);
-        ChooseBat.SetActive(false);
+        ChooseFist.SetActive(true);
+        ChooseKnife?.SetActive(false);
+        ChooseGun?.SetActive(false);
+        ChooseBat?.SetActive(false);
     }
 
     // Update is called once per frame aefef

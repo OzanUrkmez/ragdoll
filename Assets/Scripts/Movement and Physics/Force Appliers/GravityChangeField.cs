@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class GravityChangeField : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField]
+    private bool disableOnExit;
+
+    [SerializeField]
+    private Vector3 newGravity;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        ForceObject forceObject = other.GetComponent<ForceObject>();
+        if (forceObject == null)
+            return;
+
+        forceObject.SetGravityBaseForce(newGravity);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        if (!disableOnExit)
+            return;
+
+        ForceObject forceObject = other.GetComponent<ForceObject>();
+        if (forceObject == null)
+            return;
+
+        forceObject.SetGravityBaseForce(GameProperties.Singleton.BaseGravity);
+
     }
+
 }

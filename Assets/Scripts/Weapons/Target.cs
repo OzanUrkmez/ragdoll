@@ -37,4 +37,12 @@ public class Target : MonoBehaviour
             destroy = false;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // detect if collision is by a bullet
+        if (collision.gameObject.tag == "Bullet") {
+            GetHit(true);
+        }
+    }
 }

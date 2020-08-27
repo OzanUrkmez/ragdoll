@@ -33,7 +33,7 @@ public class GameProperties : MonoBehaviour
 
     public static void EnforceGameProperties()
     {
-        Physics.gravity = Singleton.GravityConstant;
+        Physics.gravity = Singleton.BaseGravity;
     }
 
     #endregion
@@ -42,7 +42,7 @@ public class GameProperties : MonoBehaviour
 
     [SerializeField]
     private Vector3 _gravityConstant = new Vector3(0,-9.81f,0);
-    public Vector3 GravityConstant {
+    public Vector3 BaseGravity {
         get
         {
             return _gravityConstant;
@@ -55,7 +55,20 @@ public class GameProperties : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private float _animationCheckBuffer;
 
+    public float AnimationCheckBuffer
+    {
+        get
+        {
+            return _animationCheckBuffer;
+        }
+        private set
+        {
+            _animationCheckBuffer = value;
+        }
+    }
     #endregion
 
     #region Setters of Properties

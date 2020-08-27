@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Death
   - Checkpoint
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Killer
   - Player
   - Audio
-  - 
+  - PostProcess
   - 
   - 
   - 

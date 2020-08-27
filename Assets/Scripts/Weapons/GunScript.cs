@@ -18,6 +18,10 @@ public class GunScript : MonoBehaviour
 
     private float nextFireTime = 0f;
 
+    //BULLET VARIABLES
+    public float bulletStartingForceMagnitude;
+    public float bulletForceApplicationTime;
+
     // Update is called once per frame
     void Update()
     {
@@ -38,26 +42,37 @@ public class GunScript : MonoBehaviour
     {
         muzzleFlash.Play();
 
-        RaycastHit hit;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        GameObject bulletObj;
+        bulletObj = Instantiate(bullet, fpsCam.transform.position + fpsCam.transform.forward * 0.05f, fpsCam.transform.rotation);
+        bulletObj.transform.forward = fpsCam.transform.forward;
 
-        if (Physics.Raycast(ray, out hit, range))
-        {
-            Debug.Log(hit.transform.name);
-            // generates a bullet
-            // GameObject bullet2;
-            // bullet2 = Instantiate(bullet, hit.point, fpsCam.transform.rotation);
-            // bullet2 = transform.TransformDirection(Vector3.forward * 10);
-            if (hit.rigidbody != null) {
-                hit.rigidbody.AddForceAtPosition(ray.direction * power, hit.point);
-            }
+        CustomTraditionalForce force = bulletObj.AddComponent<CustomTraditionalForce>();
 
-            Target target = hit.transform.GetComponent<Target>();
-            if (target != null) //If target is hit, turn damage on and send bool to GetHit under Target
-            {
-                damage = true;
-                target.GetHit(damage);
-            }
-        }
+        force.Force = fpsCam.transform.forward * bulletStartingForceMagnitude;
+
+        force.ApplyForce(bulletObj.GetComponent<ForceObject>(), true, bulletForceApplicationTime);
+        
+
+
+        //RaycastHit hit;
+        //var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //if (Physics.Raycast(ray, out hit, range))
+        //{
+        //    Debug.Log(hit.transform.name);
+        //    // generates a bullet
+
+        //    // the death hit
+        //    // if (hit.rigidbody != null) {
+        //    //     hit.rigidbody.AddForceAtPosition(ray.direction * power, hit.point);
+        //    // }
+
+        //    Target target = hit.transform.GetComponent<Target>();
+        //    if (target != null) //If target is hit, turn damage on and send bool to GetHit under Target
+        //    {
+        //        damage = true;
+        //        target.GetHit(damage);
+        //    }
+        //}
     }
 }
