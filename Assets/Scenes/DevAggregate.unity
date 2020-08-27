@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -645,6 +645,7 @@ MonoBehaviour:
   range: 100
   power: 10
   fireRate: 15
+  gameOver: {fileID: 0}
   fpsCam: {fileID: 0}
   muzzleFlash: {fileID: 1436717616}
   Player: {fileID: 0}
@@ -1557,7 +1558,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 49024146314748385, guid: 9a6f20fa308cb944780befb9c17d550a, type: 3}
   m_PrefabInstance: {fileID: 258058665}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 965008963}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a53692c39b4e6b4bb7bc3a09c2cc0e4, type: 3}
@@ -3286,7 +3287,7 @@ GameObject:
   - component: {fileID: 649828035}
   - component: {fileID: 649828034}
   m_Layer: 5
-  m_Name: Volume Title (1)
+  m_Name: MusicTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3616,7 +3617,7 @@ GameObject:
   - component: {fileID: 712800729}
   - component: {fileID: 712800730}
   m_Layer: 5
-  m_Name: Volume (1)
+  m_Name: MusicVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4799,6 +4800,11 @@ Transform:
   m_Father: {fileID: 1046193670}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &965008963 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 49024146822618738, guid: 9a6f20fa308cb944780befb9c17d550a, type: 3}
+  m_PrefabInstance: {fileID: 258058665}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &983520587
 GameObject:
   m_ObjectHideFlags: 0
@@ -4869,7 +4875,7 @@ AudioSource:
   m_GameObject: {fileID: 991111062}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 554ba2da03fe99e44b3fa7a904f37916, type: 2}
   m_audioClip: {fileID: 8300000, guid: d80384072e80dd64f822f1c3001001af, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.519
@@ -5242,6 +5248,7 @@ MonoBehaviour:
   range: 100
   power: 1000
   fireRate: 15
+  gameOver: {fileID: 965008963}
   fpsCam: {fileID: 428432589}
   muzzleFlash: {fileID: 1192903040}
   Player: {fileID: 1012856303}
@@ -16686,7 +16693,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 7503910697543260201}
-  musicManager: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: 554ba2da03fe99e44b3fa7a904f37916, type: 2}
+  pauseMenu: {fileID: 969764402569398873}
+  settingsMenu: {fileID: 1514995746}
+  menuActive: 0
 --- !u!1 &1529295398
 GameObject:
   m_ObjectHideFlags: 0
@@ -19823,6 +19833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 969764402569398873}
+  settingsMenu: {fileID: 1514995746}
 --- !u!224 &969764403473165297
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20405,16 +20416,28 @@ MonoBehaviour:
   m_FillRect: {fileID: 3014266393031118806}
   m_HandleRect: {fileID: 3014266393223041783}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 0.479
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1514995750}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1514995750}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: SetVolumeOther
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20435,7 +20458,7 @@ GameObject:
   - component: {fileID: 3014266391430078052}
   - component: {fileID: 3014266391430078053}
   m_Layer: 5
-  m_Name: Volume
+  m_Name: SFXVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20763,7 +20786,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.479, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -20953,7 +20976,7 @@ GameObject:
   - component: {fileID: 3014266393101453827}
   - component: {fileID: 3014266393101453826}
   m_Layer: 5
-  m_Name: Volume Title
+  m_Name: SFXVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21145,8 +21168,8 @@ RectTransform:
   m_Father: {fileID: 3014266392421577435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.479, y: 0}
-  m_AnchorMax: {x: 0.479, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
