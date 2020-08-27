@@ -18,6 +18,7 @@ public class GameProperties : MonoBehaviour
             return;
         }
         Singleton = this;
+        DontDestroyOnLoad(this);
     }
 
     private void OnDestroy()
@@ -69,6 +70,35 @@ public class GameProperties : MonoBehaviour
             _animationCheckBuffer = value;
         }
     }
+
+    [SerializeField]
+    private Material _checkpointDefaultMaterial, _checkpointCheckedMaterial;
+
+    public Material CheckPointDefaultMaterial
+    {
+        get
+        {
+            return _checkpointDefaultMaterial;
+        }
+        private set
+        {
+            _checkpointDefaultMaterial = value;
+        }
+    }
+
+    public Material CheckPointCheckedMaterial
+    {
+        get
+        {
+            return _checkpointCheckedMaterial;
+        }
+        private set
+        {
+            _checkpointCheckedMaterial = value;
+        }
+    }
+
+
     #endregion
 
     #region Setters of Properties

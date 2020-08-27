@@ -109,9 +109,16 @@ public class DeathCheck : MonoBehaviour
     {
         if (hit.tag == "Checkpoint")
         {
+
+            checkpoint.GetComponent<SkinnedMeshRenderer>().material = GameProperties.Singleton.CheckPointDefaultMaterial;
+
+
+
             ForceObject fo = GetComponent<ForceObject>();
             gravity = fo.GetGravityForce();
             checkpoint = hit.transform;
+
+            checkpoint.GetComponent<SkinnedMeshRenderer>().material = GameProperties.Singleton.CheckPointCheckedMaterial;
         }
 
         if (hit.tag == "Death")
