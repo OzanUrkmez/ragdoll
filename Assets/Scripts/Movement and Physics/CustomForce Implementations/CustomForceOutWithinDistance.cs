@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomConstantForceTowards : MonoBehaviour, ICustomForceImplementation
+public class CustomForceOutWithinDistance : MonoBehaviour, ICustomForceImplementation
 {
-
-    [SerializeField]
-    private float distanceExtraCoeff;
 
     public ComponentExclusiveForceInformation componentOnlyObjectRef;
 
@@ -16,15 +13,16 @@ public class CustomConstantForceTowards : MonoBehaviour, ICustomForceImplementat
     }
 
 
-    public Transform towardsTransform;
+    public Transform distantTransform;
+
+    public float minDistance;
 
     public float magnitude;
 
     public Vector3 GetCurrentForceVector(CustomForce parentForce, ForceObject objectAppliedTo)
     {
+        Vector3 between = objectAppliedTo.transform.position - distantTransform.transform.position;
 
-        Vector3 dist = towardsTransform.transform.position - objectAppliedTo.transform.position;
-
-        return (dist).normalized * ( magnitude + distanceExtraCoeff * dist.magnitude );
+        return (between.magnitude > minDistance) ? Vector3.zero : between.normalized * magnitude;
     }
 }
