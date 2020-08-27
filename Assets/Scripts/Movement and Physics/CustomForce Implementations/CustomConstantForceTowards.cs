@@ -5,6 +5,9 @@ using UnityEngine;
 public class CustomConstantForceTowards : MonoBehaviour, ICustomForceImplementation
 {
 
+    [SerializeField]
+    private float distanceExtraCoeff;
+
     public ComponentExclusiveForceInformation componentOnlyObjectRef;
 
     private void Start()
@@ -19,6 +22,9 @@ public class CustomConstantForceTowards : MonoBehaviour, ICustomForceImplementat
 
     public Vector3 GetCurrentForceVector(CustomForce parentForce, ForceObject objectAppliedTo)
     {
-        return (towardsTransform.transform.position - objectAppliedTo.transform.position).normalized * magnitude;
+
+        Vector3 dist = towardsTransform.transform.position - objectAppliedTo.transform.position;
+
+        return (dist).normalized * ( magnitude + distanceExtraCoeff * dist.magnitude );
     }
 }

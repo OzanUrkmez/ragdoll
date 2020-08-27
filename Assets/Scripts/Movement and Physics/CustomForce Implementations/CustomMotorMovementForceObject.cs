@@ -38,6 +38,9 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
 
     private int currentMaxIndex = 0;
 
+    private bool isOrienting = false;
+
+
     [SerializeField]
     private float NoMovementCutoff = 1;
 
@@ -67,6 +70,9 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
 
     private void OnMotorObjectGravityChanged(ForceObject obj, Vector3 newGravity)
     {
+
+        isOrienting = true;
+
         groundDir = newGravity.normalized;
 
         Quaternion lookQuaternion = Quaternion.LookRotation(motorMovementTransform.forward, -newGravity);
@@ -85,6 +91,10 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
         }
 
         motorMovementTransform.rotation = lookQuaternion;
+
+        motorMovementTransform.transform.up = -groundDir;
+
+        isOrienting = false;
     }
 
     #endregion
@@ -185,6 +195,11 @@ public class CustomMotorMovementForceObject : ICustomForceImplementation
     public Vector3 GetGroundDir()
     {
         return groundDir;
+    }
+
+    public bool IsOrienting()
+    {
+        return isOrienting;
     }
 
     #endregion

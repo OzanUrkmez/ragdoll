@@ -254,6 +254,11 @@ public class HumanoidMotorObject : MonoBehaviour
         return returned;
     }
 
+    public bool IsOrienting()
+    {
+        return motorMovementForceObject.IsOrienting();
+    }
+
     #endregion
 
     [Serializable]
