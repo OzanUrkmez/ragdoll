@@ -1507,6 +1507,7 @@ GameObject:
   - component: {fileID: 336687608}
   - component: {fileID: 336687607}
   - component: {fileID: 336687611}
+  - component: {fileID: 336687612}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -1522,8 +1523,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336687605}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -46.9, y: -1.49, z: -15.6}
-  m_LocalScale: {x: 14.4, y: 1, z: 5}
+  m_LocalPosition: {x: -46.9, y: -1.49, z: -18.5}
+  m_LocalScale: {x: 8.68, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 1350601999}
   m_RootOrder: 9
@@ -1616,9 +1617,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389ac2ff46b2e424eb3f62afdfbb2534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platform: {fileID: 336687605}
-  timedelay: 2
+  points:
+  - {x: -46.9, y: -0.2, z: -123}
+  - {x: -46.9, y: -0.2, z: -160.5}
+  pointNum: 0
+  tolerance: 0
+  timeDelay: 2
   speed: 10
+  automatic: 1
+  platform: {fileID: 336687605}
+--- !u!65 &336687612
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336687605}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000002, y: 2.138134, z: 1.0000002}
+  m_Center: {x: 0.0000019227305, y: 0.569067, z: 0.0000009536744}
 --- !u!1 &373516782
 GameObject:
   m_ObjectHideFlags: 0
@@ -3039,7 +3059,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638395591}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.7, y: 0.33, z: -146}
+  m_LocalPosition: {x: -36.7, y: 0.33, z: -146}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 428432586}
@@ -4582,6 +4602,7 @@ MonoBehaviour:
   range: 100
   power: 1000
   fireRate: 15
+  gameOver: {fileID: 0}
   fpsCam: {fileID: 428432589}
   muzzleFlash: {fileID: 1192903040}
   Player: {fileID: 1012856303}
@@ -10888,6 +10909,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 7503910697543260201}
+  audioMixer: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  settingsMenu: {fileID: 0}
+  menuActive: 0
 --- !u!1 &1529295398
 GameObject:
   m_ObjectHideFlags: 0
@@ -11320,9 +11345,9 @@ GameObject:
   - component: {fileID: 1664867962}
   - component: {fileID: 1664867966}
   - component: {fileID: 1664867965}
-  - component: {fileID: 1664867963}
   - component: {fileID: 1664867964}
   - component: {fileID: 1664867967}
+  - component: {fileID: 1664867963}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -11353,11 +11378,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1664867961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 206767aca89fea749ab5f0e15fbd82b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 70cab6ed930c643d2a8d61057a7b67af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deActivateOnTouch: 1
-  buttonwall: {fileID: 0}
+  platform: {fileID: 336687605}
 --- !u!65 &1664867964
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13845,6 +13869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 969764402569398873}
+  settingsMenu: {fileID: 0}
 --- !u!224 &969764403473165297
 RectTransform:
   m_ObjectHideFlags: 0

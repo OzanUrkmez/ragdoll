@@ -4,35 +4,79 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    public Vector3[] points;
+    public int pointNum = 0;
+    private Vector3 currentTarget;
+    public float tolerance;
+    public int timeDelay = 2;
+    public float speed;
+    private float delayStart;
+    public bool automatic;
     public GameObject platform;
-    public int timedelay = 2;
-    public float speed = 10f;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("DisappearObject", 2 + timedelay, timedelay*2);
-        InvokeRepeating("ReappearObject", 2, timedelay*2);
+        platform.SetActive(false);
+        if (points.Length > 0) {
+            currentTarget = points[0];
+        }
+
+        tolerance = speed * Time.deltaTime;
         
     }
 
     void Update() {
-        if (platform.transform.position.z > 100) {
-            platform.transform.position += platform.transform.right * speed * Time.deltaTime;
-        } else if (platform.transform.position.z < 0) {
-            platform.transform.position -= platform.transform.right * speed * Time.deltaTime;
+        if (transform.position != currentTarget) {
+            MovePlatform();
+        } 
+        else {
+            UpdateTarget();
+        }
+
+    }
+
+    void MovePlatform()
+    {   
+        // moves the platform when user is on it
+        Vector3 heading = currentTarget - transform.position;
+        // normalizes heading vector into a unit vector and then multiplies it by speed
+        transform.position += (heading / heading.magnitude) * speed * Time.deltaTime;
+        if (heading.magnitude < tolerance) {
+            // snaps platform into place as it reaches end
+            transform.position = currentTarget;
+            // starts timer
+            delayStart = Time.time;
         }
     }
 
-    void DisappearObject()
-    {   
-        platform.transform.position += platform.transform.right * speed * Time.deltaTime;
-        platform.SetActive(false); //TODO bruh you gotta send notification to force object ;_;. on collision exit ;) 
+    void UpdateTarget()
+    {
+        // if set to automatic
+        if (automatic) {
+            // check if it's time for platform to move
+            if (Time.time - delayStart > timeDelay) {
+                NextTarget();
+            }
+        }
+        // if set to activate when user steps on it
+        else {
+
+        }
     }
 
-    void ReappearObject()
-    {
-        platform.SetActive(true);
-        platform.transform.position += -platform.transform.right * speed * Time.deltaTime;
+    public void NextTarget() {
+        pointNum += 1;
+        if (pointNum >= points.Length) {
+            pointNum = 0;
+        }
+        currentTarget = points[pointNum];
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        other.transform.parent = transform;
+    }
+    private void OnTriggerExit(Collider other) {
+        other.transform.parent = null;
     }
 }
 
