@@ -72,29 +72,29 @@ public class GameProperties : MonoBehaviour
     }
 
     [SerializeField]
-    private Material _checkpointDefaultMaterial, _checkpointCheckedMaterial;
+    private GameObject _checkpointDefaultGameobject, _checkpointCheckedGameobject;
 
-    public Material CheckPointDefaultMaterial
+    public GameObject CheckPointDefaultGameobject
     {
         get
         {
-            return _checkpointDefaultMaterial;
+            return _checkpointDefaultGameobject;
         }
         private set
         {
-            _checkpointDefaultMaterial = value;
+            _checkpointDefaultGameobject = value;
         }
     }
 
-    public Material CheckPointCheckedMaterial
+    public GameObject CheckPointCheckedGameobject
     {
         get
         {
-            return _checkpointCheckedMaterial;
+            return _checkpointCheckedGameobject;
         }
         private set
         {
-            _checkpointCheckedMaterial = value;
+            _checkpointCheckedGameobject = value;
         }
     }
 
