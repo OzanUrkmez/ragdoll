@@ -940,7 +940,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -1322,7 +1322,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -1502,7 +1502,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 50000
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0.01
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -1765,7 +1765,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelDefaultDragValue: 35
-  playerObject: {fileID: 0}
 --- !u!1 &665007747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2460,7 +2459,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -3169,7 +3168,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -4193,7 +4192,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -10177,7 +10176,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -10645,7 +10644,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -11267,7 +11266,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}

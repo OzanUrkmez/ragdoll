@@ -19,6 +19,8 @@ public class DeathCheck : MonoBehaviour
     private Collider pCollider;
     public Vector3 gravity;
 
+    public bool freezingAbilityEnabled = true;
+
     private ForceObject fo1;
 
     public static DeathCheck Singleton;
@@ -46,44 +48,47 @@ public class DeathCheck : MonoBehaviour
 
             if (lives > 0)
             {
-                Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
+                GameObject ragdollInstance = Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
+                ragdollInstance.GetComponentInChildren<SkinnedMeshRenderer>().material = GameManager.Singleton.GetPlayerObject().GetComponentInChildren<SkinnedMeshRenderer>().material;
                 Invoke("Checkpointer1", 0);
                 lives -= 1;
+                FindObjectOfType<AudioManager>().Play("PlayerDeath"); //Plays death sound after death
             }
 
-            if (lives == 0)
-            {
-                Player.transform.position = new Vector3(firstcheckpoint.position.x,
-                    firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
-                fo1.DirectSetSpeed(stop);
-                Player.transform.position = new Vector3(firstcheckpoint.transform.position.x,
-                    firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
-                gameOverMenu.GameOver();
-                lives = 10;
-            }
+            //if (lives == 0)
+            //{
+            //    Player.transform.position = new Vector3(firstcheckpoint.position.x,
+            //        firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
+            //    fo1.DirectSetSpeed(stop);
+            //    Player.transform.position = new Vector3(firstcheckpoint.transform.position.x,
+            //        firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
+            //    gameOverMenu.GameOver();
+            //    lives = 10;
+            //}
 
-            FindObjectOfType<AudioManager>().Play("PlayerDeath"); //Plays death sound after death
-        }else if (Input.GetKeyDown("e"))
+        }
+        else if (Input.GetKeyDown("e"))
         {
-            if (lives > 0)
+            if (lives > 0 && freezingAbilityEnabled)
             {
-                Instantiate(frozen, Player.transform.position, Player.transform.rotation);
+                GameObject frozenInstance = Instantiate(frozen, Player.transform.position, Player.transform.rotation);
+                frozenInstance.transform.Rotate(-90, 0, 0, Space.Self);
                 Invoke("Checkpointer1", 0);
                 lives -= 1;
+                FindObjectOfType<AudioManager>().Play("PlayerDeath"); //Plays death sound after death
             }
 
-            if (lives == 0)
-            {
-                Player.transform.position = new Vector3(firstcheckpoint.position.x,
-                    firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
-                fo1.DirectSetSpeed(stop);
-                Player.transform.position = new Vector3(firstcheckpoint.transform.position.x,
-                    firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
-                gameOverMenu.GameOver();
-                lives = 10;
-            }
+            //if (lives == 0)
+            //{
+            //    Player.transform.position = new Vector3(firstcheckpoint.position.x,
+            //        firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
+            //    fo1.DirectSetSpeed(stop);
+            //    Player.transform.position = new Vector3(firstcheckpoint.transform.position.x,
+            //        firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
+            //    gameOverMenu.GameOver();
+            //    lives = 10;
+            //}
 
-            FindObjectOfType<AudioManager>().Play("PlayerDeath"); //Plays death sound after death
         }
     }
 

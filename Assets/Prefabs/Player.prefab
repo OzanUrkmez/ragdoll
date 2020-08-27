@@ -1043,7 +1043,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -1064,6 +1064,7 @@ MonoBehaviour:
   Player: {fileID: 5559681683405883647}
   firstcheckpoint: {fileID: 0}
   ragdoll: {fileID: 4420393181870941647, guid: 7324a5cfca92b6d4f8ba7d384439a77e, type: 3}
+  frozen: {fileID: 5559681683405883647, guid: bbae3c1d9c643504a91d535806b19578, type: 3}
   heightrespawn: 1
   gameOverMenu: {fileID: 0}
   stop: {x: 0, y: 0, z: 0}

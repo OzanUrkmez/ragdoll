@@ -13,8 +13,8 @@ public class DisappearReappear : MonoBehaviour
         InvokeRepeating("ReappearObject",2,timedelay*2);
     }
     void DisappearObject()
-    {   
-        wall.SetActive(false); //TODO bruh you gotta send notification to force object ;_;. on collision exit ;) 
+    {
+        wall.SetActive(false);
     }
 
     void ReappearObject()

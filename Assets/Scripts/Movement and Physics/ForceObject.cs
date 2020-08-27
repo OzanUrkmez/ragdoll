@@ -18,7 +18,7 @@ public class ForceObject : MonoBehaviour
     private float mass = 1f;
 
     [SerializeField]
-    private bool allowRigidBodyForces;
+    private bool isRagdoll; //TODO fix this. change back to allowRigidBodyForces!! Seriously, implement rigid body. or find way to make it work along with system. can still allow rigid body forces, but must be compatible with our components. or at least should be
 
     [SerializeField]
     private float minimumSpeedToMove = 0f;
@@ -47,7 +47,7 @@ public class ForceObject : MonoBehaviour
             isRigid = true;
 
         characterController = GetComponent<CharacterController>();
-        if (!allowRigidBodyForces)
+        if (!isRagdoll)
         {
             activeGravityForce = new CustomTraditionalForce(GameProperties.Singleton.BaseGravity * gravityMultiplier);
         }
@@ -57,7 +57,6 @@ public class ForceObject : MonoBehaviour
             activeGravityForce = new CustomTraditionalForce(Vector3.zero);
 
             activeRigidBody.useGravity = true;
-
             activeRigidBody.AddForce(GameProperties.Singleton.BaseGravity * gravityMultiplier - Physics.gravity);
             currentRigidGravity = GameProperties.Singleton.BaseGravity * gravityMultiplier;
         }
@@ -127,7 +126,7 @@ public class ForceObject : MonoBehaviour
 
             if (netSpeedForFrame.magnitude > minimumSpeedToMove)
             {
-                if (allowRigidBodyForces)
+                if (isRagdoll)
                 {
                     activeRigidBody.velocity += netSpeedForFrame - activeRigidBody.velocity;
                 }
@@ -366,7 +365,7 @@ public class ForceObject : MonoBehaviour
 
     public Vector3 GetGravityForce()
     {
-        if (allowRigidBodyForces)
+        if (isRagdoll)
             return currentRigidGravity;
 
         return activeGravityForce.Force;
@@ -377,7 +376,7 @@ public class ForceObject : MonoBehaviour
 
         newForce *= gravityMultiplier;
 
-        if (allowRigidBodyForces)
+        if (isRagdoll)
         {
             activeRigidBody.AddForce(newForce - currentRigidGravity);
             currentRigidGravity = newForce;
