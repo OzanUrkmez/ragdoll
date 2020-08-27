@@ -16241,7 +16241,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0.2
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -17063,7 +17063,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0.2
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -17075,13 +17075,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543427092}
   serializedVersion: 2
-  m_Mass: 0.0000001
+  m_Mass: 10000
   m_Drag: 0
   m_AngularDrag: 0
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &543427098
 MonoBehaviour:
@@ -17096,7 +17096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transferredChildren: []
-  ragdoll: {fileID: 0}
+  ragdoll: {fileID: 4420393181870941647, guid: 7324a5cfca92b6d4f8ba7d384439a77e, type: 3}
   fpsCam: {fileID: 0}
   range: 100
 --- !u!136 &543427099
@@ -18773,13 +18773,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lives: 10
   checkpoint: {fileID: 0}
-  Player: {fileID: 638395591}
   firstcheckpoint: {fileID: 0}
   ragdoll: {fileID: 4420393181870941647, guid: 7324a5cfca92b6d4f8ba7d384439a77e, type: 3}
+  frozen: {fileID: 0}
   heightrespawn: 1
   gameOverMenu: {fileID: 0}
   stop: {x: 0, y: 0, z: 0}
   gravity: {x: 0, y: 0, z: 0}
+  freezingAbilityEnabled: 1
 --- !u!114 &638395597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18795,7 +18796,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -26323,7 +26324,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0.2
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -28705,7 +28706,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0.2
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -28717,13 +28718,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064363056}
   serializedVersion: 2
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1064363062
 MonoBehaviour:
@@ -28738,7 +28739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transferredChildren: []
-  ragdoll: {fileID: 0}
+  ragdoll: {fileID: 4420393181870941647, guid: 7324a5cfca92b6d4f8ba7d384439a77e, type: 3}
   fpsCam: {fileID: 0}
   range: 100
 --- !u!136 &1064363063
@@ -39604,7 +39605,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelDefaultDragValue: 35
-  playerObject: {fileID: 0}
 --- !u!1 &1211580194
 GameObject:
   m_ObjectHideFlags: 0
@@ -44838,7 +44838,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0.2
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -46904,7 +46904,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0.2
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -46930,13 +46930,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376128472}
   serializedVersion: 2
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1376128479
 MonoBehaviour:
@@ -46951,7 +46951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transferredChildren: []
-  ragdoll: {fileID: 0}
+  ragdoll: {fileID: 4420393181870941647, guid: 7324a5cfca92b6d4f8ba7d384439a77e, type: 3}
   fpsCam: {fileID: 0}
   range: 100
 --- !u!1 &1381720400
@@ -67722,7 +67722,7 @@ MonoBehaviour:
   gravityMultiplier: 1
   dragResistanceMultiplier: 1
   mass: 1
-  allowRigidBodyForces: 0
+  isRagdoll: 0
   minimumSpeedToMove: 0.2
   netSpeedForFrame: {x: 0, y: 0, z: 0}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
@@ -67751,10 +67751,10 @@ Rigidbody:
   m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1980101926
 MonoBehaviour:
@@ -67769,7 +67769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transferredChildren: []
-  ragdoll: {fileID: 0}
+  ragdoll: {fileID: 4420393181870941647, guid: 7324a5cfca92b6d4f8ba7d384439a77e, type: 3}
   fpsCam: {fileID: 0}
   range: 100
 --- !u!1 &1982857834
