@@ -70,6 +70,11 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
         allCollidingComponents.Clear();
     }
 
+    private void OnDestroy()
+    {
+        OnDisable();
+    }
+
     #endregion
 
     private void GeneralCollisionEnter(ForceObject forceTarget, Vector3 contactFaceNormal)

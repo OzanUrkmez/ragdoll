@@ -25,6 +25,12 @@ public class DeathCheck : MonoBehaviour
 
     public static DeathCheck Singleton;
 
+    [SerializeField]
+    private float checkpointCooldown = 0.5f;
+    [SerializeField]
+    private float checkpointCurrentCooldown = 0;
+
+
     private void Start()
     {
         gravity = GameProperties.Singleton.BaseGravity;
@@ -41,10 +47,21 @@ public class DeathCheck : MonoBehaviour
         Singleton = this;
 
         fo1 = Player.GetComponent<ForceObject>();
+
+        //first boi enabled
+        GameObject g = Instantiate(GameProperties.Singleton.CheckPointCheckedGameobject);
+        checkpoint = firstcheckpoint.transform;
+        g.transform.position = checkpoint.transform.position;
+        g.transform.rotation = checkpoint.transform.rotation;
+        g.transform.localScale = checkpoint.transform.localScale;
+        Destroy(firstcheckpoint.gameObject);
+        firstcheckpoint = g.transform;
+        checkpoint = g.transform;
     }
 
     void Update()
     {
+        checkpointCurrentCooldown -= Time.deltaTime;
         if (Input.GetKeyDown("q"))
         {
 
@@ -110,15 +127,35 @@ public class DeathCheck : MonoBehaviour
         if (hit.tag == "Checkpoint")
         {
 
-            checkpoint.GetComponent<SkinnedMeshRenderer>().material = GameProperties.Singleton.CheckPointDefaultMaterial;
+            if (checkpointCurrentCooldown > 0)
+                return;
 
+            checkpointCurrentCooldown = checkpointCooldown;
 
 
             ForceObject fo = GetComponent<ForceObject>();
             gravity = fo.GetGravityForce();
-            checkpoint = hit.transform;
 
-            checkpoint.GetComponent<SkinnedMeshRenderer>().material = GameProperties.Singleton.CheckPointCheckedMaterial;
+            if (checkpoint == hit.transform)
+                return;
+
+            if(checkpoint != null)
+            {
+                GameObject yes = Instantiate(GameProperties.Singleton.CheckPointDefaultGameobject);
+                yes.transform.position = checkpoint.transform.position;
+                yes.transform.rotation = checkpoint.transform.rotation;
+                yes.transform.localScale = checkpoint.transform.localScale;
+
+                Destroy(checkpoint.gameObject);
+            }
+            GameObject g = Instantiate(GameProperties.Singleton.CheckPointCheckedGameobject);
+            checkpoint = hit.transform;
+            g.transform.position = checkpoint.transform.position;
+            g.transform.rotation = checkpoint.transform.rotation;
+            g.transform.localScale = checkpoint.transform.localScale;
+            Destroy(hit.gameObject);
+            checkpoint = g.transform;
+            
         }
 
         if (hit.tag == "Death")
