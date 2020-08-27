@@ -34,23 +34,4 @@ public class LevelSelector : MonoBehaviour
         fader.FadeTo(SceneManager.GetActiveScene().name);
     }
 
-
-
-    //When the game ends
-    //
-
-    //public GameObject winGame; //change the GameObject to the file name of the checkpoint that wins the game later, put this into the
-    
-    //public string nextLevel = "Level02";
-    //public int levelToUnlock = 2;
-
-    //public SceneFader sceneFader;
-
-    //public void LevelWon ()
-    //{
-        //Debug.Log("Level Won!");
-        //PlayerPrefs.SetInt("levelReached", levelToUnlock);
-        //sceneFader.FadeTo(nextLevel);
-
-    //}
 }
