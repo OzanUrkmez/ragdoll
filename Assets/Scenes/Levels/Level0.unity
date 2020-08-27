@@ -15387,19 +15387,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1356397899412408, guid: f6f346a53c4b3a24c867c377bde62d17, type: 3}
   m_PrefabInstance: {fileID: 1742121540}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1742121542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742121541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8595d8c328b70db4fbe40430d5757c26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotation: {x: 0, y: 0, z: 20}
 --- !u!114 &1742121543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15417,28 +15404,8 @@ MonoBehaviour:
   mass: 1
   allowRigidBodyForces: 0
   minimumSpeedToMove: 0
-  netSpeedForFrame: {x: 0, y: 0, z: 10}
+  netSpeedForFrame: {x: 0, y: 0, z: -5}
   netAccelerationForFrame: {x: 0, y: 0, z: 0}
---- !u!114 &1742121544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742121541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33e4444c55dc4e4439dc5b958c19f05c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceExtraCoeff: 0
-  componentOnlyObjectRef:
-    appliedTo: {fileID: 1742121543}
-    isPure: 1
-    infiniteTimeForce: 1
-    applyTime: 0
-  towardsTransform: {fileID: 1714441262}
-  magnitude: 2
 --- !u!1 &1746534639
 GameObject:
   m_ObjectHideFlags: 0
