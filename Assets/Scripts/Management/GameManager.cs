@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float levelDefaultDragValue = 25f;
 
-    [SerializeField]
     private GameObject playerObject;
 
     public float GetLevelDefaultDragValue()
@@ -54,5 +53,14 @@ public class GameManager : MonoBehaviour
     public GameObject GetPlayerObject()
     {
         return playerObject;
+    }
+
+    public void AssignPlayer(GameObject playerObject)
+    {
+        if(this.playerObject != null)
+        {
+            Debug.LogError("There cannot be more than  one player character!");
+        }
+        this.playerObject = playerObject;
     }
 }
