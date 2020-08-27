@@ -9,7 +9,7 @@ public class DeathCheck : MonoBehaviour
 {
     public int lives = 10;
     public Transform checkpoint;
-    public GameObject Player;
+    private GameObject Player;
     public Transform firstcheckpoint;
     public GameObject ragdoll;
     public GameObject frozen;
@@ -35,6 +35,8 @@ public class DeathCheck : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        Player = GameManager.Singleton.GetPlayerObject();
 
         Singleton = this;
 
