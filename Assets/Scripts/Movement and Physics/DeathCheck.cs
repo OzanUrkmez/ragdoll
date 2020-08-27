@@ -24,6 +24,8 @@ public class DeathCheck : MonoBehaviour
 
     private void Start()
     {
+        gravity = GameProperties.Singleton.BaseGravity;
+
         pCollider = GetComponent<Collider>();
         if (Singleton != null)
         {
@@ -72,6 +74,7 @@ public class DeathCheck : MonoBehaviour
     {
         OnDeathCollision(other);
     }
+
 
     private void OnDeathCollision(Collider hit)
     {
