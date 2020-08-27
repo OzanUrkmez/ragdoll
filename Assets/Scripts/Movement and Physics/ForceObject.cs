@@ -21,7 +21,7 @@ public class ForceObject : MonoBehaviour
     private bool allowRigidBodyForces;
 
     [SerializeField]
-    private float minimumSpeedToMove = 0.2f;
+    private float minimumSpeedToMove = 0f;
 
     private bool isRigid = false;
     private Rigidbody activeRigidBody;
@@ -34,6 +34,8 @@ public class ForceObject : MonoBehaviour
     //TODO if can change this, then do event system! 
     private float objectDragValue = -1;
 
+    private Vector3 currentRigidGravity; //TODO do not use in future! use our system. unless you decide otherwise. this could actually work?
+
     //TODO In future move drag etc. to modular outside modifiable behaviour effecting system. have this system be called by events etc. in here to adjust speeds etc etc. so yeah modular behaviour etc. system! we can then truly have customizable physics
 
     #region Initialization
@@ -45,8 +47,20 @@ public class ForceObject : MonoBehaviour
             isRigid = true;
 
         characterController = GetComponent<CharacterController>();
+        if (!allowRigidBodyForces)
+        {
+            activeGravityForce = new CustomTraditionalForce(GameProperties.Singleton.BaseGravity * gravityMultiplier);
+        }
+        else
+        {
+            //TODO Dont do this in proper physics system onec its fully implemented. official standard components should handle this stuff! Maybe. Dont waste too much time but yea it should work
+            activeGravityForce = new CustomTraditionalForce(Vector3.zero);
 
-        activeGravityForce = new CustomTraditionalForce(GameProperties.Singleton.BaseGravity * gravityMultiplier);
+            activeRigidBody.useGravity = true;
+
+            activeRigidBody.AddForce(GameProperties.Singleton.BaseGravity * gravityMultiplier - Physics.gravity);
+            currentRigidGravity = GameProperties.Singleton.BaseGravity * gravityMultiplier;
+        }
 
         new CustomForce(this, activeGravityForce, true, float.NegativeInfinity);
 
@@ -54,7 +68,6 @@ public class ForceObject : MonoBehaviour
         adjustedTrueMaximumSpeed = objectDragValue * dragResistanceMultiplier;
 
         InitializeAppropriateForceCoroutine();
-
 
     }
 
@@ -353,14 +366,28 @@ public class ForceObject : MonoBehaviour
 
     public Vector3 GetGravityForce()
     {
+        if (allowRigidBodyForces)
+            return currentRigidGravity;
+
         return activeGravityForce.Force;
     }
 
     public void SetGravityBaseForce(Vector3 newForce)
     {
+
         newForce *= gravityMultiplier;
 
-        activeGravityForce.Force = newForce;
+        if (allowRigidBodyForces)
+        {
+            activeRigidBody.AddForce(newForce - currentRigidGravity);
+            currentRigidGravity = newForce;
+
+        }
+        else
+        {
+            activeGravityForce.Force = newForce;
+        }
+
 
         onGravityAdjusted?.Invoke(this, newForce);
     }

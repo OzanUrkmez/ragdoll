@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class Trigger : MonoBehaviour
+public class TriggerEnableDisable : MonoBehaviour
 {
     private Collider collisiCollider;
-    public GameObject text;
+    public GameObject enabledDisabledObject;
     public int texton = 5;
 
     void Start()
@@ -14,7 +14,7 @@ public class Trigger : MonoBehaviour
     {
         if (collider.transform.tag == "Player")
         {
-            text.SetActive(true);
+            enabledDisabledObject.SetActive(true);
             Invoke("turnoff",texton);
         }
 
@@ -31,6 +31,6 @@ public class Trigger : MonoBehaviour
 
     void turnoff()
     {
-        text.SetActive(false);
+        enabledDisabledObject.SetActive(false);
     }
 }

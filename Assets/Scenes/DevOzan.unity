@@ -961,18 +961,25 @@ MonoBehaviour:
   switchingForces:
   - forceVector: {x: 0, y: 0, z: 0}
     time: 7
+    isLocal: 0
   - forceVector: {x: 5, y: 0, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: -5, y: 0, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: 0, y: 0, z: 0}
     time: 3
+    isLocal: 0
   - forceVector: {x: -5, y: 0, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: 5, y: 0, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: 0, y: 0, z: 0}
     time: 2
+    isLocal: 0
   repeatForever: 1
   repetitionTimes: 1
 --- !u!114 &558796069
@@ -1296,6 +1303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276c0db4e5450644eab1e2b21bc9364a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transferredChildren: []
   ragdoll: {fileID: 4420393181870941647, guid: 7324a5cfca92b6d4f8ba7d384439a77e, type: 3}
   fpsCam: {fileID: 0}
   range: 100
@@ -1427,6 +1435,153 @@ Transform:
   m_Father: {fileID: 1948854495}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &635720540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 635720541}
+  - component: {fileID: 635720547}
+  - component: {fileID: 635720546}
+  - component: {fileID: 635720545}
+  - component: {fileID: 635720544}
+  - component: {fileID: 635720543}
+  - component: {fileID: 635720542}
+  m_Layer: 0
+  m_Name: Ground (15)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &635720541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635720540}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -5.27, y: 1.22, z: 0.91}
+  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_Children: []
+  m_Father: {fileID: 1831999501}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!54 &635720542
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635720540}
+  serializedVersion: 2
+  m_Mass: 50
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 2
+--- !u!114 &635720543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635720540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95b4ee948698fe4882844d5ccee0478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityMultiplier: 0
+  dragResistanceMultiplier: 1
+  mass: 50000
+  allowRigidBodyForces: 0
+  minimumSpeedToMove: 0.01
+  netSpeedForFrame: {x: 0, y: 0, z: 0}
+  netAccelerationForFrame: {x: 0, y: 0, z: 0}
+--- !u!114 &635720544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635720540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83de9f8a02eebb4395ac54995f734e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalForceStableMultiplier: 1
+  normalForceInstantBounceMultiplier: 1
+--- !u!65 &635720545
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635720540}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &635720546
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635720540}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &635720547
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635720540}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &639536978
 GameObject:
   m_ObjectHideFlags: 0
@@ -3035,18 +3190,25 @@ MonoBehaviour:
   switchingForces:
   - forceVector: {x: 0, y: 0, z: 0}
     time: 3
+    isLocal: 0
   - forceVector: {x: 5, y: 0, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: -5, y: 0, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: 0, y: 0, z: 0}
     time: 3
+    isLocal: 0
   - forceVector: {x: -5, y: 0, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: 5, y: 0, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: 0, y: 0, z: 0}
     time: 2
+    isLocal: 0
   repeatForever: 1
   repetitionTimes: 1
 --- !u!114 &1123534700
@@ -10285,6 +10447,7 @@ Transform:
   - {fileID: 1333078250}
   - {fileID: 471273522}
   - {fileID: 826447315}
+  - {fileID: 635720541}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10503,16 +10666,22 @@ MonoBehaviour:
   switchingForces:
   - forceVector: {x: 0, y: 10, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: 0, y: -10, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: 0, y: 0, z: 0}
     time: 3
+    isLocal: 0
   - forceVector: {x: 0, y: -10, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: 0, y: 10, z: 0}
     time: 2
+    isLocal: 0
   - forceVector: {x: 0, y: 0, z: 0}
     time: 2
+    isLocal: 0
   repeatForever: 1
   repetitionTimes: 1
 --- !u!114 &1852885437
@@ -10907,7 +11076,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3295e58bca479244587f58036da80f4a, type: 2}
+  - {fileID: 2100000, guid: 0590c749ef4e0684d9c744d7bc1593ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

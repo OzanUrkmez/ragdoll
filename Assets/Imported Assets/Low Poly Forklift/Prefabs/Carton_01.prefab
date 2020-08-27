@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2311437476211173496}
   - component: {fileID: 1710307611835410397}
   - component: {fileID: 3483759711487546135}
-  - component: {fileID: 5867021271600760541}
+  - component: {fileID: 4647072520119088475}
   m_Layer: 0
   m_Name: Carton_01
   m_TagString: Untagged
@@ -56,6 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,8 +81,9 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5867021271600760541
-MeshCollider:
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4647072520119088475
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,7 +92,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1953723390312084291, guid: 74ff7790b0d0b504d85bc23c4a028eeb, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.5637674, y: 1.5256377, z: 3.4115605}
+  m_Center: {x: 0.0000016093254, y: 0.762819, z: -0.0000005960465}

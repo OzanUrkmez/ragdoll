@@ -11,7 +11,7 @@
 # Visual Studio cache directory
 .vs/
 
-Assets/Imported Assets/
+*Assets/Imported Assets/**
 
 # Gradle cache directory
 .gradle/

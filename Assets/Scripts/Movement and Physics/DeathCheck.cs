@@ -12,6 +12,7 @@ public class DeathCheck : MonoBehaviour
     public GameObject Player;
     public Transform firstcheckpoint;
     public GameObject ragdoll;
+    public GameObject frozen;
     public int heightrespawn = 1;
     public GameOverMenu gameOverMenu;
     public Vector3 stop;
@@ -40,12 +41,33 @@ public class DeathCheck : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("k"))
+        if (Input.GetKeyDown("q"))
         {
 
             if (lives > 0)
             {
                 Instantiate(ragdoll, Player.transform.position, Player.transform.rotation);
+                Invoke("Checkpointer1", 0);
+                lives -= 1;
+            }
+
+            if (lives == 0)
+            {
+                Player.transform.position = new Vector3(firstcheckpoint.position.x,
+                    firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
+                fo1.DirectSetSpeed(stop);
+                Player.transform.position = new Vector3(firstcheckpoint.transform.position.x,
+                    firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
+                gameOverMenu.GameOver();
+                lives = 10;
+            }
+
+            FindObjectOfType<AudioManager>().Play("PlayerDeath"); //Plays death sound after death
+        }else if (Input.GetKeyDown("e"))
+        {
+            if (lives > 0)
+            {
+                Instantiate(frozen, Player.transform.position, Player.transform.rotation);
                 Invoke("Checkpointer1", 0);
                 lives -= 1;
             }
