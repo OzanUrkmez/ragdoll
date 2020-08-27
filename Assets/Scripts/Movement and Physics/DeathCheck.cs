@@ -16,6 +16,7 @@ public class DeathCheck : MonoBehaviour
     public GameOverMenu gameOverMenu;
     public Vector3 stop;
     private Collider pCollider;
+    public Vector3 gravity;
 
     private ForceObject fo1;
 
@@ -76,6 +77,8 @@ public class DeathCheck : MonoBehaviour
     {
         if (hit.tag == "Checkpoint")
         {
+            ForceObject fo = GetComponent<ForceObject>();
+            gravity = fo.GetGravityForce();
             checkpoint = hit.transform;
         }
 
@@ -109,6 +112,7 @@ public class DeathCheck : MonoBehaviour
     public void Checkpointer1()
     {
         fo1.DirectSetSpeed(stop);
+        fo1.SetGravityBaseForce(gravity);
         Player.transform.position = new Vector3(checkpoint.position.x, checkpoint.position.y + heightrespawn,
             checkpoint.position.z);
     }
