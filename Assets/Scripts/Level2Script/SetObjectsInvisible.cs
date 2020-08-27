@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class SetObjectsInvisible : MonoBehaviour
 {
-    public GameObject obj;
+    public GameObject gravity, slope;
     // Simple script to set objects invisible until buttons are pressed
     void Start()
     {
-        obj.SetActive(false);
+        gravity.SetActive(false);
+        slope.SetActive(false);
     }
 
 }
