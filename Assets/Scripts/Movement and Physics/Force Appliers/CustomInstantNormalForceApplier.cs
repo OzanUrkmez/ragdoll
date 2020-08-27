@@ -5,6 +5,15 @@ using UnityEngine;
 public class CustomInstantNormalForceApplier : MonoBehaviour
 {
 
+    private void Start()
+    {
+        //DELETE THIS IN FUTURE? MAYBE CAN STAY
+        if((GetComponent<Rigidbody>() == null && GetComponent<Collider>() == null) || GetComponents<CustomInstantNormalForceApplier>().Length != 1)
+        {
+            Destroy(this);
+        }
+    }
+
 
     [SerializeField]
     private float normalForceStableMultiplier = 1f;
@@ -17,6 +26,8 @@ public class CustomInstantNormalForceApplier : MonoBehaviour
     private Dictionary<ForceObject, List<Transform>> allCollidingComponents = new Dictionary<ForceObject, List<Transform>>();
 
     #region Unity Collision Detectors
+
+
 
 
     private void OnCollisionEnter(Collision collision)

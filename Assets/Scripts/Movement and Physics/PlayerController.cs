@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+        GameManager.Singleton.AssignPlayer(characterObject.gameObject);
+
         WeaponChooser.onNewWeaponChosen += OnWeaponChanged;
 
         possibleInstantInputs = humanoidMotorObject.GetAcceptedInstantKeyCodes();

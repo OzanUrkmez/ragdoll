@@ -23,6 +23,7 @@ public class CustomSwitchingForce : MonoBehaviour, ICustomForceImplementation
     {
         public Vector3 forceVector;
         public float time;
+        public bool isLocal;
     }
 
     [SerializeField]
@@ -43,12 +44,12 @@ public class CustomSwitchingForce : MonoBehaviour, ICustomForceImplementation
 
     public Vector3 GetCurrentForceVector(CustomForce parentForce, ForceObject objectAppliedTo)
     {
-        if(currentTime > switchingForces[currentIndex].time)
+        if (currentTime > switchingForces[currentIndex].time)
         {
             if (!repeatForever)
             {
                 repetitionTimes--;
-                if(repetitionTimes < 1)
+                if (repetitionTimes < 1)
                 {
                     objectAppliedTo.QueueRemoveForce(parentForce);
                 }
@@ -58,6 +59,8 @@ public class CustomSwitchingForce : MonoBehaviour, ICustomForceImplementation
         }
         currentTime += Time.fixedDeltaTime;
 
-        return switchingForces[currentIndex].forceVector;
+        Vector3 force = switchingForces[currentIndex].forceVector;
+
+        return switchingForces[currentIndex].isLocal? (Vector3)(currentAppliedObject.transform.localToWorldMatrix * force) : force ;
     }
 }
