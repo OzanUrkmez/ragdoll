@@ -110,8 +110,19 @@ public class ForceObject : MonoBehaviour
             onBeforeSpeedApplied?.Invoke(this);
 
             CalculateProcesAcceleration(Time.fixedDeltaTime);
+
+
             if (netSpeedForFrame.magnitude > minimumSpeedToMove)
-                activeRigidBody.velocity = netSpeedForFrame;
+            {
+                if (allowRigidBodyForces)
+                {
+                    activeRigidBody.velocity += netSpeedForFrame - activeRigidBody.velocity;
+                }
+                else
+                {
+                    activeRigidBody.velocity = netSpeedForFrame;
+                }
+            }
             else
                 activeRigidBody.velocity = Vector3.zero;
 
