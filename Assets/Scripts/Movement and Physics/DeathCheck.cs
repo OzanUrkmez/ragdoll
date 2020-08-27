@@ -97,7 +97,7 @@ public class DeathCheck : MonoBehaviour
                     firstcheckpoint.position.y + heightrespawn, firstcheckpoint.position.z);
                 Player.transform.position = new Vector3(firstcheckpoint.transform.position.x,
                     firstcheckpoint.transform.position.y + heightrespawn, firstcheckpoint.transform.position.z);
-                SceneManager.LoadScene("DevAggregate");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 lives = 10;
 
             }
