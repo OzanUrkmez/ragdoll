@@ -2,6 +2,10 @@
 
 public class Target : MonoBehaviour
 {
+
+    [SerializeField]
+    private GameObject[] transferredChildren;
+
     public GameObject ragdoll;
     public Camera fpsCam;
     public float range = 100f;
@@ -20,7 +24,13 @@ public class Target : MonoBehaviour
     void Die()
     {
         GameObject g = Instantiate(ragdoll, gameObject.transform.position, gameObject.transform.rotation);
-        g.GetComponentInChildren<SkinnedMeshRenderer>().material = gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material; //TODO inefficient but good if we are not doing this more than 5 times per second
+        g.GetComponentInChildren<SkinnedMeshRenderer>().material = gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material; //TODO inefficient but good if we are not doing this more than ~5 times per second
+        
+        foreach(GameObject c in transferredChildren)
+        {
+            c.transform.parent = g.transform;
+        }
+
         Destroy(gameObject);
         destroy = true; 
     }
