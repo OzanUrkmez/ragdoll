@@ -16,7 +16,7 @@ public class wallbutton : MonoBehaviour
         collidingTransforms.Add(collision.transform);
         ExecuteButtonWallLogic();
     }
-
+    
     void OnCollisionExit(Collision collision)
     {
         collidingTransforms.Remove(collision.transform);
