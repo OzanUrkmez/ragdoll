@@ -80,7 +80,7 @@ public class SimpleBot : MonoBehaviour
 
                 Vector3 rotation = (botTransform.up * signedAngleBetween);
 
-                botTransform.Rotate((rotation.magnitude > rotationSpeed)? rotation.normalized * rotationSpeed : rotation);
+                botTransform.Rotate((rotation.magnitude > rotationSpeed)? rotation.normalized * rotationSpeed : rotation,Space.Self);
 
 
                 break;
