@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (settingsMenu.activeSelf)
                 return;
-        if (Input.GetKeyDown(KeyCode.Tab)) //Looks for the 'ESC' key input
+        if (Input.GetKeyDown(KeyCode.Escape)) //Looks for the 'ESC' key input
         {
             if (GameIsPaused) //If game is paused, resume the game again
             {

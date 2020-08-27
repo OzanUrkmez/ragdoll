@@ -13,7 +13,7 @@ public class SettingsMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) //Looks for the 'ESC' key input
+        if (Input.GetKeyDown(KeyCode.Escape)) //Looks for the 'ESC' key input
         {
             if (gameObject.activeSelf)//Checks if the options menu is open
             {
