@@ -19213,8 +19213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 10
-  checkpoint: {fileID: 1303586542}
-  firstcheckpoint: {fileID: 1303586542}
+  checkpoint: {fileID: 234250365}
+  firstcheckpoint: {fileID: 234250365}
   ragdoll: {fileID: 4420393181870941647, guid: 7324a5cfca92b6d4f8ba7d384439a77e, type: 3}
   frozen: {fileID: 1675289225}
   heightrespawn: 1
