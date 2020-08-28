@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.05918894, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.0765819, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -22799,7 +22799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155f988101f1d7848aef28716abe9688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextLevel: Level1
+  NextLevel: Level2
   fader: {fileID: 645343804}
   levelToUnlock: 2
 --- !u!135 &1753761212

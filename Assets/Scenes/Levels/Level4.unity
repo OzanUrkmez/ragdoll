@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.11185876, g: 0.14931992, b: 0.13826385, a: 1}
+  m_IndirectSpecularColor: {r: 0.112891324, g: 0.11914877, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -535,6 +535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 577551331}
+  settingsMenu: {fileID: 0}
 --- !u!114 &210414258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,6 +940,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 2117629592}
+  audioMixer: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  settingsMenu: {fileID: 0}
+  menuActive: 0
 --- !u!114 &320985596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3033,6 +3038,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gravityConstant: {x: 0, y: -9.81, z: 0}
   _animationCheckBuffer: 0.05
+  _checkpointDefaultGameobject: {fileID: 0}
+  _checkpointCheckedGameobject: {fileID: 0}
 --- !u!1 &1387819752
 GameObject:
   m_ObjectHideFlags: 0
@@ -4078,7 +4085,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelDefaultDragValue: 35
-  playerObject: {fileID: 6273093260238158492}
 --- !u!1 &1768590804
 GameObject:
   m_ObjectHideFlags: 0
@@ -5690,8 +5696,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc3626130ce2d3248b03e7a30e3c0238, type: 3}
---- !u!1 &6273093260238158492 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5559681683405883647, guid: dc3626130ce2d3248b03e7a30e3c0238, type: 3}
-  m_PrefabInstance: {fileID: 6273093260238158491}
-  m_PrefabAsset: {fileID: 0}

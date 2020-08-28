@@ -5,7 +5,7 @@ using UnityEngine;
 public class GravityChangerNPC : MonoBehaviour
 {
     public Vector3 newGravity;
-    void Start()
+    void Start() 
     {
         ForceObject fo = GetComponent<ForceObject>();
         fo.SetGravityBaseForce(newGravity);
