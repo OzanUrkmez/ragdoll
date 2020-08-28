@@ -49,14 +49,7 @@ public class DeathCheck : MonoBehaviour
         fo1 = Player.GetComponent<ForceObject>();
 
         //first boi enabled
-        GameObject g = Instantiate(GameProperties.Singleton.CheckPointCheckedGameobject);
-        checkpoint = firstcheckpoint.transform;
-        g.transform.position = checkpoint.transform.position;
-        g.transform.rotation = checkpoint.transform.rotation;
-        g.transform.localScale = checkpoint.transform.localScale;
-        Destroy(firstcheckpoint.gameObject);
-        firstcheckpoint = g.transform;
-        checkpoint = g.transform;
+
     }
 
     void Update()

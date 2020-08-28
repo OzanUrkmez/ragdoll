@@ -6,7 +6,7 @@ public class LoadScene : MonoBehaviour
     //Loads the next scene from the current scene
     public void GameLoader()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Level1");
     }
 
     //Quits the Game

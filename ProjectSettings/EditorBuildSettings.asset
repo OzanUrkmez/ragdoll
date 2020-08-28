@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: ff06d238a9f9eeb4188057560b5fd177
   - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: b310972f5d9ab944bba1fbcc87cf88e8
+  - enabled: 1
+    path: Assets/Scenes/PauseMenu.unity
+    guid: 0070a046adb16a64ea4ce42dbad339e6
+  - enabled: 0
     path: Assets/Scenes/Levels/Level0.unity
     guid: 5bded0e41d277be428738a7c091d9894
   - enabled: 1
@@ -17,4 +23,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/DevAggregate.unity
     guid: 4bd557bb98d1d7f4dbad1bdcdf57eef0
+  - enabled: 1
+    path: Assets/Scenes/Levels/level2.unity
+    guid: 20ebb9354d5f4447780464402646ace2
+  - enabled: 1
+    path: Assets/Scenes/Levels/LevelMaze.unity
+    guid: 97962f5409243c04fa3ff2b7fdc65621
+  - enabled: 1
+    path: Assets/Scenes/YouWin.unity
+    guid: 46a160abcf5a1714d8fbb46e875c8853
   m_configObjects: {}
